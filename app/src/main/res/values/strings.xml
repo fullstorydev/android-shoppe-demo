@@ -1,3 +1,5 @@
 <resources>
-    <string name="app_name">RefShoppe</string>
+    <string name="app_name">Fruit Shoppe</string>
+    <string name="title_market">Market</string>
+    <string name="title_cart">Cart</string>
 </resources>
