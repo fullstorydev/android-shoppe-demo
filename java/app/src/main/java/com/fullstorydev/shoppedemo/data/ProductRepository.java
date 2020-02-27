@@ -1,6 +1,8 @@
 package com.fullstorydev.shoppedemo.data;
 
 import android.app.Application;
+import android.util.Log;
+
 import androidx.lifecycle.LiveData;
 
 import java.util.List;
@@ -32,5 +34,39 @@ public class ProductRepository {
         AppDatabase.databaseWriteExecutor.execute(() -> {
             mProductDao.insertAll(product);
         });
+    }
+
+    public boolean updateQuantityInCartByOne(Product product,boolean isAdd){
+        List<Product>  p = mProductDao.getAllByTitles(product.title);
+        if(isAdd){
+            if(p.size()>0){
+                p.get(0).quantityInCart++;
+                AppDatabase.databaseWriteExecutor.execute(() -> {
+                    mProductDao.updateQuantityInCart(p.get(0));
+                });
+                return true;
+            }else{
+                AppDatabase.databaseWriteExecutor.execute(() -> {
+                    mProductDao.insertAll(product);
+                });
+                return true;
+            }
+        }else{
+            if(p.size()>0 && p.get(0).quantityInCart > 1){
+                p.get(0).quantityInCart--;
+                AppDatabase.databaseWriteExecutor.execute(() -> {
+                    mProductDao.updateQuantityInCart(p.get(0));
+                });
+                return true;
+            }else if(p.size()>0 && p.get(0).quantityInCart == 1){
+                AppDatabase.databaseWriteExecutor.execute(() -> {
+                    mProductDao.delete(product);
+                });
+                return true;
+            }else{
+                Log.e("ProductRepository","trying to remove a product that's not in cart");
+                return false;
+            }
+        }
     }
 }
