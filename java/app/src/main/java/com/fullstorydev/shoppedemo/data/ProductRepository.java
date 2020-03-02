@@ -1,7 +1,6 @@
 package com.fullstorydev.shoppedemo.data;
 
 import android.app.Application;
-import android.util.Log;
 
 import androidx.lifecycle.LiveData;
 
@@ -22,14 +21,10 @@ public class ProductRepository {
         mAllProducts = mProductDao.getAll();
     }
 
-    // Room executes all **queries** on a separate thread.
-    // Observed LiveData will notify the observer when the data has changed.
     public LiveData<List<Product>> getAll() {
         return mAllProducts;
     }
 
-    // You must call these on a non-UI thread or your app will throw an exception. Room ensures
-    // that you're not doing any long running operations on the main thread, blocking the UI.
     public void insert(Product product) {
         AppDatabase.databaseWriteExecutor.execute(() -> {
             mProductDao.insert(product);
@@ -37,10 +32,14 @@ public class ProductRepository {
     }
 
     public void increaseQuantityInCart(Product product){
+        AppDatabase.databaseWriteExecutor.execute(() -> {
             mProductDao.increaseQuantityOrInsert(product);
+        });
     }
 
     public void decreaseQuantityInCart(Product product){
+        AppDatabase.databaseWriteExecutor.execute(() -> {
             mProductDao.decreaseQuantityOrDelete(product);
+        });
     }
 }
