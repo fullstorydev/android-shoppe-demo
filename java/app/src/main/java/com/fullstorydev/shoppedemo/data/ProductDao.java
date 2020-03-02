@@ -16,8 +16,8 @@ abstract class ProductDao {
     @Query("SELECT * FROM product")
     abstract LiveData<List<Product>> getAll();
 
-    @Query("SELECT * FROM product WHERE title = :productTitles LIMIT 1")
-    protected abstract Product getProductByTitle(String productTitles);
+    @Query("SELECT quantityInCart FROM product WHERE title = :productTitles LIMIT 1")
+    protected abstract int getProductQuantityByTitle(String productTitles);
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     abstract void insert(Product products);
@@ -43,8 +43,8 @@ abstract class ProductDao {
     }
     @Transaction
     void decreaseQuantityOrDelete(Product product) {
-        Product productInCart = getProductByTitle(product.title);
-        if(productInCart != null && productInCart.quantityInCart > 1 ){
+        int productInCart = getProductQuantityByTitle(product.title);
+        if(productInCart > 1 ){
             decreaseQuantity(product.title);
         }else{
             delete(product);
