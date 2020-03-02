@@ -28,45 +28,19 @@ public class ProductRepository {
         return mAllProducts;
     }
 
-    // You must call this on a non-UI thread or your app will throw an exception. Room ensures
+    // You must call these on a non-UI thread or your app will throw an exception. Room ensures
     // that you're not doing any long running operations on the main thread, blocking the UI.
     public void insertAll(Product product) {
         AppDatabase.databaseWriteExecutor.execute(() -> {
-            mProductDao.insertAll(product);
+            mProductDao.insert(product);
         });
     }
 
-    public boolean updateQuantityInCartByOne(Product product,boolean isAdd){
-        List<Product>  p = mProductDao.getAllByTitles(product.title);
-        if(isAdd){
-            if(p.size()>0){
-                p.get(0).quantityInCart++;
-                AppDatabase.databaseWriteExecutor.execute(() -> {
-                    mProductDao.updateQuantityInCart(p.get(0));
-                });
-                return true;
-            }else{
-                AppDatabase.databaseWriteExecutor.execute(() -> {
-                    mProductDao.insertAll(product);
-                });
-                return true;
-            }
-        }else{
-            if(p.size()>0 && p.get(0).quantityInCart > 1){
-                p.get(0).quantityInCart--;
-                AppDatabase.databaseWriteExecutor.execute(() -> {
-                    mProductDao.updateQuantityInCart(p.get(0));
-                });
-                return true;
-            }else if(p.size()>0 && p.get(0).quantityInCart == 1){
-                AppDatabase.databaseWriteExecutor.execute(() -> {
-                    mProductDao.delete(product);
-                });
-                return true;
-            }else{
-                Log.e("ProductRepository","trying to remove a product that's not in cart");
-                return false;
-            }
-        }
+    public void increaseQuantityInCart(Product product){
+            mProductDao.increaseQuantityOrInsert(product);
+    }
+
+    public void decreaseQuantityInCart(Product product){
+            mProductDao.decreaseQuantityOrDelete(product);
     }
 }
