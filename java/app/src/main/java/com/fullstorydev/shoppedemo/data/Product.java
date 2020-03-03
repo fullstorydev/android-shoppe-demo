@@ -12,8 +12,8 @@ import androidx.room.PrimaryKey;
             "description": "The old reliable.",
             "price": 2.99,ΩΩΩΩ
             "image": "banans.jpg",
-            "unit": "lb.", // this is called quantity in json api
-            "quantityInCart": "2" // this is different from the quantity returned from json
+            "unit": "lb.",
+            "quantityInCart": "2"
     }
  */
 
