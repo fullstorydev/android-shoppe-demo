@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/li_product_item"
+    android:orientation="horizontal"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/image_product_market"
+        android:layout_width="@dimen/product_image_size"
+        android:layout_height="@dimen/product_image_size" />
+
+    <LinearLayout
+        android:id="@+id/view_market_product"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingTop="@dimen/padding_space">
+
+        <TextView
+            android:id="@+id/tv_product_name"
+            android:textSize="@dimen/product_name_text_size"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/tv_product_price_unit"
+            android:textSize="@dimen/product_name_text_size"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/btn_add_to_cart">
+        </Button>
+    </LinearLayout>
+</LinearLayout>
