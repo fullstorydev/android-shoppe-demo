@@ -12,3 +12,6 @@
 /captures
 .externalNativeBuild
 .cxx
+
+## for **dev only** cleartextTrafficPermitted rules product json is hosted as plain text without SSL
+**/xml/network_security_config.xml
