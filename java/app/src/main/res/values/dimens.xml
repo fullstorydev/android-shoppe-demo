@@ -5,4 +5,5 @@
     <dimen name="product_image_size">150dp</dimen>
     <dimen name="padding_space">2dp</dimen>
     <dimen name="product_name_text_size">23sp</dimen>
+    <dimen name="product_price_text_size">18sp</dimen>
 </resources>
