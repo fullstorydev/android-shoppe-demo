@@ -3,4 +3,5 @@
     <string name="title_market">Market</string>
     <string name="title_cart">Cart</string>
     <string name="add_to_cart">Add To Cart</string>
+    <string name="remove_from_cart">Remove From Cart</string>
 </resources>
