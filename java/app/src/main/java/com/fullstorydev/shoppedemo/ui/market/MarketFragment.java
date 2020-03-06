@@ -1,4 +1,4 @@
-package com.fullstorydev.shoppedemo.ui.dashboard;
+package com.fullstorydev.shoppedemo.ui.market;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -12,17 +12,17 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import com.fullstorydev.shoppedemo.R;
 
-public class DashboardFragment extends Fragment {
+public class MarketFragment extends Fragment {
 
-    private DashboardViewModel dashboardViewModel;
+    private MarketViewModel marketViewModel;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
             ViewGroup container, Bundle savedInstanceState) {
-        dashboardViewModel =
-                ViewModelProviders.of(this).get(DashboardViewModel.class);
-        View root = inflater.inflate(R.layout.fragment_dashboard, container, false);
-        final TextView textView = root.findViewById(R.id.text_dashboard);
-        dashboardViewModel.getText().observe(this, new Observer<String>() {
+        marketViewModel =
+                ViewModelProviders.of(this).get(MarketViewModel.class);
+        View root = inflater.inflate(R.layout.fragment_market, container, false);
+        final TextView textView = root.findViewById(R.id.text_market);
+        marketViewModel.getText().observe(this, new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
                 textView.setText(s);

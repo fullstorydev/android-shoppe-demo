@@ -3,24 +3,24 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/navigation_home">
+    app:startDestination="@+id/navigation_market">
 
     <fragment
-        android:id="@+id/navigation_home"
-        android:name="com.fullstorydev.shoppedemo.ui.home.HomeFragment"
-        android:label="@string/title_home"
-        tools:layout="@layout/fragment_home" >
+        android:id="@+id/navigation_market"
+        android:name="com.fullstorydev.shoppedemo.ui.market.MarketFragment"
+        android:label="@string/title_market"
+        tools:layout="@layout/fragment_market" >
         <action
-            android:id="@+id/action_navigation_home_to_navigation_dashboard2"
-            app:destination="@id/navigation_dashboard"
-            app:popUpTo="@id/navigation_home"
-            app:popUpToInclusive="true" />
+            android:id="@+id/action_navigation_market_to_navigation_cart2"
+            app:destination="@id/navigation_cart"
+            app:popUpTo="@id/navigation_market"
+            app:popUpToInclusive="true"/>
     </fragment>
 
     <fragment
-        android:id="@+id/navigation_dashboard"
-        android:name="com.fullstorydev.shoppedemo.ui.dashboard.DashboardFragment"
-        android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_dashboard" />
+        android:id="@+id/navigation_cart"
+        android:name="com.fullstorydev.shoppedemo.ui.cart.CartFragment"
+        android:label="@string/title_cart"
+        tools:layout="@layout/fragment_cart" />
 
 </navigation>

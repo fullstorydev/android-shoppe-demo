@@ -9,9 +9,9 @@
 <!--        app:showAsAction="never"/>-->
 
     <item
-        android:id="@+id/navigation_dashboard"
+        android:id="@+id/navigation_cart"
         android:icon="@drawable/ic_cart_black"
-        android:title="@string/title_dashboard"
+        android:title="@string/title_cart"
         app:showAsAction="always"/>
 
 </menu>

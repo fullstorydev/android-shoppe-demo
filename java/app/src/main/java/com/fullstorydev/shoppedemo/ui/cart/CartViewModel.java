@@ -1,16 +1,16 @@
-package com.fullstorydev.shoppedemo.ui.dashboard;
+package com.fullstorydev.shoppedemo.ui.cart;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-public class DashboardViewModel extends ViewModel {
+public class CartViewModel extends ViewModel {
 
     private MutableLiveData<String> mText;
 
-    public DashboardViewModel() {
+    public CartViewModel() {
         mText = new MutableLiveData<>();
-        mText.setValue("This is dashboard fragment");
+        mText.setValue("This is cart fragment");
     }
 
     public LiveData<String> getText() {
