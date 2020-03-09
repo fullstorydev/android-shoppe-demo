@@ -36,7 +36,7 @@ public class MarketFragment extends Fragment {
         marketViewModel.getProductList().observe(this.getViewLifecycleOwner(), new Observer<List<Product>>() {
             @Override
             public void onChanged(List<Product> products) {
-                //product holds the list of products, live data is updated when retrieved from API, this data will be used to populate the recycler view
+                // products holds the list of products, live data is updated when retrieved from API, this data will be used to populate the recycler view
             }
         });
     }
