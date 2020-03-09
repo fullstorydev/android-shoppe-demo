@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
-
-</PreferenceScreen>
+<network-security-config>
+<!-- this file is *** dev only *** Override security rules to permit cleartextTrafficPermitted for product host if not using SSL traffic -->
+    <domain-config cleartextTrafficPermitted="true">
+        <domain includeSubdomains="true">reactshoppe.s3-website-us-east-1.amazonaws.com</domain>
+    </domain-config>
+</network-security-config>
