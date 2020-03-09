@@ -4,12 +4,11 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 import androidx.annotation.Nullable;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProviders;
+import androidx.lifecycle.ViewModelProvider;
 import com.fullstorydev.shoppedemo.R;
 
 public class CartFragment extends Fragment {
@@ -18,10 +17,14 @@ public class CartFragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater,
             ViewGroup container, Bundle savedInstanceState) {
-        cartViewModel =
-                ViewModelProviders.of(this).get(CartViewModel.class);
         View root = inflater.inflate(R.layout.fragment_cart, container, false);
-
         return root;
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        // get ViewModel from ViewModelProvider, placeholder for observing LiveData later
+        cartViewModel = new ViewModelProvider(this).get(CartViewModel.class);
     }
 }

@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 public class CartViewModel extends ViewModel {
-
+    //placeholder code to be replaced once data logic in place
     private MutableLiveData<String> mText;
 
     public CartViewModel() {
