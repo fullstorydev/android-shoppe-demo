@@ -5,5 +5,5 @@
     <string name="add_to_cart">Add To Cart</string>
     <string name="remove_from_cart">Remove From Cart</string>
     <string name="checkout">Checkout</string>
-    <string name="quantity_in_cart"> in cart</string>
+    <string name="quantity_in_cart">in cart</string>
 </resources>
