@@ -24,6 +24,9 @@ public class ProductRepository {
     // dependency. This adds complexity and much more code, and this sample is not about testing.
     // See the BasicSample in the android-architecture-components repository at
     // https://github.com/googlesamples
+
+    // The repository is the only class that depends on multiple other classes; in this example, the repository depends on a persistent data model and a remote backend data source.
+    // For more information on this app architecture, see: https://developer.android.com/jetpack/docs/guide
     public ProductRepository(Application application) {
         AppDatabase db = AppDatabase.getDatabase(application);
         mProductDao = db.productDao();
