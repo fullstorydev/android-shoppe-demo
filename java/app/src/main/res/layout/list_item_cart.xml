@@ -1,7 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout
-    xmlns:android="http://schemas.android.com/apk/res/android">
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="product"
+            type="com.fullstorydev.shoppedemo.data.Product" />
+    </data>
+
+    <LinearLayout
         android:id="@+id/li_cart"
         android:orientation="horizontal"
         android:layout_width="wrap_content"
@@ -10,7 +17,8 @@
         <ImageView
             android:id="@+id/image_cart_product"
             android:layout_width="@dimen/product_image_size"
-            android:layout_height="@dimen/product_image_size" />
+            android:layout_height="@dimen/product_image_size"
+            app:imageURL="@{@string/img_host + product.image}"/>
 
         <LinearLayout
             android:id="@+id/view_cart_product"
@@ -23,13 +31,15 @@
                 android:id="@+id/tv_cart_product_name"
                 android:textSize="@dimen/product_name_text_size"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:text="@{product.title}" />
 
             <TextView
                 android:id="@+id/tv_cart_product_price_unit"
                 android:textSize="@dimen/product_price_text_size"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:text="@{product.quantityInCart +` `+ @string/quantity_in_cart"/>
 
             <Button
                 android:layout_width="wrap_content"
