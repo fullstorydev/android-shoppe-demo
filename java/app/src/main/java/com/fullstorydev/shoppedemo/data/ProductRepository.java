@@ -1,7 +1,6 @@
 package com.fullstorydev.shoppedemo.data;
 
 import android.app.Application;
-import android.content.res.Resources;
 import android.os.AsyncTask;
 
 import androidx.lifecycle.LiveData;
@@ -29,30 +28,10 @@ public class ProductRepository {
         AppDatabase db = AppDatabase.getDatabase(application);
         mProductDao = db.productDao();
         mAllItems = mProductDao.getAll();
-        String hostURLStr = Resources.getSystem().getString(R.string.aws_host);
+        mAllProducts = new MutableLiveData<>();
+
+        String hostURLStr = application.getString(R.string.products_endpoint);
         new FetchFromAPI().execute(hostURLStr);
-    }
-
-    class FetchFromAPI extends AsyncTask<String,Void,List<Product>> {
-        @Override
-        protected List<Product> doInBackground(String... urls) {
-            if(urls.length>0){
-                try{
-                    NetworkUtils.getProductListFromURL(urls[0]);
-                    return JsonHelper.getProductListFromJsonString(urls[0]);
-                }catch (IOException | JsonParseException e){
-                    e.printStackTrace();
-                }
-            }
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute( List<Product> list) {
-            if(list != null){
-                mAllProducts.postValue(list);
-            }
-        }
     }
 
     public LiveData<List<Product>> getAllFromDB() {
@@ -77,5 +56,27 @@ public class ProductRepository {
         AppDatabase.databaseWriteExecutor.execute(() -> {
             mProductDao.decreaseQuantityOrDelete(product);
         });
+    }
+
+    class FetchFromAPI extends AsyncTask<String,Void,List<Product>> {
+        @Override
+        protected List<Product> doInBackground(String... urls) {
+            if(urls.length>0){
+                try{
+                    String resStr = NetworkUtils.getProductListFromURL(urls[0]);
+                    return JsonHelper.getProductListFromJsonString(resStr);
+                }catch (IOException | JsonParseException e){
+                    e.printStackTrace();
+                }
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute( List<Product> list) {
+            if(list != null){
+                mAllProducts.postValue(list);
+            }
+        }
     }
 }
