@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="aws_host">http://reactshoppe.s3-website-us-east-1.amazonaws.com</string>
+    <string name="aws_host">http://reactshoppe.s3-website-us-east-1.amazonaws.com/data/products.json</string>
     <string name="img_host">https://fruitshoppe.firebaseapp.com/images/</string>
 </resources>
