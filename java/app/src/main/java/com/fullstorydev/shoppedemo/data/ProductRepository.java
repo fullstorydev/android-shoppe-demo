@@ -37,10 +37,12 @@ public class ProductRepository {
         new FetchFromAPI().execute(hostURLStr);
     }
 
-    public LiveData<List<Product>> getAllFromDB() {
+    // get items from cart - data saved in DB
+    public LiveData<List<Product>> getAllItemsFromDB() {
         return mAllItems;
     }
 
+    // get products for market - data fetched from REST API via a async task
     public LiveData<List<Product>> getAllFromAPI() { return mAllProducts; }
 
     public void insert(Product product) {
