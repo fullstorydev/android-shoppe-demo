@@ -12,3 +12,9 @@
 /captures
 .externalNativeBuild
 .cxx
+
+# Legacy Eclipse project files
+.classpath
+.project
+.cproject
+.settings/
