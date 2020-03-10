@@ -8,6 +8,7 @@ import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.fullstorydev.shoppedemo.ui.market.MarketEventHandlers;
 import com.fullstorydev.shoppedemo.R;
 import com.fullstorydev.shoppedemo.data.Product;
 import com.fullstorydev.shoppedemo.databinding.ListItemMarketBinding;
@@ -18,8 +19,10 @@ import java.util.List;
 public class MarketProductAdapter extends RecyclerView.Adapter<MarketProductAdapter.MarketProductViewHolder> {
     private List<Product> mProductList;
     private LayoutInflater layoutInflater;
+    private MarketEventHandlers mMarketHandlers;
 
-    public MarketProductAdapter() {
+    public MarketProductAdapter(MarketEventHandlers marketHandlers) {
+        mMarketHandlers = marketHandlers;
         mProductList = new ArrayList<>();
     }
 
@@ -53,9 +56,11 @@ public class MarketProductAdapter extends RecyclerView.Adapter<MarketProductAdap
 
     class MarketProductViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private ListItemMarketBinding binding;
-        protected MarketProductViewHolder(@NonNull ListItemMarketBinding binding){
+        MarketProductViewHolder(@NonNull ListItemMarketBinding binding){
             super(binding.getRoot());
             this.binding = binding;
+            // bind the on click handler for add to cart buttons
+            this.binding.setHandlers(mMarketHandlers);
         }
 
         void bind(Product product) {
