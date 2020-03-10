@@ -1,7 +1,6 @@
 package com.fullstorydev.shoppedemo.data;
 
 import android.app.Application;
-import android.os.AsyncTask;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
@@ -32,9 +31,20 @@ public class ProductRepository {
         mProductDao = db.productDao();
         mAllItems = mProductDao.getAll();
         mAllProducts = new MutableLiveData<>();
-
-        String hostURLStr = application.getString(R.string.products_endpoint);
-        new FetchFromAPI().execute(hostURLStr);
+        
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                String hostURLStr = application.getString(R.string.products_endpoint);
+                try{
+                    String resStr = NetworkUtils.getProductListFromURL(hostURLStr);
+                    List<Product> list = JsonHelper.getProductListFromJsonString(resStr);
+                    mAllProducts.postValue(list);
+                }catch (IOException | JsonParseException e){
+                    e.printStackTrace();
+                }
+            }
+        }).start();
     }
 
     // get items from cart - data saved in DB
@@ -61,27 +71,5 @@ public class ProductRepository {
         AppDatabase.databaseWriteExecutor.execute(() -> {
             mProductDao.decreaseQuantityOrDelete(product);
         });
-    }
-
-    class FetchFromAPI extends AsyncTask<String,Void,List<Product>> {
-        @Override
-        protected List<Product> doInBackground(String... urls) {
-            if(urls.length>0){
-                try{
-                    String resStr = NetworkUtils.getProductListFromURL(urls[0]);
-                    return JsonHelper.getProductListFromJsonString(resStr);
-                }catch (IOException | JsonParseException e){
-                    e.printStackTrace();
-                }
-            }
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute( List<Product> list) {
-            if(list != null){
-                mAllProducts.postValue(list);
-            }
-        }
     }
 }
