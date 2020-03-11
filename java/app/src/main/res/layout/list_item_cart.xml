@@ -42,7 +42,7 @@
                 android:textSize="@dimen/product_price_text_size"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@{item.quantityInCart +` `+ @string/quantity_in_cart"/>
+                android:text="@{item.quantityInCart + ` ` + @string/quantity_in_cart}"/>
 
             <Button
                 android:layout_width="wrap_content"
