@@ -10,6 +10,9 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import com.fullstorydev.shoppedemo.R;
+import com.fullstorydev.shoppedemo.data.Product;
+
+import java.util.List;
 
 public class CartFragment extends Fragment {
 
@@ -21,10 +24,17 @@ public class CartFragment extends Fragment {
         return root;
     }
 
+
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        // get ViewModel from ViewModelProvider, placeholder for observing LiveData later
+
         cartViewModel = new ViewModelProvider(this).get(CartViewModel.class);
+        cartViewModel.getItemList().observe(this.getViewLifecycleOwner(), new Observer<List<Product>>() {
+            @Override
+            public void onChanged(List<Product> items) {
+                //items contains a list of Products and their quantities in cart, to be used to populate recycler view
+            }
+        });
     }
 }
