@@ -4,8 +4,11 @@
 
     <data>
         <variable
-            name="product"
+            name="item"
             type="com.fullstorydev.shoppedemo.data.Product" />
+        <variable
+            name="handlers"
+            type="com.fullstorydev.shoppedemo.ui.cart.CartEventHandlers"/>
     </data>
 
     <LinearLayout
@@ -15,36 +18,37 @@
         android:layout_height="wrap_content">
 
         <ImageView
-            android:id="@+id/image_cart_product"
+            android:id="@+id/image_cart_item"
             android:layout_width="@dimen/product_image_size"
             android:layout_height="@dimen/product_image_size"
-            app:imageURL="@{@string/img_host + product.image}"/>
+            app:imageURL="@{@string/img_host + item.image}"/>
 
         <LinearLayout
-            android:id="@+id/view_cart_product"
+            android:id="@+id/view_cart_item"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:paddingTop="@dimen/padding_space">
 
             <TextView
-                android:id="@+id/tv_cart_product_name"
+                android:id="@+id/tv_cart_item_name"
                 android:textSize="@dimen/product_name_text_size"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@{product.title}" />
+                android:text="@{item.title}" />
 
             <TextView
-                android:id="@+id/tv_cart_product_price_unit"
+                android:id="@+id/tv_cart_item_price_unit"
                 android:textSize="@dimen/product_price_text_size"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@{product.quantityInCart +` `+ @string/quantity_in_cart"/>
+                android:text="@{item.quantityInCart + ` ` + @string/quantity_in_cart}"/>
 
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/btn_remove_from_cart"
+                android:onClick="@{()->handlers.onClickRemoveFromCart(item)}"
                 android:text="@string/remove_from_cart">
             </Button>
         </LinearLayout>
