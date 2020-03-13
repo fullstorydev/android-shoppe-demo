@@ -70,10 +70,10 @@ public class CartItemAdapter extends RecyclerView.Adapter<CartItemAdapter.CartIt
 
         @Override
         public void onClick(View v) {
-            // getting clicked product from adapter position
-            Product product = mItemList.get(getAdapterPosition());
+            // getting clicked item from adapter position
+            Product item = mItemList.get(getAdapterPosition());
             try {
-                //TODO: When recyclerview is clicked, get the product and perform action here, i.e. show product details fragment
+                //TODO: When recyclerview is clicked, get the item and perform action here, i.e. show item details fragment
             } catch (Exception e) {
                 e.printStackTrace();
             }
