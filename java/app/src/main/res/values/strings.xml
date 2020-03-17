@@ -6,4 +6,20 @@
     <string name="remove_from_cart">Remove From Cart</string>
     <string name="checkout">Checkout</string>
     <string name="quantity_in_cart">in cart</string>
+    
+    <!--    checkout form strings-->
+    <string name="billing_address">Billing Address</string>
+    <string name="payment_details">Payment Details</string>
+    <string name="first_name">First Name</string>
+    <string name="last_name">Last Name</string>
+    <string name="address_1">Address 1</string>
+    <string name="address_2">Address 2</string>
+    <string name="city">City</string>
+    <string name="state">State</string>
+    <string name="zip_code">Zip Code</string>
+    <string name="credit_card_number">Credit Card Number</string>
+    <string name="expiration">Expiration</string>
+    <string name="security_code">Security Code</string>
+    <string name="subtotal">Subtotal:</string>
+    <string name="purchase">Purchase</string>
 </resources>
