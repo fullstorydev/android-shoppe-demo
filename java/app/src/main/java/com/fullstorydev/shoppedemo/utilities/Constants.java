@@ -97,5 +97,4 @@ public class Constants {
     public static final String EXPIRATION_MONTH = "expirationMonth";
     public static final String EXPIRATION_YEAR = "expirationYear";
     public static final String SECURITY_CODE = "securityCode";
-
 }
