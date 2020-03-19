@@ -4,11 +4,11 @@ import com.fullstorydev.shoppedemo.utilities.Constants;
 
 import java.util.HashMap;
 
-public class CustomerInfoMap{
+public class CustomerInfo {
     private HashMap<String,String> strMap;
     private HashMap<String,Integer> intMap;
 
-    CustomerInfoMap(){
+    CustomerInfo(){
         // all key-value pairs available for USER_INFO_STRING_KEYS
         strMap = new HashMap<>();
         // all key-value pairs available for USER_INFO_INTEGER_KEYS
