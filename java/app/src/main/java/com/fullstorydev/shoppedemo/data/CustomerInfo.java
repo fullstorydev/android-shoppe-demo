@@ -31,17 +31,17 @@ public class CustomerInfo {
 
 
     public boolean validateOrder() throws NullPointerException, IllegalArgumentException{
-        if (firstName == null || firstName.length()<1) throw new NullPointerException("firstName");
-        if (lastName == null || lastName.length()<1) throw new NullPointerException("lastName");
-        if (address1 == null || address1.length()<1) throw new NullPointerException("address1");
+        if (firstName == null || firstName.length()<1) throw new NullPointerException(Constants.FIRST_NAME);
+        if (lastName == null || lastName.length()<1) throw new NullPointerException(Constants.LAST_NAME);
+        if (address1 == null || address1.length()<1) throw new NullPointerException(Constants.ADDRESS_1);
         if (address2 == null) address2 = "";
-        if (city == null || city.length()<1) throw new NullPointerException("city");
-        if (!isValidState(state)) throw new NullPointerException("state");
-        if (zip == null || zip.length()!= 5) throw new IllegalArgumentException("zip"); // only allow US zip codes
-        if (creditCardNumber == null) throw new NullPointerException("creditCardNumber");
-        if (expirationMonth < 0) throw new IllegalArgumentException("expirationMonth");
-        if (expirationYear < 0) throw new IllegalArgumentException("expirationYear");
-        if (securityCode.length() != 3) throw new IllegalArgumentException("securityCode"); // 3 digit security code
+        if (city == null || city.length()<1) throw new NullPointerException(Constants.ADDRESS_2);
+        if (!isValidState(state)) throw new NullPointerException(Constants.STATE);
+        if (zip == null || zip.length()!= 5) throw new IllegalArgumentException(Constants.ZIP); // only allow US zip codes
+        if (creditCardNumber == null) throw new NullPointerException(Constants.CREDIT_CARD_NUMBER);
+        if (expirationMonth < 0) throw new IllegalArgumentException(Constants.EXPIRATION_MONTH);
+        if (expirationYear < 0) throw new IllegalArgumentException(Constants.EXPIRATION_YEAR);
+        if (securityCode.length() != 3) throw new IllegalArgumentException(Constants.SECURITY_CODE); // 3 digit security code
         return true;
     }
 

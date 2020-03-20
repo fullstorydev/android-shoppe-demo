@@ -97,7 +97,5 @@ public class Constants {
     public static final String EXPIRATION_MONTH = "expirationMonth";
     public static final String EXPIRATION_YEAR = "expirationYear";
     public static final String SECURITY_CODE = "securityCode";
-    public static final String[] USER_INFO_STRING_KEYS = { FIRST_NAME, LAST_NAME, ADDRESS_1, ADDRESS_2, CITY, ZIP, CREDIT_CARD_NUMBER, SECURITY_CODE };
-    public static final String[] USER_INFO_INTEGER_KEYS = { EXPIRATION_MONTH, EXPIRATION_YEAR, STATE };
 
 }
