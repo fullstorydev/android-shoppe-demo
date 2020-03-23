@@ -20,6 +20,7 @@ public class CustomerInfoRepository {
     public CustomerInfoRepository(Application application) {
         this.application = application;
         isLoading = new MutableLiveData<>();
+        info = new CustomerInfo.OrderBuilder().buildOrder();
         initInfoFromSharedPref();
     }
 
