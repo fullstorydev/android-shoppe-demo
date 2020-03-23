@@ -26,6 +26,11 @@ public class CustomerInfoRepository {
     public CustomerInfo getInfo() { return info; } // info may return null if still loading
     public LiveData<Boolean> getIsLoading(){ return isLoading; }
 
+    // get constants to be used to populate drop downs in UI
+    public String[] getStates() { return Constants.getStates(); }
+    public Integer[] getYears() { return Constants.getYears(); }
+    public Integer[] getMonths() { return Constants.getMonths(); }
+
     public void updateInfo(CustomerInfo newInfo) throws IllegalArgumentException {
         isLoading.setValue(true);
         updateInfo(Constants.FIRST_NAME,newInfo.getFirstName());
