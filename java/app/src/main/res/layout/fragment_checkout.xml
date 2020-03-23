@@ -59,7 +59,7 @@
             android:id="@+id/et_checkout_address1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@{viewmodel.customerInfo.address1}" />
+            android:text="@={viewmodel.address1}" />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -68,7 +68,7 @@
             android:id="@+id/et_checkout_address2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@{viewmodel.customerInfo.address2}" />
+            android:text="@={viewmodel.address2}" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -83,7 +83,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1.5"
-                android:text="@{viewmodel.customerInfo.city}"/>
+                android:text="@={viewmodel.city}"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -93,7 +93,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                app:selectedValue="@{viewmodel.customerInfo.state}"/>
+                app:selectedValue="@{viewmodel.state}"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -104,7 +104,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:inputType="number"
-                android:text="@{viewmodel.customerInfo.zip}" />
+                android:text="@={viewmodel.zip}" />
         </LinearLayout>
 
         <TextView
@@ -122,7 +122,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="number"
-            android:text="@{viewmodel.customerInfo.creditCardNumber}" />
+            android:text="@={viewmodel.creditCardNumber}" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -137,12 +137,12 @@
                 android:id="@+id/spinner_checkout_month"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:selectedValue="@{viewmodel.customerInfo.expirationMonth}"/>
+                app:selectedValue="@{viewmodel.expirationMonth}"/>
             <Spinner
                 android:id="@+id/spinner_checkout_year"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:selectedValue="@{viewmodel.customerInfo.expirationYear}" />
+                app:selectedValue="@{viewmodel.expirationYear}" />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -152,7 +152,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="number"
-                android:text="@{viewmodel.customerInfo.securityCode}" />
+                android:text="@={viewmodel.securityCode}" />
         </LinearLayout>
 
         <LinearLayout

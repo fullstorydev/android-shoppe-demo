@@ -15,6 +15,7 @@ import android.widget.Spinner;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
+import androidx.databinding.library.baseAdapters.BR;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -98,7 +99,6 @@ public class CheckoutFragment extends Fragment {
             dialog.setMessage("Loading....");
             if(isLoading){ dialog.show(); }
             else{
-                checkoutViewModel.getCustomerInfo();
                 dialog.dismiss();
             }
         });

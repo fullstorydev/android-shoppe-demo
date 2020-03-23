@@ -3,6 +3,8 @@ package com.fullstorydev.shoppedemo.data;
 import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.LinearGradient;
+import android.util.Log;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
@@ -74,7 +76,6 @@ public class CustomerInfoRepository {
                     .withAddress(address1,address2,city,state,zip)
                     .withPayment(creditCardNumber,expirationMonth,expirationYear,securityCode)
                     .buildOrder();
-
             isLoading.postValue(false);
         }).start();
     }
