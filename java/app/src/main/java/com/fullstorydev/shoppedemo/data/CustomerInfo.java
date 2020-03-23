@@ -49,7 +49,7 @@ public class CustomerInfo {
         return Constants.isValidState(state);
     }
 
-    static class OrderBuilder {
+    public static class OrderBuilder {
         private String firstName;
         private String lastName;
         private String address1;
