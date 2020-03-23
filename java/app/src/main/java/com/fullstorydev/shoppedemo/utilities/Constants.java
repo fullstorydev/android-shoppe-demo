@@ -97,4 +97,6 @@ public class Constants {
     public static final String EXPIRATION_MONTH = "expirationMonth";
     public static final String EXPIRATION_YEAR = "expirationYear";
     public static final String SECURITY_CODE = "securityCode";
+
+    public static final String PREFERENCE_FILE_KEY = "com.fullstorydev.shoppedemo.PREFERENCE_FILE_KEY";
 }
