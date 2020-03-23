@@ -21,6 +21,16 @@
         android:id="@+id/navigation_cart"
         android:name="com.fullstorydev.shoppedemo.ui.cart.CartFragment"
         android:label="@string/title_cart"
-        tools:layout="@layout/fragment_cart" />
+        tools:layout="@layout/fragment_cart" >
+        <action
+            android:id="@+id/action_navigation_cart_to_checkoutFragment"
+            app:destination="@id/navigation_checkout"
+            app:popUpTo="@id/navigation_cart"/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_checkout"
+        android:name="com.fullstorydev.shoppedemo.ui.checkout.CheckoutFragment"
+        android:label="@string/checkout" />
 
 </navigation>
