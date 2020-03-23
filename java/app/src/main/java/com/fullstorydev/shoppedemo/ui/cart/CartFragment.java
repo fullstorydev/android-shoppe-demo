@@ -9,6 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.fullstorydev.shoppedemo.R;
@@ -28,6 +29,9 @@ public class CartFragment extends Fragment implements CartEventHandlers{
         mCartItemAdapter = new CartItemAdapter(this);
         RecyclerView mRecyclerView = root.findViewById(R.id.rv_cart);
         mRecyclerView.setAdapter(mCartItemAdapter);
+        root.findViewById(R.id.btn_checkout).setOnClickListener(v -> {
+            Navigation.findNavController(v).navigate(R.id.action_navigation_cart_to_checkoutFragment);
+        });
         return root;
     }
 

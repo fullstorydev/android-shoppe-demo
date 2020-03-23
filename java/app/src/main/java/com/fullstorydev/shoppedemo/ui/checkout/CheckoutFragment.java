@@ -19,11 +19,9 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.fullstorydev.shoppedemo.R;
-
+import com.fullstorydev.shoppedemo.data.CustomerInfo;
 import com.fullstorydev.shoppedemo.databinding.FragmentCheckoutBinding;
 import com.fullstorydev.shoppedemo.utilities.Constants;
-
-import java.io.IOException;
 
 public class CheckoutFragment extends Fragment {
     private CheckoutViewModel checkoutViewModel;
@@ -41,13 +39,15 @@ public class CheckoutFragment extends Fragment {
     private ArrayAdapter<String> stateAdapter;
     private ArrayAdapter<Integer> yearAdapter;
     private ArrayAdapter<Integer> monthAdapter;
+
     FragmentCheckoutBinding binding;
 
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        binding = DataBindingUtil.inflate(getLayoutInflater(), R.layout.fragment_checkout, container, false);
+//        return inflater.inflate(R.layout.fragment_checkout, container, false);
+        binding = DataBindingUtil.inflate(inflater,R.layout.fragment_checkout,container,false);
         return binding.getRoot();
     }
 
@@ -64,7 +64,6 @@ public class CheckoutFragment extends Fragment {
         address2EditText = view.findViewById(R.id.et_checkout_address2);
         cityEditText = view.findViewById(R.id.et_checkout_city);
         zipEditText = view.findViewById(R.id.et_checkout_zip);
-
         creditCardNumberEditText = view.findViewById(R.id.et_checkout_credit_card_number);
         securityCodeEditText = view.findViewById(R.id.et_checkout_security_code);
 
@@ -98,51 +97,38 @@ public class CheckoutFragment extends Fragment {
         checkoutViewModel.getIsLoading().observe(this.getViewLifecycleOwner(), isLoading -> {
             dialog.setMessage("Loading....");
             if(isLoading){ dialog.show(); }
-            else{ dialog.dismiss(); }
+            else{
+                checkoutViewModel.getCustomerInfo();
+                dialog.dismiss();
+            }
         });
 
     }
 
-    @Override
-    public void onDestroyView() {
-        //only need to cache the current data when the view is about to get destroyed
-        super.onDestroyView();
-
-        try {
-            checkoutViewModel.updateInfo(Constants.FIRST_NAME,String.valueOf(firstNameEditText.getText()));
-            checkoutViewModel.updateInfo(Constants.LAST_NAME,String.valueOf(lastNameEditText.getText()));
-            checkoutViewModel.updateInfo(Constants.ADDRESS_1,String.valueOf(address1EditText.getText()));
-            checkoutViewModel.updateInfo(Constants.ADDRESS_2,String.valueOf(address2EditText.getText()));
-            checkoutViewModel.updateInfo(Constants.CITY,String.valueOf(cityEditText.getText()));
-            checkoutViewModel.updateInfo(Constants.ZIP,String.valueOf(zipEditText.getText()));
-            checkoutViewModel.updateInfo(Constants.CREDIT_CARD_NUMBER,String.valueOf(creditCardNumberEditText.getText()));
-            checkoutViewModel.updateInfo(Constants.SECURITY_CODE,String.valueOf(securityCodeEditText.getText()));
-
-            checkoutViewModel.updateInfo(Constants.STATE,stateSpinner.getSelectedItemPosition());
-            checkoutViewModel.updateInfo(Constants.EXPIRATION_MONTH,monthSpinner.getSelectedItemPosition());
-            checkoutViewModel.updateInfo(Constants.EXPIRATION_YEAR,yearSpinner.getSelectedItemPosition());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
 
     private boolean onTouchListener (View v, MotionEvent event) {
-        InputMethodManager inputMethodManager =
-                (InputMethodManager) getActivity().getSystemService(
-                        Activity.INPUT_METHOD_SERVICE);
-        assert inputMethodManager != null;
-        inputMethodManager.hideSoftInputFromWindow(
-                v.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+//        InputMethodManager inputMethodManager =
+//                (InputMethodManager) getActivity().getSystemService(
+//                        Activity.INPUT_METHOD_SERVICE);
+//        assert inputMethodManager != null;
+//        inputMethodManager.hideSoftInputFromWindow(
+//                v.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
         return false;
     }
 
     private void onClickListener (View v) {
         //TODO: 1 handle null pointer
-        InputMethodManager inputMethodManager =
-                (InputMethodManager) getActivity().getSystemService(
-                        Activity.INPUT_METHOD_SERVICE);
-        assert inputMethodManager != null;
-        inputMethodManager.hideSoftInputFromWindow(
-                getActivity().getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+//        InputMethodManager inputMethodManager =
+//                (InputMethodManager) getActivity().getSystemService(
+//                        Activity.INPUT_METHOD_SERVICE);
+//        assert inputMethodManager != null;
+//        inputMethodManager.hideSoftInputFromWindow(
+//                getActivity().getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        checkoutViewModel.updateInfo();
     }
 }
