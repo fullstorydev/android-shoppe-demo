@@ -11,7 +11,6 @@ import com.fullstorydev.shoppedemo.utilities.Constants;
 
 
 public class CustomerInfoRepository {
-    private static final String TAG = "CustomerInfoRepository";
     private SharedPreferences sharedPref;
     private CustomerInfo info;
 
