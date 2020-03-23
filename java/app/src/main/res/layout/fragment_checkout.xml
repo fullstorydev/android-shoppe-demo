@@ -9,7 +9,6 @@
             type="com.fullstorydev.shoppedemo.ui.checkout.CheckoutViewModel" />
     </data>
 
-
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
@@ -36,7 +35,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="@{viewmodel.info.firstName}" />
+                android:text="@={viewmodel.firstName}" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -47,7 +46,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="@{viewmodel.info.lastName}"
+                android:text="@={viewmodel.lastName}"
                 />
         </LinearLayout>
 
@@ -59,7 +58,7 @@
             android:id="@+id/et_checkout_address1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@{viewmodel.info.address1}" />
+            android:text="@={viewmodel.address1}" />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -68,7 +67,7 @@
             android:id="@+id/et_checkout_address2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@{viewmodel.info.address2}" />
+            android:text="@={viewmodel.address2}" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -83,7 +82,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1.5"
-                android:text="@{viewmodel.info.city}"/>
+                android:text="@={viewmodel.city}"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -93,7 +92,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                app:selectedValue="@{viewmodel.info.state}"/>
+                app:selectedValue="@={viewmodel.state}"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -104,7 +103,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:inputType="number"
-                android:text="@{viewmodel.info.zip}" />
+                android:text="@={viewmodel.zip}" />
         </LinearLayout>
 
         <TextView
@@ -122,7 +121,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="number"
-            android:text="@{viewmodel.info.creditCardNumber}" />
+            android:text="@={viewmodel.creditCardNumber}" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -137,12 +136,12 @@
                 android:id="@+id/spinner_checkout_month"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:selectedValue="@{viewmodel.info.expirationMonth}"/>
+                app:selectedValue="@={viewmodel.expirationMonth}"/>
             <Spinner
                 android:id="@+id/spinner_checkout_year"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:selectedValue="@{viewmodel.info.expirationYear}" />
+                app:selectedValue="@={viewmodel.expirationYear}" />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -152,7 +151,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="number"
-                android:text="@{viewmodel.info.securityCode}" />
+                android:text="@={viewmodel.securityCode}" />
         </LinearLayout>
 
         <LinearLayout
@@ -174,9 +173,5 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/purchase" />
-
     </LinearLayout>
-
-
 </layout>
-
