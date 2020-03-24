@@ -26,7 +26,11 @@ public class CustomerInfoRepository {
         initCustomerInfoFromSharedPref();
     }
 
-    public CustomerInfo getCustomerInfo() { return customerInfo; } // info may return null if still loading
+    public CustomerInfo getCustomerInfo() {
+            Log.d("here","repo get");
+            Log.d("here","here+"+String.valueOf(customerInfo.getFirstName()));
+        return customerInfo;
+    } // info may return null if still loading
     public LiveData<Boolean> getIsLoading(){ return isLoading; }
 
     // get constants to be used to populate drop downs in UI
@@ -111,6 +115,7 @@ public class CustomerInfoRepository {
                 throw new IllegalArgumentException("invalid value for key: " + key);
         }
         sharedPref.edit().putString(key, val).apply();
+        Log.d("here",val);
     }
 
     // overload private updateInfo to handle int type values
@@ -130,4 +135,5 @@ public class CustomerInfoRepository {
         }
         sharedPref.edit().putInt(key, val).apply();
     }
+
 }

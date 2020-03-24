@@ -1,5 +1,7 @@
 package com.fullstorydev.shoppedemo.data;
 
+import android.util.Log;
+
 import com.fullstorydev.shoppedemo.utilities.Constants;
 
 public class CustomerInfo {
@@ -55,11 +57,11 @@ public class CustomerInfo {
         private String address1;
         private String address2;
         private String city;
-        private int state;
+        private int state=0;
         private String zip;
         private String creditCardNumber;
-        private int expirationMonth;
-        private int expirationYear;
+        private int expirationMonth=0;
+        private int expirationYear=0;
         private String securityCode;
 
         public OrderBuilder withName(String firstName, String lastName) {
@@ -90,7 +92,10 @@ public class CustomerInfo {
     }
 
 
-    public String getFirstName(){ return firstName; }
+    public String getFirstName(){
+        Log.d("here!!",String.valueOf(firstName));
+        return firstName;
+    }
     public void setFirstName(String firstName) { this.firstName = firstName; }
 
     public String getLastName() { return lastName; }

@@ -3,6 +3,7 @@ package com.fullstorydev.shoppedemo.ui.checkout;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -99,12 +100,20 @@ public class CheckoutFragment extends Fragment {
             dialog.setMessage("Loading....");
             if(isLoading){ dialog.show(); }
             else{
+                Log.d("here","loading");
+                populateTE();
                 dialog.dismiss();
             }
         });
 
     }
 
+    private void populateTE(){
+        Log.d("here","hererrrr");
+        checkoutViewModel.fetchCustomerInfo();
+        firstNameEditText.setText(checkoutViewModel.getInfo().getFirstName());
+        Log.d("heree",checkoutViewModel.getInfo().getFirstName());
+    }
 
     private boolean onTouchListener (View v, MotionEvent event) {
 //        InputMethodManager inputMethodManager =
@@ -126,9 +135,4 @@ public class CheckoutFragment extends Fragment {
 //                getActivity().getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
     }
 
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        checkoutViewModel.updateInfo();
-    }
 }
