@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android" >
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
         <variable
@@ -35,6 +36,7 @@
                 android:layout_weight="1"
                 android:importantForAutofill="no"
                 android:inputType="text"
+                android:text="@{viewmodel.customerInfo.firstName}"
                 android:onTextChanged="@{viewmodel::setFirstName}" />
             <TextView
                 android:layout_width="wrap_content"
@@ -48,6 +50,7 @@
                 android:layout_weight="1"
                 android:importantForAutofill="no"
                 android:inputType="text"
+                android:text="@{viewmodel.customerInfo.lastName}"
                 android:onTextChanged="@{viewmodel::setLastName}" />
         </LinearLayout>
 
@@ -62,6 +65,7 @@
             android:layout_height="wrap_content"
             android:importantForAutofill="no"
             android:inputType="text"
+            android:text="@{viewmodel.customerInfo.address1}"
             android:onTextChanged="@{viewmodel::setAddress1}" />
         <TextView
             android:layout_width="wrap_content"
@@ -74,6 +78,7 @@
             android:layout_height="wrap_content"
             android:importantForAutofill="no"
             android:inputType="text"
+            android:text="@{viewmodel.customerInfo.address2}"
             android:onTextChanged="@{viewmodel::setAddress2}" />
 
         <LinearLayout
@@ -92,6 +97,7 @@
                 android:layout_weight="1.5"
                 android:importantForAutofill="no"
                 android:inputType="text"
+                android:text="@{viewmodel.customerInfo.city}"
                 android:onTextChanged="@{viewmodel::setCity}" />
             <TextView
                 android:layout_width="wrap_content"
@@ -103,6 +109,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                app:selectedValue="@{viewmodel.customerInfo.state}"
                 android:onItemSelected="@{(parent,view,position,id)->viewmodel.setState(position)}" />
             <TextView
                 android:layout_width="wrap_content"
@@ -116,6 +123,7 @@
                 android:layout_weight="1"
                 android:importantForAutofill="no"
                 android:inputType="number"
+                android:text="@{viewmodel.customerInfo.zip}"
                 android:onTextChanged="@{viewmodel::setZip}" />
         </LinearLayout>
 
@@ -136,6 +144,7 @@
             android:layout_height="wrap_content"
             android:importantForAutofill="no"
             android:inputType="number"
+            android:text="@{viewmodel.customerInfo.creditCardNumber}"
             android:onTextChanged="@{viewmodel::setCreditCardNumber}" />
 
         <LinearLayout
@@ -151,11 +160,13 @@
                 android:id="@+id/spinner_checkout_month"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                app:selectedValue="@{viewmodel.customerInfo.expirationMonth}"
                 android:onItemSelected="@{(parent,view,position,id)->viewmodel.setExpirationMonth(position)}" />
             <Spinner
                 android:id="@+id/spinner_checkout_year"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                app:selectedValue="@{viewmodel.customerInfo.expirationYear}"
                 android:onItemSelected="@{(parent,view,position,id)->viewmodel.setExpirationYear(position)}" />
             <TextView
                 android:layout_width="wrap_content"
@@ -167,6 +178,7 @@
                 android:layout_height="wrap_content"
                 android:importantForAutofill="no"
                 android:inputType="number"
+                android:text="@{viewmodel.customerInfo.securityCode}"
                 android:onTextChanged="@{viewmodel::setSecurityCode}" />
         </LinearLayout>
 
