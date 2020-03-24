@@ -37,7 +37,11 @@
                 android:importantForAutofill="no"
                 android:inputType="text"
                 android:text="@{viewmodel.customerInfo.firstName}"
+<<<<<<< HEAD
                 android:onTextChanged="@{(s,start,before,count)->viewmodel.setFirstName(s)}" />
+=======
+                android:onTextChanged="@{viewmodel::setFirstName}" />
+>>>>>>> bind for spinner
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -51,7 +55,11 @@
                 android:importantForAutofill="no"
                 android:inputType="text"
                 android:text="@{viewmodel.customerInfo.lastName}"
+<<<<<<< HEAD
                 android:onTextChanged="@{(s,start,before,count)->viewmodel.setLastName(s)}" />
+=======
+                android:onTextChanged="@{viewmodel::setLastName}" />
+>>>>>>> bind for spinner
         </LinearLayout>
 
         <TextView
@@ -66,7 +74,11 @@
             android:importantForAutofill="no"
             android:inputType="text"
             android:text="@{viewmodel.customerInfo.address1}"
+<<<<<<< HEAD
             android:onTextChanged="@{(s,start,before,count)->viewmodel.setAddress1(s)}" />
+=======
+            android:onTextChanged="@{viewmodel::setAddress1}" />
+>>>>>>> bind for spinner
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -79,7 +91,11 @@
             android:importantForAutofill="no"
             android:inputType="text"
             android:text="@{viewmodel.customerInfo.address2}"
+<<<<<<< HEAD
             android:onTextChanged="@{(s,start,before,count)->viewmodel.setAddress2(s)}" />
+=======
+            android:onTextChanged="@{viewmodel::setAddress2}" />
+>>>>>>> bind for spinner
 
         <LinearLayout
             android:layout_width="match_parent"
