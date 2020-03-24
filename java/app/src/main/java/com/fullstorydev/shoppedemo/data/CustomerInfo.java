@@ -35,7 +35,7 @@ public class CustomerInfo {
         if (lastName == null || lastName.length()<1) throw new NullPointerException(Constants.LAST_NAME);
         if (address1 == null || address1.length()<1) throw new NullPointerException(Constants.ADDRESS_1);
         if (address2 == null) address2 = "";
-        if (city == null || city.length()<1) throw new NullPointerException(Constants.ADDRESS_2);
+        if (city == null || city.length()<1) throw new NullPointerException(Constants.CITY);
         if (!isValidState(state)) throw new NullPointerException(Constants.STATE);
         if (zip == null || zip.length()!= 5) throw new IllegalArgumentException(Constants.ZIP); // only allow US zip codes
         if (creditCardNumber == null) throw new NullPointerException(Constants.CREDIT_CARD_NUMBER);
@@ -49,7 +49,7 @@ public class CustomerInfo {
         return Constants.isValidState(state);
     }
 
-    static class OrderBuilder {
+    public static class OrderBuilder {
         private String firstName;
         private String lastName;
         private String address1;
