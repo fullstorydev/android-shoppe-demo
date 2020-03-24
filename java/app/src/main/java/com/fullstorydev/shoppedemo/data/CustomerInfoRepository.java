@@ -12,19 +12,19 @@ import com.fullstorydev.shoppedemo.utilities.Constants;
 
 public class CustomerInfoRepository {
     private SharedPreferences sharedPref;
-    private CustomerInfo info;
+    private CustomerInfo customerInfo;
 
     private Application application;
-    private MutableLiveData<Boolean> isLoading;
+    private MutableLiveData<Boolean> isLoading; // lifecycle aware observable, observe it to get update when loading is done
 
     public CustomerInfoRepository(Application application) {
         this.application = application;
         isLoading = new MutableLiveData<>();
-        info = new CustomerInfo.OrderBuilder().buildOrder();
-        initInfoFromSharedPref();
+        customerInfo = new CustomerInfo.OrderBuilder().buildOrder();
+        initCustomerInfoFromSharedPref();
     }
 
-    public CustomerInfo getInfo() { return info; } // info may return null if still loading
+    public CustomerInfo getCustomerInfo() { return customerInfo; } // info may return null if still loading
     public LiveData<Boolean> getIsLoading(){ return isLoading; }
 
     // get constants to be used to populate drop downs in UI
@@ -32,24 +32,24 @@ public class CustomerInfoRepository {
     public Integer[] getYears() { return Constants.getYears(); }
     public Integer[] getMonths() { return Constants.getMonths(); }
 
-    public void updateInfo(CustomerInfo newInfo) throws IllegalArgumentException {
+    public void updateCustomerInfo(CustomerInfo newCustomerInfo) throws IllegalArgumentException {
         isLoading.setValue(true);
-        updateInfo(Constants.FIRST_NAME,newInfo.getFirstName());
-        updateInfo(Constants.LAST_NAME,newInfo.getLastName());
-        updateInfo(Constants.ADDRESS_1,newInfo.getAddress1());
-        updateInfo(Constants.ADDRESS_2,newInfo.getAddress2());
-        updateInfo(Constants.CITY,newInfo.getCity());
-        updateInfo(Constants.STATE,newInfo.getState());
-        updateInfo(Constants.ZIP,newInfo.getZip());
-        updateInfo(Constants.CREDIT_CARD_NUMBER,newInfo.getCreditCardNumber());
-        updateInfo(Constants.EXPIRATION_MONTH,newInfo.getExpirationMonth());
-        updateInfo(Constants.EXPIRATION_YEAR,newInfo.getExpirationYear());
-        updateInfo(Constants.SECURITY_CODE,newInfo.getSecurityCode());
+        updateCustomerInfo(Constants.FIRST_NAME,newCustomerInfo.getFirstName());
+        updateCustomerInfo(Constants.LAST_NAME,newCustomerInfo.getLastName());
+        updateCustomerInfo(Constants.ADDRESS_1,newCustomerInfo.getAddress1());
+        updateCustomerInfo(Constants.ADDRESS_2,newCustomerInfo.getAddress2());
+        updateCustomerInfo(Constants.CITY,newCustomerInfo.getCity());
+        updateCustomerInfo(Constants.STATE,newCustomerInfo.getState());
+        updateCustomerInfo(Constants.ZIP,newCustomerInfo.getZip());
+        updateCustomerInfo(Constants.CREDIT_CARD_NUMBER,newCustomerInfo.getCreditCardNumber());
+        updateCustomerInfo(Constants.EXPIRATION_MONTH,newCustomerInfo.getExpirationMonth());
+        updateCustomerInfo(Constants.EXPIRATION_YEAR,newCustomerInfo.getExpirationYear());
+        updateCustomerInfo(Constants.SECURITY_CODE,newCustomerInfo.getSecurityCode());
         isLoading.setValue(false);
     }
 
     // initialize info values from shared pref and update loading state
-    private void initInfoFromSharedPref() {
+    private void initCustomerInfoFromSharedPref() {
         // To persist user input, CustomerInfo contains simple key-value pairs, thus using lighter weight shared preference instead of sql
         // !! All customer information are saved as plain text for demo purpose only. Please handle your user data properly !!
         // taken this off UI thread and post the values whenever finished reading from shared pref
@@ -69,7 +69,7 @@ public class CustomerInfoRepository {
             int expirationYear = sharedPref.getInt(Constants.EXPIRATION_YEAR,0);
             String securityCode = sharedPref.getString(Constants.SECURITY_CODE,"");
 
-            info = new CustomerInfo.OrderBuilder()
+            customerInfo = new CustomerInfo.OrderBuilder()
                     .withName(firstName,lastName)
                     .withAddress(address1,address2,city,state,zip)
                     .withPayment(creditCardNumber,expirationMonth,expirationYear,securityCode)
@@ -80,31 +80,31 @@ public class CustomerInfoRepository {
     }
 
     // update Shared Pref String values
-    private void updateInfo(String key, String val) throws IllegalArgumentException{
+    public void updateCustomerInfo(String key, String val) throws IllegalArgumentException{
         switch (key){
             case Constants.FIRST_NAME:
-                info.setFirstName(val);
+                customerInfo.setFirstName(val);
                 break;
             case Constants.LAST_NAME:
-                info.setLastName(val);
+                customerInfo.setLastName(val);
                 break;
             case Constants.ADDRESS_1:
-                info.setAddress1(val);
+                customerInfo.setAddress1(val);
                 break;
             case Constants.ADDRESS_2:
-                info.setAddress2(val);
+                customerInfo.setAddress2(val);
                 break;
             case Constants.CITY:
-                info.setCity(val);
+                customerInfo.setCity(val);
                 break;
             case Constants.ZIP:
-                info.setZip(val);
+                customerInfo.setZip(val);
                 break;
             case Constants.CREDIT_CARD_NUMBER:
-                info.setCreditCardNumber(val);
+                customerInfo.setCreditCardNumber(val);
                 break;
             case Constants.SECURITY_CODE:
-                info.setSecurityCode(val);
+                customerInfo.setSecurityCode(val);
                 break;
             default:
                 throw new IllegalArgumentException("invalid value for key: " + key);
@@ -113,16 +113,16 @@ public class CustomerInfoRepository {
     }
 
     // overload private updateInfo to handle int type values
-    private void updateInfo(String key, int val) throws IllegalArgumentException{
+    public void updateCustomerInfo(String key, int val) throws IllegalArgumentException{
         switch (key){
             case Constants.STATE:
-                info.setState(val);
+                customerInfo.setState(val);
                 break;
             case Constants.EXPIRATION_MONTH:
-                info.setExpirationMonth(val);
+                customerInfo.setExpirationMonth(val);
                 break;
             case Constants.EXPIRATION_YEAR:
-                info.setExpirationYear(val);
+                customerInfo.setExpirationYear(val);
                 break;
             default:
                 throw new IllegalArgumentException("invalid value for key: " + key);
