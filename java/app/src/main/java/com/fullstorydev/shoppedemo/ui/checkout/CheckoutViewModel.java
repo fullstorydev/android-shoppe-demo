@@ -1,25 +1,20 @@
 package com.fullstorydev.shoppedemo.ui.checkout;
 
 import android.app.Application;
-import android.util.Log;
 
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
 import com.fullstorydev.shoppedemo.data.CustomerInfo;
 import com.fullstorydev.shoppedemo.data.CustomerInfoRepository;
-import com.fullstorydev.shoppedemo.utilities.Constants;
-
 
 public class CheckoutViewModel extends AndroidViewModel {
     private CustomerInfoRepository mCustomerInfoRepo;
     private LiveData<Boolean> isLoading;
     private CustomerInfo customerInfo;
 
-
     public CheckoutViewModel(Application application) {
         super(application);
-
         mCustomerInfoRepo = new CustomerInfoRepository(application);
         isLoading = mCustomerInfoRepo.getIsLoading();
         customerInfo = new CustomerInfo.OrderBuilder().buildOrder(); // init to new customerInfo Obj with empty values
@@ -34,78 +29,67 @@ public class CheckoutViewModel extends AndroidViewModel {
     public void fetchCustomerInfo() { customerInfo = mCustomerInfoRepo.getCustomerInfo(); }
 
     // handler for EditText onTextChanged or Spinner
-    public void setFirstName(CharSequence s, int arg1, int arg2, int arg3) {
+    public void setFirstName(CharSequence s) {
         String str = String.valueOf(s);
         if(!str.equals(customerInfo.getFirstName())){
             customerInfo.setFirstName(str);
-//            mCustomerInfoRepo.updateCustomerInfo(Constants.FIRST_NAME,str);
         }
     }
-    public void setLastName(CharSequence s, int arg1, int arg2, int arg3) {
+    public void setLastName(CharSequence s) {
         String str = String.valueOf(s);
         if(!str.equals(customerInfo.getLastName())){
             customerInfo.setLastName(str);
-//            mCustomerInfoRepo.updateCustomerInfo(Constants.LAST_NAME,str);
         }
     }
-    public void setAddress1(CharSequence s, int arg1, int arg2, int arg3) {
+    public void setAddress1(CharSequence s) {
         String str = String.valueOf(s);
         if(!str.equals(customerInfo.getAddress1())){
             customerInfo.setAddress1(str);
-//            mCustomerInfoRepo.updateCustomerInfo(Constants.ADDRESS_1,str);
         }
     }
-    public void setAddress2(CharSequence s, int arg1, int arg2, int arg3) {
+    public void setAddress2(CharSequence s) {
         String str = String.valueOf(s);
         if(!str.equals(customerInfo.getAddress2())){
             customerInfo.setAddress2(str);
-//            mCustomerInfoRepo.updateCustomerInfo(Constants.ADDRESS_2,str);
         }
     }
-    public void setCity(CharSequence s, int arg1, int arg2, int arg3) {
+    public void setCity(CharSequence s) {
         String str = String.valueOf(s);
         if(!str.equals(customerInfo.getCity())){
             customerInfo.setCity(str);
-//            mCustomerInfoRepo.updateCustomerInfo(Constants.CITY,str);
         }
     }
     public void setState(int position) {
         if(position != customerInfo.getState()){
             customerInfo.setState(position);
-//            mCustomerInfoRepo.updateCustomerInfo(Constants.STATE,position);
         }
     }
-    public void setZip(CharSequence s, int arg1, int arg2, int arg3) {
+    public void setZip(CharSequence s) {
         String str = String.valueOf(s);
         if(!str.equals(customerInfo.getZip())){
             customerInfo.setZip(str);
-//            mCustomerInfoRepo.updateCustomerInfo(Constants.ZIP,str);
         }
     }
-    public void setCreditCardNumber(CharSequence s, int arg1, int arg2, int arg3) {
+    public void setCreditCardNumber(CharSequence s) {
         String str = String.valueOf(s);
         if(!str.equals(customerInfo.getCreditCardNumber())){
             customerInfo.setCreditCardNumber(str);
-//            mCustomerInfoRepo.updateCustomerInfo(Constants.CREDIT_CARD_NUMBER,str);
         }
     }
     public void setExpirationMonth(int position) {
         if(position != customerInfo.getExpirationMonth()){
             customerInfo.setExpirationMonth(position);
-//            mCustomerInfoRepo.updateCustomerInfo(Constants.EXPIRATION_MONTH,position);
         }
     }
     public void setExpirationYear(int position) {
         if(position != customerInfo.getExpirationYear()){
             customerInfo.setExpirationYear(position);
-//            mCustomerInfoRepo.updateCustomerInfo(Constants.EXPIRATION_YEAR,position);
         }
     }
-    public void setSecurityCode(CharSequence s, int arg1, int arg2, int arg3) { // handler for EditText onTextChanged
+    public void setSecurityCode(CharSequence s) { // handler for EditText onTextChanged
         String str = String.valueOf(s);
         if(!str.equals(customerInfo.getSecurityCode())){
             customerInfo.setSecurityCode(str);
-//            mCustomerInfoRepo.updateCustomerInfo(Constants.SECURITY_CODE,str);
         }
     }
 
