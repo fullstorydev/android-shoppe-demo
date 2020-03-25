@@ -37,7 +37,7 @@
                 android:importantForAutofill="no"
                 android:inputType="text"
                 android:text="@{viewmodel.customerInfo.firstName}"
-                android:onTextChanged="@{viewmodel::setFirstName}" />
+                android:onTextChanged="@{(s,start,before,count)->viewmodel.setFirstName(s)}" />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -51,7 +51,7 @@
                 android:importantForAutofill="no"
                 android:inputType="text"
                 android:text="@{viewmodel.customerInfo.lastName}"
-                android:onTextChanged="@{viewmodel::setLastName}" />
+                android:onTextChanged="@{(s,start,before,count)->viewmodel.setLastName(s)}" />
         </LinearLayout>
 
         <TextView
@@ -66,7 +66,7 @@
             android:importantForAutofill="no"
             android:inputType="text"
             android:text="@{viewmodel.customerInfo.address1}"
-            android:onTextChanged="@{viewmodel::setAddress1}" />
+            android:onTextChanged="@{(s,start,before,count)->viewmodel.setAddress1(s)}" />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -79,7 +79,7 @@
             android:importantForAutofill="no"
             android:inputType="text"
             android:text="@{viewmodel.customerInfo.address2}"
-            android:onTextChanged="@{viewmodel::setAddress2}" />
+            android:onTextChanged="@{(s,start,before,count)->viewmodel.setAddress2(s)}" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -98,7 +98,7 @@
                 android:importantForAutofill="no"
                 android:inputType="text"
                 android:text="@{viewmodel.customerInfo.city}"
-                android:onTextChanged="@{viewmodel::setCity}" />
+                android:onTextChanged="@{(s,start,before,count)->viewmodel.setCity(s)}" />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -124,7 +124,7 @@
                 android:importantForAutofill="no"
                 android:inputType="number"
                 android:text="@{viewmodel.customerInfo.zip}"
-                android:onTextChanged="@{viewmodel::setZip}" />
+                android:onTextChanged="@{(s,start,before,count)->viewmodel.setZip(s)}" />
         </LinearLayout>
 
         <TextView
@@ -145,7 +145,7 @@
             android:importantForAutofill="no"
             android:inputType="number"
             android:text="@{viewmodel.customerInfo.creditCardNumber}"
-            android:onTextChanged="@{viewmodel::setCreditCardNumber}" />
+            android:onTextChanged="@{(s,start,before,count)->viewmodel.setCreditCardNumber(s)}" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -179,7 +179,7 @@
                 android:importantForAutofill="no"
                 android:inputType="number"
                 android:text="@{viewmodel.customerInfo.securityCode}"
-                android:onTextChanged="@{viewmodel::setSecurityCode}" />
+                android:onTextChanged="@{(s,start,before,count)->viewmodel.setSecurityCode(s)}" />
         </LinearLayout>
 
         <LinearLayout
