@@ -15,8 +15,6 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.fullstorydev.shoppedemo.R;
 import com.fullstorydev.shoppedemo.databinding.FragmentCheckoutBinding;
-import com.fullstorydev.shoppedemo.databinding.ListItemMarketBinding;
-import com.fullstorydev.shoppedemo.ui.cart.CartViewModel;
 
 public class CheckoutFragment extends Fragment {
     FragmentCheckoutBinding binding;
@@ -27,7 +25,6 @@ public class CheckoutFragment extends Fragment {
     private ArrayAdapter<Integer> yearAdapter;
     private ArrayAdapter<Integer> monthAdapter;
     CheckoutViewModel checkoutViewModel;
-
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -51,7 +48,7 @@ public class CheckoutFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        
+
         checkoutViewModel = new ViewModelProvider(this).get(CheckoutViewModel.class);
         binding.setLifecycleOwner(getViewLifecycleOwner());
 
@@ -66,6 +63,5 @@ public class CheckoutFragment extends Fragment {
                 binding.executePendingBindings();
             }
         });
-
     }
 }
