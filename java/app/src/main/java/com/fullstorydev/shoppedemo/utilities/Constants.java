@@ -59,8 +59,7 @@ public class Constants {
     static public String[] getStates(){ return States; }
 
     static public boolean isValidState(int state) {
-        if(state < 0 || state > States.length) return false;
-        return true;
+        return state >= 0 && state <= States.length;
     }
 
     // generate all valid year selection for credit card expiration year. range: now ~ +10 years
