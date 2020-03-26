@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -18,27 +20,49 @@ import com.fullstorydev.shoppedemo.ui.cart.CartViewModel;
 
 public class CheckoutFragment extends Fragment {
     FragmentCheckoutBinding binding;
+    private Spinner stateSpinner;
+    private Spinner yearSpinner;
+    private Spinner monthSpinner;
+    private ArrayAdapter<String> stateAdapter;
+    private ArrayAdapter<Integer> yearAdapter;
+    private ArrayAdapter<Integer> monthAdapter;
+    CheckoutViewModel checkoutViewModel;
+
+
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-//        View view = inflater.inflate(R.layout.fragment_checkout, container, false);
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_checkout, container, false);
+        View root = binding.getRoot();
 
-         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_checkout, container, false);
+        stateSpinner = root.findViewById(R.id.spinner_checkout_states);
+        yearSpinner = root.findViewById(R.id.spinner_checkout_year);
+        monthSpinner = root.findViewById(R.id.spinner_checkout_month);
+        stateAdapter = new ArrayAdapter<>(root.getContext(),R.layout.support_simple_spinner_dropdown_item);
+        yearAdapter = new ArrayAdapter<>(root.getContext(),R.layout.support_simple_spinner_dropdown_item);
+        monthAdapter = new ArrayAdapter<>(root.getContext(),R.layout.support_simple_spinner_dropdown_item);
+        stateSpinner.setAdapter(stateAdapter);
+        yearSpinner.setAdapter(yearAdapter);
+        monthSpinner.setAdapter(monthAdapter);
 
-        return binding.getRoot();
+        return root;
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-
-        CheckoutViewModel vm = new ViewModelProvider(this).get(CheckoutViewModel.class);
+        
+        checkoutViewModel = new ViewModelProvider(this).get(CheckoutViewModel.class);
         binding.setLifecycleOwner(getViewLifecycleOwner());
 
-        vm.getIsLoading().observe(getViewLifecycleOwner(),isLoading->{
+        stateAdapter.addAll(checkoutViewModel.getStates());
+        yearAdapter.addAll(checkoutViewModel.getYears());
+        monthAdapter.addAll(checkoutViewModel.getMonths());
+
+        checkoutViewModel.getIsLoading().observe(getViewLifecycleOwner(),isLoading->{
             if(!isLoading){
-                vm.fetchCustomerInfo();
-                binding.setViewmodel(vm);
+                checkoutViewModel.fetchCustomerInfo();
+                binding.setViewmodel(checkoutViewModel);
                 binding.executePendingBindings();
             }
         });
