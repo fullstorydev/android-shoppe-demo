@@ -97,7 +97,7 @@
         android:layout_height="wrap_content"
         android:text="@string/credit_card_number" />
     <EditText
-        android:id="@+id/et_checkout_cart_number"
+        android:id="@+id/et_checkout_card_number"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
