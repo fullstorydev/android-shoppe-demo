@@ -15,16 +15,16 @@ public class CustomerInfoRepository {
     private CustomerInfo customerInfo;
 
     private Application application;
-    private MutableLiveData<Boolean> isLoading; // lifecycle aware observable, observe it to get update when loading is done
+    private MutableLiveData<Boolean> isLoading; //  observe it to get notified when loading is done
 
     public CustomerInfoRepository(Application application) {
         this.application = application;
         isLoading = new MutableLiveData<>();
-        customerInfo = new CustomerInfo.OrderBuilder().buildOrder();
+        customerInfo = new CustomerInfo.OrderBuilder().buildOrder();// init empty customer info
         initCustomerInfoFromSharedPref();
     }
 
-    public CustomerInfo getCustomerInfo() { return customerInfo; } // info may return null if still loading
+    public CustomerInfo getCustomerInfo() { return customerInfo; }
     public LiveData<Boolean> getIsLoading(){ return isLoading; }
 
     // get constants to be used to populate drop downs in UI
