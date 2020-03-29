@@ -17,7 +17,7 @@ public class CheckoutViewModel extends AndroidViewModel {
         super(application);
         mCustomerInfoRepo = new CustomerInfoRepository(application);
         isLoading = mCustomerInfoRepo.getIsLoading();
-        customerInfo = new CustomerInfo.OrderBuilder().buildOrder(); // init to new customerInfo Obj with empty values
+        fetchCustomerInfo();
     }
 
     public LiveData<Boolean> getIsLoading() { return isLoading; }
@@ -26,7 +26,7 @@ public class CheckoutViewModel extends AndroidViewModel {
     public Integer[] getYears() { return mCustomerInfoRepo.getYears(); }
     public Integer[] getMonths() { return mCustomerInfoRepo.getMonths(); }
 
-    public void fetchCustomerInfo() { customerInfo = mCustomerInfoRepo.getCustomerInfo(); }
+    public void fetchCustomerInfo() { customerInfo = mCustomerInfoRepo.getCustomerInfo(); } //fetch the current customer info from repo
 
     // handler for EditText onTextChanged or Spinner
     public void setFirstName(CharSequence s) {
