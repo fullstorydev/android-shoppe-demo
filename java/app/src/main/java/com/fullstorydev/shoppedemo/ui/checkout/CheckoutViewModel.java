@@ -20,13 +20,12 @@ public class CheckoutViewModel extends AndroidViewModel {
         fetchCustomerInfo();
     }
 
-    public LiveData<Boolean> getIsLoading() { return isLoading; }
     public CustomerInfo getCustomerInfo(){ return customerInfo; }
-    public String[] getStates() { return mCustomerInfoRepo.getStates(); }
-    public Integer[] getYears() { return mCustomerInfoRepo.getYears(); }
-    public Integer[] getMonths() { return mCustomerInfoRepo.getMonths(); }
-
-    public void fetchCustomerInfo() { customerInfo = mCustomerInfoRepo.getCustomerInfo(); } //fetch the current customer info from repo
+    LiveData<Boolean> getIsLoading() { return isLoading; }
+    String[] getStates() { return mCustomerInfoRepo.getStates(); }
+    Integer[] getYears() { return mCustomerInfoRepo.getYears(); }
+    Integer[] getMonths() { return mCustomerInfoRepo.getMonths(); }
+    void fetchCustomerInfo() { customerInfo = mCustomerInfoRepo.getCustomerInfo(); } //fetch the current customer info from repo
 
     // handler for EditText onTextChanged or Spinner
     public void setFirstName(CharSequence s) {
