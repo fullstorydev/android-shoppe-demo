@@ -1,8 +1,6 @@
 package com.fullstorydev.shoppedemo.adapters;
 
-import android.view.MotionEvent;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.Spinner;
 
 import androidx.databinding.BindingAdapter;
