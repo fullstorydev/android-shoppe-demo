@@ -1,9 +1,13 @@
 apply plugin: 'com.android.application'
 apply plugin: 'fullstory'
 
+Properties properties = new Properties()
+properties.load(project.rootProject.file('local.properties').newDataInputStream())
+
 fullstory {
-    org '<YOUR_ORG_ID>'
-    enabledVariants 'release|debug'
+    org properties.getProperty('org') // your ORG_ID
+    enabledVariants properties.getProperty('enabledVariants') // enable variants that you want FS to instrument (all)
+    server properties.getProperty('server') // optional
 }
 
 android {
