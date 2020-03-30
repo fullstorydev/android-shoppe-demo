@@ -8,11 +8,7 @@ import androidx.lifecycle.MutableLiveData;
 
 import com.fullstorydev.shoppedemo.data.CustomerInfo;
 import com.fullstorydev.shoppedemo.data.CustomerInfoRepository;
-import com.fullstorydev.shoppedemo.data.Product;
 import com.fullstorydev.shoppedemo.data.ProductRepository;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class CheckoutViewModel extends AndroidViewModel {
     private CustomerInfoRepository mCustomerInfoRepo;
