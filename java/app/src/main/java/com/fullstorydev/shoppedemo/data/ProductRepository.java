@@ -18,6 +18,7 @@ public class ProductRepository {
     private ProductDao mProductDao;
     private LiveData<List<Product>> mAllItems; //items are in cart
     private MutableLiveData<List<Product>> mAllProducts; //products are sold in shop, fetched from API
+    private LiveData<Double> mSubtotal;
 
     // Note that in order to unit test the class, you have to remove the Application
     // dependency. This adds complexity and much more code, and this sample is not about testing.
@@ -30,19 +31,17 @@ public class ProductRepository {
         AppDatabase db = AppDatabase.getDatabase(application);
         mProductDao = db.productDao();
         mAllItems = mProductDao.getAll();
+        mSubtotal = mProductDao.getSubtotal();
         mAllProducts = new MutableLiveData<>();
         
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                String hostURLStr = application.getString(R.string.products_endpoint);
-                try{
-                    String resStr = NetworkUtils.getProductListFromURL(hostURLStr);
-                    List<Product> list = JsonHelper.getProductListFromJsonString(resStr);
-                    mAllProducts.postValue(list);
-                }catch (IOException | JsonParseException e){
-                    e.printStackTrace();
-                }
+        new Thread(() -> {
+            String hostURLStr = application.getString(R.string.products_endpoint);
+            try{
+                String resStr = NetworkUtils.getProductListFromURL(hostURLStr);
+                List<Product> list = JsonHelper.getProductListFromJsonString(resStr);
+                mAllProducts.postValue(list);
+            }catch (IOException | JsonParseException e){
+                e.printStackTrace();
             }
         }).start();
     }
@@ -54,6 +53,8 @@ public class ProductRepository {
 
     // get products for market - data fetched from REST API via a async task
     public LiveData<List<Product>> getAllFromAPI() { return mAllProducts; }
+
+    public LiveData<Double> getSubtotal(){ return mSubtotal; }
 
     public void insert(Product product) {
         AppDatabase.databaseWriteExecutor.execute(() -> {

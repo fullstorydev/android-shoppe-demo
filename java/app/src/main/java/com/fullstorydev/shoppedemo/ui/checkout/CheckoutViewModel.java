@@ -7,20 +7,29 @@ import androidx.lifecycle.LiveData;
 
 import com.fullstorydev.shoppedemo.data.CustomerInfo;
 import com.fullstorydev.shoppedemo.data.CustomerInfoRepository;
+import com.fullstorydev.shoppedemo.data.Product;
+import com.fullstorydev.shoppedemo.data.ProductRepository;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class CheckoutViewModel extends AndroidViewModel {
     private CustomerInfoRepository mCustomerInfoRepo;
+    private ProductRepository mProductRepo;
     private LiveData<Boolean> isLoading;
     private CustomerInfo customerInfo;
 
     public CheckoutViewModel(Application application) {
         super(application);
         mCustomerInfoRepo = new CustomerInfoRepository(application);
+        mProductRepo = new ProductRepository(application);
         isLoading = mCustomerInfoRepo.getIsLoading();
         fetchCustomerInfo();
     }
 
     public CustomerInfo getCustomerInfo(){ return customerInfo; }
+    public LiveData<Double> getSubtotal() { return mProductRepo.getSubtotal(); }
+
     LiveData<Boolean> getIsLoading() { return isLoading; }
     String[] getStates() { return mCustomerInfoRepo.getStates(); }
     Integer[] getYears() { return mCustomerInfoRepo.getYears(); }
@@ -95,6 +104,11 @@ public class CheckoutViewModel extends AndroidViewModel {
     @Override
     protected void onCleared() {
         super.onCleared();
-        mCustomerInfoRepo.updateCustomerInfo(customerInfo);
+        try{
+            mCustomerInfoRepo.updateCustomerInfo(customerInfo);
+        }catch (IllegalArgumentException e){
+            e.printStackTrace();
+        }
+
     }
 }
