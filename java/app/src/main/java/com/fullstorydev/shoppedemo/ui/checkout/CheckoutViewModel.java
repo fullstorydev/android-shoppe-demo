@@ -4,28 +4,39 @@ import android.app.Application;
 
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 
 import com.fullstorydev.shoppedemo.data.CustomerInfo;
 import com.fullstorydev.shoppedemo.data.CustomerInfoRepository;
+import com.fullstorydev.shoppedemo.data.ProductRepository;
 
 public class CheckoutViewModel extends AndroidViewModel {
     private CustomerInfoRepository mCustomerInfoRepo;
+    private ProductRepository mProductRepo;
     private LiveData<Boolean> isLoading;
     private CustomerInfo customerInfo;
 
     public CheckoutViewModel(Application application) {
         super(application);
         mCustomerInfoRepo = new CustomerInfoRepository(application);
+        mProductRepo = new ProductRepository(application);
         isLoading = mCustomerInfoRepo.getIsLoading();
         fetchCustomerInfo();
     }
 
     public CustomerInfo getCustomerInfo(){ return customerInfo; }
+    public LiveData<Double> getSubtotal() {
+        LiveData<Double> subtotal = mProductRepo.getSubtotal();
+        if( subtotal==null ) return new MutableLiveData<>(0.0);
+        return subtotal;
+    }
+
     LiveData<Boolean> getIsLoading() { return isLoading; }
     String[] getStates() { return mCustomerInfoRepo.getStates(); }
     Integer[] getYears() { return mCustomerInfoRepo.getYears(); }
     Integer[] getMonths() { return mCustomerInfoRepo.getMonths(); }
     void fetchCustomerInfo() { customerInfo = mCustomerInfoRepo.getCustomerInfo(); } //fetch the current customer info from repo
+
 
     // handler for EditText onTextChanged or Spinner
     public void setFirstName(CharSequence s) {
@@ -95,6 +106,11 @@ public class CheckoutViewModel extends AndroidViewModel {
     @Override
     protected void onCleared() {
         super.onCleared();
-        mCustomerInfoRepo.updateCustomerInfo(customerInfo);
+        try{
+            mCustomerInfoRepo.updateCustomerInfo(customerInfo);
+        }catch (IllegalArgumentException e){
+            e.printStackTrace();
+        }
+
     }
 }
