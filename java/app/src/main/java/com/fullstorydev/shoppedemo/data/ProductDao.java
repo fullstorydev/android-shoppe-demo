@@ -19,7 +19,7 @@ abstract class ProductDao {
     @Query("SELECT quantityInCart FROM product WHERE title = :productTitles LIMIT 1")
     protected abstract int getProductQuantityByTitle(String productTitles);
 
-    @Query("SELECT sum(quantityInCart*price) FROM product")
+    @Query("SELECT SUM(quantityInCart * price) FROM product")
     abstract LiveData<Double> getSubtotal();
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
