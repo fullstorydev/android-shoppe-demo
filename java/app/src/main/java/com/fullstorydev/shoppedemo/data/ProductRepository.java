@@ -33,15 +33,18 @@ public class ProductRepository {
         mAllItems = mProductDao.getAll();
         mSubtotal = mProductDao.getSubtotal();
         mAllProducts = new MutableLiveData<>();
-        
-        new Thread(() -> {
-            String hostURLStr = application.getString(R.string.products_endpoint);
-            try{
-                String resStr = NetworkUtils.getProductListFromURL(hostURLStr);
-                List<Product> list = JsonHelper.getProductListFromJsonString(resStr);
-                mAllProducts.postValue(list);
-            }catch (IOException | JsonParseException e){
-                e.printStackTrace();
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                String hostURLStr = application.getString(R.string.products_endpoint);
+                try{
+                    String resStr = NetworkUtils.getProductListFromURL(hostURLStr);
+                    List<Product> list = JsonHelper.getProductListFromJsonString(resStr);
+                    mAllProducts.postValue(list);
+                }catch (IOException | JsonParseException e){
+                    e.printStackTrace();
+                }
             }
         }).start();
     }
