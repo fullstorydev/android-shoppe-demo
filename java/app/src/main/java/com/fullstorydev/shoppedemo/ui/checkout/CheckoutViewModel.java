@@ -4,6 +4,7 @@ import android.app.Application;
 
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 
 import com.fullstorydev.shoppedemo.data.CustomerInfo;
 import com.fullstorydev.shoppedemo.data.CustomerInfoRepository;
@@ -28,13 +29,18 @@ public class CheckoutViewModel extends AndroidViewModel {
     }
 
     public CustomerInfo getCustomerInfo(){ return customerInfo; }
-    public LiveData<Double> getSubtotal() { return mProductRepo.getSubtotal(); }
+    public LiveData<Double> getSubtotal() {
+        LiveData<Double> subtotal = mProductRepo.getSubtotal();
+        if( subtotal==null ) return new MutableLiveData<>(0.0);
+        return subtotal;
+    }
 
     LiveData<Boolean> getIsLoading() { return isLoading; }
     String[] getStates() { return mCustomerInfoRepo.getStates(); }
     Integer[] getYears() { return mCustomerInfoRepo.getYears(); }
     Integer[] getMonths() { return mCustomerInfoRepo.getMonths(); }
     void fetchCustomerInfo() { customerInfo = mCustomerInfoRepo.getCustomerInfo(); } //fetch the current customer info from repo
+
 
     // handler for EditText onTextChanged or Spinner
     public void setFirstName(CharSequence s) {

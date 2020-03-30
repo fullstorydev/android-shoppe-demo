@@ -6,6 +6,9 @@
         <variable
             name="viewmodel"
             type="com.fullstorydev.shoppedemo.ui.checkout.CheckoutViewModel" />
+        <variable
+            name="handlers"
+            type="com.fullstorydev.shoppedemo.ui.checkout.CheckoutEventHandlers"/>
     </data>
 
     <LinearLayout
@@ -115,7 +118,7 @@
                 android:id="@+id/spinner_checkout_states"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
+                android:layout_weight="1.5"
                 app:selectedValue="@{viewmodel.customerInfo.state}"
                 android:onItemSelected="@{(parent,view,position,id)->viewmodel.setState(position)}" />
             <TextView
@@ -205,13 +208,14 @@
                 android:id="@+id/tv_checkout_subtotal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@{'$'+viewmodel.subtotal.toString()}"/>
+                android:text="@{'$'+String.valueOf(viewmodel.subtotal)}"/>
         </LinearLayout>
 
         <Button
             android:id="@+id/btn_checkout_purchase"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:onClick="@{()->handlers.onClickPurchase(viewmodel.customerInfo,viewmodel.subtotal)}"
             android:text="@string/purchase" />
     </LinearLayout>
 </layout>

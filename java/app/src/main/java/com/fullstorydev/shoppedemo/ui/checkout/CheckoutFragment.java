@@ -1,11 +1,16 @@
 package com.fullstorydev.shoppedemo.ui.checkout;
 
+import android.app.Activity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -14,9 +19,10 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.fullstorydev.shoppedemo.R;
+import com.fullstorydev.shoppedemo.data.CustomerInfo;
 import com.fullstorydev.shoppedemo.databinding.FragmentCheckoutBinding;
 
-public class CheckoutFragment extends Fragment {
+public class CheckoutFragment extends Fragment implements CheckoutEventHandlers {
     FragmentCheckoutBinding binding;
     private Spinner stateSpinner;
     private Spinner yearSpinner;
@@ -42,8 +48,18 @@ public class CheckoutFragment extends Fragment {
         yearSpinner.setAdapter(yearAdapter);
         monthSpinner.setAdapter(monthAdapter);
 
+
+        root.setOnFocusChangeListener((v,focus) -> {
+            if(!(v instanceof EditText)) {
+                hideKeyboard(getActivity());
+            }else{
+                Log.d("here",String.valueOf(v.getId()));
+            }
+        });
+
         return root;
     }
+
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
@@ -60,8 +76,33 @@ public class CheckoutFragment extends Fragment {
             if(!isLoading){
                 checkoutViewModel.fetchCustomerInfo();
                 binding.setViewmodel(checkoutViewModel);
-                binding.executePendingBindings();
+                binding.setHandlers(this);
+//                binding.executePendingBindings();
             }
         });
+    }
+
+    @Override
+    public void onClickPurchase(CustomerInfo customerInfo, Double subtotal) {
+        try{
+            boolean valid = customerInfo.validateOrder();
+            if(valid && subtotal!= null && subtotal>0) {
+                Toast.makeText(getContext(), "Purchase success!", Toast.LENGTH_LONG).show();
+            }else{
+                throw new IllegalArgumentException("Order not valid");
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+            Toast.makeText(getContext(),"Purchase failed!",Toast.LENGTH_LONG).show();
+        }
+    }
+
+    private static void hideKeyboard(Activity activity) {
+        InputMethodManager imm = (InputMethodManager) activity.getSystemService(Activity.INPUT_METHOD_SERVICE);
+        View view = activity.getCurrentFocus();
+        if (view == null) {
+            view = new View(activity);
+        }
+        imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }
 }
