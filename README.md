@@ -1,5 +1,5 @@
 # android-shoppe-demo
- Client for the example "Shoppe" app
+Android Client for the example "Shoppe" app
 
 
 Android Shoppe Demo is reference application that provides tips and tricks to using [FullStory](https://www.fullstory.com/) on [Native Mobile](https://www.fullstory.com/mobile-apps/) Android.
