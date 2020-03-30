@@ -27,7 +27,7 @@ public class CheckoutViewModel extends AndroidViewModel {
     public CustomerInfo getCustomerInfo(){ return customerInfo; }
     public LiveData<Double> getSubtotal() {
         LiveData<Double> subtotal = mProductRepo.getSubtotal();
-        if( subtotal==null ) return new MutableLiveData<>(0.0);
+        if(subtotal == null) return new MutableLiveData<>(0.0);
         return subtotal;
     }
 
