@@ -1,9 +1,11 @@
 package com.fullstorydev.shoppedemo.ui.checkout;
 
 import android.app.Activity;
+import android.app.RemoteInput;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
@@ -22,15 +24,12 @@ import com.fullstorydev.shoppedemo.R;
 import com.fullstorydev.shoppedemo.data.CustomerInfo;
 import com.fullstorydev.shoppedemo.databinding.FragmentCheckoutBinding;
 
-public class CheckoutFragment extends Fragment implements CheckoutEventHandlers {
-    FragmentCheckoutBinding binding;
-    private Spinner stateSpinner;
-    private Spinner yearSpinner;
-    private Spinner monthSpinner;
+public class CheckoutFragment extends Fragment implements CheckoutEventHandlers{
+    private FragmentCheckoutBinding binding;
     private ArrayAdapter<String> stateAdapter;
     private ArrayAdapter<Integer> yearAdapter;
     private ArrayAdapter<Integer> monthAdapter;
-    CheckoutViewModel checkoutViewModel;
+    private CheckoutViewModel checkoutViewModel;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -38,24 +37,15 @@ public class CheckoutFragment extends Fragment implements CheckoutEventHandlers 
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_checkout, container, false);
         View root = binding.getRoot();
 
-        stateSpinner = root.findViewById(R.id.spinner_checkout_states);
-        yearSpinner = root.findViewById(R.id.spinner_checkout_year);
-        monthSpinner = root.findViewById(R.id.spinner_checkout_month);
+        Spinner stateSpinner = root.findViewById(R.id.spinner_checkout_states);
+        Spinner yearSpinner = root.findViewById(R.id.spinner_checkout_year);
+        Spinner monthSpinner = root.findViewById(R.id.spinner_checkout_month);
         stateAdapter = new ArrayAdapter<>(root.getContext(),R.layout.support_simple_spinner_dropdown_item);
         yearAdapter = new ArrayAdapter<>(root.getContext(),R.layout.support_simple_spinner_dropdown_item);
         monthAdapter = new ArrayAdapter<>(root.getContext(),R.layout.support_simple_spinner_dropdown_item);
         stateSpinner.setAdapter(stateAdapter);
         yearSpinner.setAdapter(yearAdapter);
         monthSpinner.setAdapter(monthAdapter);
-
-
-        root.setOnFocusChangeListener((v,focus) -> {
-            if(!(v instanceof EditText)) {
-                hideKeyboard(getActivity());
-            }else{
-                Log.d("here",String.valueOf(v.getId()));
-            }
-        });
 
         return root;
     }
@@ -77,7 +67,6 @@ public class CheckoutFragment extends Fragment implements CheckoutEventHandlers 
                 checkoutViewModel.fetchCustomerInfo();
                 binding.setViewmodel(checkoutViewModel);
                 binding.setHandlers(this);
-//                binding.executePendingBindings();
             }
         });
     }
@@ -97,12 +86,26 @@ public class CheckoutFragment extends Fragment implements CheckoutEventHandlers 
         }
     }
 
+
+    @Override
+    public View.OnTouchListener getOnTouchListener() {
+        return (v, event) -> {
+            if(!(v instanceof EditText)) {
+                hideKeyboard(getActivity());
+            }
+            v.performClick();
+            return false;
+        };
+    }
     private static void hideKeyboard(Activity activity) {
-        InputMethodManager imm = (InputMethodManager) activity.getSystemService(Activity.INPUT_METHOD_SERVICE);
-        View view = activity.getCurrentFocus();
-        if (view == null) {
-            view = new View(activity);
+        if(activity!=null){
+            InputMethodManager imm = (InputMethodManager) activity.getSystemService(Activity.INPUT_METHOD_SERVICE);
+            View view = activity.getCurrentFocus();
+            if (view == null) {
+                view = new View(activity);
+            }
+            assert imm != null;
+            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
         }
-        imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }
 }

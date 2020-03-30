@@ -17,7 +17,8 @@
 <!-- !!!!*** dev only ***!!!! Override security rules to permit cleartextTrafficPermitted for product host if not using SSL traffic -->
         <activity
             android:name="com.fullstorydev.shoppedemo.MainActivity"
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+            android:windowSoftInputMode="adjustResize" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

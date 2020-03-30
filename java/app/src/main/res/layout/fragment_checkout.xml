@@ -11,211 +11,221 @@
             type="com.fullstorydev.shoppedemo.ui.checkout.CheckoutEventHandlers"/>
     </data>
 
-    <LinearLayout
-        android:orientation="vertical"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent" >
-
-        <TextView
-            android:id="@+id/tv_checkout_billing"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="@dimen/padding_space"
-            android:text="@string/billing_address"
-            android:fontFamily="sans-serif-black" />
-
+        android:layout_height="match_parent"
+        android:fillViewport="true" >
         <LinearLayout
+            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal" >
+            android:layout_height="match_parent"
+            app:touchListener="@{handlers.onTouchListener}" >
+
             <TextView
-                android:id="@+id/tv_checkout_first_name"
+                android:id="@+id/tv_checkout_billing"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/padding_space"
+                android:text="@string/billing_address"
+                android:fontFamily="sans-serif-black" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" >
+                <TextView
+                    android:id="@+id/tv_checkout_first_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:labelFor="@+id/et_checkout_first_name"
+                    android:text="@string/first_name"/>
+                <EditText
+                    android:id="@+id/et_checkout_first_name"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:importantForAutofill="no"
+                    android:inputType="text"
+                    android:text="@{viewmodel.customerInfo.firstName}"
+                    android:onTextChanged="@{(s,start,before,count)->viewmodel.setFirstName(s)}" />
+                <TextView
+                    android:id="@+id/tv_checkout_last_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:labelFor="@+id/et_checkout_last_name"
+                    android:text="@string/last_name" />
+                <EditText
+                    android:id="@+id/et_checkout_last_name"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:importantForAutofill="no"
+                    android:inputType="text"
+                    android:text="@{viewmodel.customerInfo.lastName}"
+                    android:onTextChanged="@{(s,start,before,count)->viewmodel.setLastName(s)}" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tv_checkout_address_1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:labelFor="@+id/et_checkout_first_name"
-                android:text="@string/first_name" />
+                android:labelFor="@+id/et_checkout_address_1"
+                android:text="@string/address_1" />
             <EditText
-                android:id="@+id/et_checkout_first_name"
-                android:layout_width="0dp"
+                android:id="@+id/et_checkout_address_1"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:importantForAutofill="no"
                 android:inputType="text"
-                android:text="@{viewmodel.customerInfo.firstName}"
-                android:onTextChanged="@{(s,start,before,count)->viewmodel.setFirstName(s)}" />
+                android:text="@{viewmodel.customerInfo.address1}"
+                android:onTextChanged="@{(s,start,before,count)->viewmodel.setAddress1(s)}" />
             <TextView
-                android:id="@+id/tv_checkout_last_name"
+                android:id="@+id/tv_checkout_address_2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:labelFor="@+id/et_checkout_last_name"
-                android:text="@string/last_name" />
+                android:labelFor="@id/et_checkout_address_2"
+                android:text="@string/address_2" />
             <EditText
-                android:id="@+id/et_checkout_last_name"
-                android:layout_width="0dp"
+                android:id="@+id/et_checkout_address_2"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:importantForAutofill="no"
                 android:inputType="text"
-                android:text="@{viewmodel.customerInfo.lastName}"
-                android:onTextChanged="@{(s,start,before,count)->viewmodel.setLastName(s)}" />
-        </LinearLayout>
+                android:text="@{viewmodel.customerInfo.address2}"
+                android:onTextChanged="@{(s,start,before,count)->viewmodel.setAddress2(s)}" />
 
-        <TextView
-            android:id="@+id/tv_checkout_address_1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:labelFor="@+id/et_checkout_address_1"
-            android:text="@string/address_1" />
-        <EditText
-            android:id="@+id/et_checkout_address_1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:importantForAutofill="no"
-            android:inputType="text"
-            android:text="@{viewmodel.customerInfo.address1}"
-            android:onTextChanged="@{(s,start,before,count)->viewmodel.setAddress1(s)}" />
-        <TextView
-            android:id="@+id/tv_checkout_address_2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:labelFor="@id/et_checkout_address_2"
-            android:text="@string/address_2" />
-        <EditText
-            android:id="@+id/et_checkout_address_2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:importantForAutofill="no"
-            android:inputType="text"
-            android:text="@{viewmodel.customerInfo.address2}"
-            android:onTextChanged="@{(s,start,before,count)->viewmodel.setAddress2(s)}" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" >
+                <TextView
+                    android:id="@+id/tv_checkout_city"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:labelFor="@id/et_checkout_city"
+                    android:text="@string/city" />
+                <EditText
+                    android:id="@+id/et_checkout_city"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.5"
+                    android:importantForAutofill="no"
+                    android:inputType="text"
+                    android:text="@{viewmodel.customerInfo.city}"
+                    android:onTextChanged="@{(s,start,before,count)->viewmodel.setCity(s)}" />
+                <TextView
+                    android:id="@+id/tv_checkout_state"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:labelFor="@id/spinner_checkout_states"
+                    android:text="@string/state" />
+                <Spinner
+                    android:id="@+id/spinner_checkout_states"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.5"
+                    app:touchListener="@{handlers.onTouchListener}"
+                    app:selectedValue="@{viewmodel.customerInfo.state}"
+                    android:onItemSelected="@{(parent,view,position,id)->viewmodel.setState(position)}" />
+                <TextView
+                    android:id="@+id/tv_checkout_zip"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:labelFor="@id/et_checkout_zip"
+                    android:text="@string/zip_code" />
+                <EditText
+                    android:id="@+id/et_checkout_zip"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:importantForAutofill="no"
+                    android:inputType="number"
+                    android:text="@{viewmodel.customerInfo.zip}"
+                    android:onTextChanged="@{(s,start,before,count)->viewmodel.setZip(s)}" />
+            </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal" >
             <TextView
-                android:id="@+id/tv_checkout_city"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/padding_space"
+                android:text="@string/payment_details"
+                android:fontFamily="sans-serif-black" />
+            <TextView
+                android:id="@+id/tv_checkout_credit_cart_number"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:labelFor="@id/et_checkout_city"
-                android:text="@string/city" />
+                android:text="@string/credit_card_number"
+                android:labelFor="@id/et_checkout_cart_number" />
             <EditText
-                android:id="@+id/et_checkout_city"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1.5"
-                android:importantForAutofill="no"
-                android:inputType="text"
-                android:text="@{viewmodel.customerInfo.city}"
-                android:onTextChanged="@{(s,start,before,count)->viewmodel.setCity(s)}" />
-            <TextView
-                android:id="@+id/tv_checkout_state"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:labelFor="@id/spinner_checkout_states"
-                android:text="@string/state" />
-            <Spinner
-                android:id="@+id/spinner_checkout_states"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1.5"
-                app:selectedValue="@{viewmodel.customerInfo.state}"
-                android:onItemSelected="@{(parent,view,position,id)->viewmodel.setState(position)}" />
-            <TextView
-                android:id="@+id/tv_checkout_zip"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:labelFor="@id/et_checkout_zip"
-                android:text="@string/zip_code" />
-            <EditText
-                android:id="@+id/et_checkout_zip"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:importantForAutofill="no"
-                android:inputType="number"
-                android:text="@{viewmodel.customerInfo.zip}"
-                android:onTextChanged="@{(s,start,before,count)->viewmodel.setZip(s)}" />
-        </LinearLayout>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="@dimen/padding_space"
-            android:text="@string/payment_details"
-            android:fontFamily="sans-serif-black" />
-        <TextView
-            android:id="@+id/tv_checkout_credit_cart_number"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/credit_card_number"
-            android:labelFor="@id/et_checkout_cart_number" />
-        <EditText
-            android:id="@+id/et_checkout_cart_number"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:importantForAutofill="no"
-            android:inputType="number"
-            android:text="@{viewmodel.customerInfo.creditCardNumber}"
-            android:onTextChanged="@{(s,start,before,count)->viewmodel.setCreditCardNumber(s)}" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <TextView
-                android:id="@+id/tv_checkout_expiration"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:labelFor="@id/spinner_checkout_month"
-                android:text="@string/expiration" />
-            <Spinner
-                android:id="@+id/spinner_checkout_month"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:selectedValue="@{viewmodel.customerInfo.expirationMonth}"
-                android:onItemSelected="@{(parent,view,position,id)->viewmodel.setExpirationMonth(position)}" />
-            <Spinner
-                android:id="@+id/spinner_checkout_year"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:selectedValue="@{viewmodel.customerInfo.expirationYear}"
-                android:onItemSelected="@{(parent,view,position,id)->viewmodel.setExpirationYear(position)}" />
-            <TextView
-                android:id="@+id/tv_checkout_security_code"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/security_code"/>
-            <EditText
-                android:id="@+id/et_checkout_security_code"
+                android:id="@+id/et_checkout_cart_number"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:importantForAutofill="no"
                 android:inputType="number"
-                android:text="@{viewmodel.customerInfo.securityCode}"
-                android:onTextChanged="@{(s,start,before,count)->viewmodel.setSecurityCode(s)}" />
-        </LinearLayout>
+                android:text="@{viewmodel.customerInfo.creditCardNumber}"
+                android:onTextChanged="@{(s,start,before,count)->viewmodel.setCreditCardNumber(s)}" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <TextView
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:id="@+id/tv_checkout_expiration"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:labelFor="@id/spinner_checkout_month"
+                    android:text="@string/expiration" />
+                <Spinner
+                    android:id="@+id/spinner_checkout_month"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:touchListener="@{handlers.onTouchListener}"
+                    app:selectedValue="@{viewmodel.customerInfo.expirationMonth}"
+                    android:onItemSelected="@{(parent,view,position,id)->viewmodel.setExpirationMonth(position)}" />
+                <Spinner
+                    android:id="@+id/spinner_checkout_year"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:touchListener="@{handlers.onTouchListener}"
+                    app:selectedValue="@{viewmodel.customerInfo.expirationYear}"
+                    android:onItemSelected="@{(parent,view,position,id)->viewmodel.setExpirationYear(position)}" />
+                <TextView
+                    android:id="@+id/tv_checkout_security_code"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/security_code"/>
+                <EditText
+                    android:id="@+id/et_checkout_security_code"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:importantForAutofill="no"
+                    android:inputType="number"
+                    android:text="@{viewmodel.customerInfo.securityCode}"
+                    android:onTextChanged="@{(s,start,before,count)->viewmodel.setSecurityCode(s)}" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/subtotal" />
+                <TextView
+                    android:id="@+id/tv_checkout_subtotal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{'$'+String.valueOf(viewmodel.subtotal)}"/>
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/btn_checkout_purchase"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/subtotal" />
-            <TextView
-                android:id="@+id/tv_checkout_subtotal"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@{'$'+String.valueOf(viewmodel.subtotal)}"/>
+                app:touchListener="@{handlers.onTouchListener}"
+                android:onClick="@{()->handlers.onClickPurchase(viewmodel.customerInfo,viewmodel.subtotal)}"
+                android:text="@string/purchase" />
         </LinearLayout>
-
-        <Button
-            android:id="@+id/btn_checkout_purchase"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:onClick="@{()->handlers.onClickPurchase(viewmodel.customerInfo,viewmodel.subtotal)}"
-            android:text="@string/purchase" />
-    </LinearLayout>
+    </ScrollView>
 </layout>
