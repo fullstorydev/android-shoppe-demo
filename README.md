@@ -1,4 +1,5 @@
 # android-shoppe-demo
+
 Android Client for the example "Shoppe" app
 
 The Android Shoppe Demo is reference application that provides tips and tricks to using [FullStory](https://www.fullstory.com/) on [Native Mobile](https://www.fullstory.com/mobile-apps/) Android.
@@ -45,6 +46,12 @@ Make sure you background or kill your app. This ensures that FullStory receives 
 Then you can find your session by going to the mobile segment in FullStory, or build your own segment/search.
 
 Check out a few sessions and explore the data to get a feel for how you'd use FullStory on your own app.
+
+## App Architecture
+
+See diagram below for the [app architecture](https://developer.android.com/jetpack/docs/guide):
+
+![Diagram](readmeImages/diagram.jpg "App architecture diagram")
 
 ## Tips and tricks
 
