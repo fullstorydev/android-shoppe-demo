@@ -6,6 +6,9 @@
         <variable
             name="viewmodel"
             type="com.fullstorydev.shoppedemo.ui.checkout.CheckoutViewModel" />
+        <variable
+            name="handlers"
+            type="com.fullstorydev.shoppedemo.ui.checkout.CheckoutEventHandlers"/>
     </data>
 
     <ScrollView
@@ -216,7 +219,8 @@
                 android:id="@+id/btn_checkout_purchase"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/purchase" />
+                android:text="@string/purchase"
+                android:onClick="@{()->handlers.onClickPurchase(viewmodel.customerInfo,viewmodel.subtotal)}" />
         </LinearLayout>
     </ScrollView>
 </layout>
