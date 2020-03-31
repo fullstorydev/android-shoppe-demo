@@ -1,7 +1,6 @@
 # android-shoppe-demo
 Android Client for the example "Shoppe" app
 
-
 Android Shoppe Demo is reference application that provides tips and tricks to using [FullStory](https://www.fullstory.com/) on [Native Mobile](https://www.fullstory.com/mobile-apps/) Android.
 
 ## Getting started
@@ -18,7 +17,6 @@ org=<your org id>
 enabledVariants = all
 ```
 Your orgId can be found on the Settings page.  It'll be next to the `window['_fs_org']` variable in the snippet.  For more information, see [Install your recording snippet](https://help.fullstory.com/hc/en-us/articles/360020828233#Install).
-
 
 Unless otherwise instructed, you can remove the follwoing line from your app level `build.gradle`
 ```
