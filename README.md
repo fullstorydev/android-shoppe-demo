@@ -1,11 +1,11 @@
 # android-shoppe-demo
 Android Client for the example "Shoppe" app
 
-Android Shoppe Demo is reference application that provides tips and tricks to using [FullStory](https://www.fullstory.com/) on [Native Mobile](https://www.fullstory.com/mobile-apps/) Android.
+The Android Shoppe Demo is reference application that provides tips and tricks to using [FullStory](https://www.fullstory.com/) on [Native Mobile](https://www.fullstory.com/mobile-apps/) Android.
 
 ## Getting started
 
-To apply FullStory Android plugin, you'll need [Android Studio](https://developer.android.com/studio). You'll then download or clone this repo to your desired directory.
+To apply the FullStory Android Plugin, you'll need [Android Studio](https://developer.android.com/studio). You'll then download or clone this repo to your desired directory.
 
 To open the project, use "File > Open" in Android Studio and selece either "java" or "kotlin"(coming soon) folder.
 
@@ -40,7 +40,7 @@ The Shoppe is a super simple e-commerce application. Build and run the app on yo
 
 Now that you've used the app, you have a session in FullStory. Head on over to FullStory [https://app.fullstory.com/login](https://app.fullstory.com/login).
 
-Make sure you background or kill your app. This is a limitation as of now to ensure that FullStory recieves a signal in order to start processing your session. The process may take few minutes.
+Make sure you background or kill your app. This ensures that FullStory receives a signal in order to start processing your session. The may take few minutes.
 
 Then you can find your session by going to the mobile segment in FullStory, or build your own segment/search.
 
