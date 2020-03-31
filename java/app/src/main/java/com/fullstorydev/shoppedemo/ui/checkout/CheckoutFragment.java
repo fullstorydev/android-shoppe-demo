@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -14,9 +15,10 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.fullstorydev.shoppedemo.R;
+import com.fullstorydev.shoppedemo.data.CustomerInfo;
 import com.fullstorydev.shoppedemo.databinding.FragmentCheckoutBinding;
 
-public class CheckoutFragment extends Fragment {
+public class CheckoutFragment extends Fragment implements CheckoutEventHandlers {
     FragmentCheckoutBinding binding;
     private Spinner stateSpinner;
     private Spinner yearSpinner;
@@ -60,8 +62,25 @@ public class CheckoutFragment extends Fragment {
             if(!isLoading){
                 checkoutViewModel.fetchCustomerInfo();
                 binding.setViewmodel(checkoutViewModel);
-                binding.executePendingBindings();
+                binding.setHandlers(this);
             }
         });
+    }
+
+    @Override
+    public void onClickPurchase(CustomerInfo customerInfo, Double subtotal) {
+        try{
+            boolean valid = customerInfo.validateOrder();
+            if(valid && subtotal!= null && subtotal>0) {
+                // placeholder for your logic here to complete purchase
+                Toast.makeText(getContext(), "Purchase success!", Toast.LENGTH_LONG).show();
+            }else{
+                throw new IllegalArgumentException("Order not valid");
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+            // placeholder for your logic here to handle failed purchase
+            Toast.makeText(getContext(),"Purchase failed!",Toast.LENGTH_LONG).show();
+        }
     }
 }
