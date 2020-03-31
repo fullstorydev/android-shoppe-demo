@@ -12,19 +12,20 @@ To open the project, use "File > Open" in Android Studio and selece either "java
 
 ## Adding FullStory to the app
 
-If you have signed up for FullStory, add to your `local.properties` file the following:
+If you have [signed up](https://www.fullstory.com/plans/) for FullStory, add to your `local.properties` file the following:
 ```
 org=<your org id>
 enabledVariants = all
 ```
+Your orgId can be found on the Settings page.  It'll be next to the `window['_fs_org']` variable in the snippet.  For more information, see [Install your recording snippet](https://help.fullstory.com/hc/en-us/articles/360020828233#Install).
+
+
 Unless otherwise instructed, you can remove the follwoing line from your app level `build.gradle`
 ```
 server properties.getProperty('server') // optional
 ```
 
 Sync gradle after the changes and your app should be fully instrumented with your org information.
-
- Your orgId can be found on the Settings page.  It'll be next to the `window['_fs_org']` variable in the snippet.  For more information, see [Install your recording snippet](https://help.fullstory.com/hc/en-us/articles/360020828233#Install).
 
 ## Using the app
 
@@ -41,8 +42,9 @@ The Shoppe is a super simple e-commerce application. Build and run the app on yo
 
 Now that you've used the app, you have a session in FullStory. Head on over to FullStory [https://app.fullstory.com/login](https://app.fullstory.com/login).
 
-Make sure you background or kill your app.
-Find your session by going to the mobile segment in FullStory.
+Make sure you background or kill your app. This is a limitation as of now to ensure that FullStory recieves a signal in order to start processing your session. The process may take few minutes.
+
+Then you can find your session by going to the mobile segment in FullStory, or build your own segment/search.
 
 Check out a few sessions and explore the data to get a feel for how you'd use FullStory on your own app.
 
