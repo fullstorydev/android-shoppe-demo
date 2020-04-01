@@ -33,7 +33,7 @@ The Shoppe is a super simple e-commerce application. Build and run the app on yo
 - Go to your _Shopping Cart_ by clicking on the cart icon on the top right corner.
 - Review your cart and then click the **Checkout** button.
 - Fill out the form on the _Checkout_ view and click **Purchase**. The app persists locally all the information from this view. Please do **not** use your real information
-- When clicking **Purchase** your information is validated and a Toast message will be shown. The purchase is successful if all fields passed the validate and your subtotal is grater than 0.
+- When clicking **Purchase** your information is validated and a Toast message will be shown. The purchase is successful if all fields passed the validate and your subtotal is greater than 0.
 
 ## Using FullStory with the app
 
