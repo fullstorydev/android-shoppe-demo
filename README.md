@@ -2,7 +2,7 @@
 
 Android Client for the example "Shoppe" app
 
-The Android Shoppe Demo is reference application that provides tips and tricks to using [FullStory](https://www.fullstory.com/) on [Native Mobile](https://www.fullstory.com/mobile-apps/) Android.
+The Android Shoppe Demo is a reference application that provides tips and tricks to using [FullStory](https://www.fullstory.com/) on [Native Mobile](https://www.fullstory.com/mobile-apps/) Android.
 
 ## Getting started
 
@@ -18,9 +18,9 @@ org = <your org id>
 enabledVariants = all
 server = https://fullstory.com
 ```
-Your orgId can be found on the Settings page.  It'll be next to the `window['_fs_org']` variable in the snippet.  For more information, see [Install your recording snippet](https://help.fullstory.com/hc/en-us/articles/360020828233#Install).
+Your orgId can be found on the _Settings_ page once you are logged in to FullStory.  It'll be next to the `window['_fs_org']` variable in the snippet.  For more information, see [Install your recording snippet](https://help.fullstory.com/hc/en-us/articles/360020828233#Install).
 
-For successful recording, please do not change the `server` value; it should always be https://fullstory.com.
+For successful recording, please do not change the `server` value. It should always be `https://fullstory.com`.
 
 Sync gradle after the changes and your app should be fully instrumented with your org information.
 
@@ -30,10 +30,10 @@ The Shoppe is a super simple e-commerce application. Build and run the app on yo
 
 - Browse a list of products int the _Market_.
 - Use the **Add to Cart** button to add products to your shopping cart.
-- Go to your _Shopping Cart_ by clicking on the cart icon on top right corner.
+- Go to your _Shopping Cart_ by clicking on the cart icon on the top right corner.
 - Review your cart and then click the **Checkout** button.
-- Fill out the form on the _Checkout_ view and click **Purchase**. The app persist locally all the information from this page. Please do not use your real information
-- When clicking **Purchase** your information is validated and a Toast message will be shown. The purchase is successful if all fields passed the validate.
+- Fill out the form on the _Checkout_ view and click **Purchase**. The app persists locally all the information from this view. Please do **not** use your real information
+- When clicking **Purchase** your information is validated and a Toast message will be shown. The purchase is successful if all fields passed the validate and your subtotal is grater than 0.
 
 ## Using FullStory with the app
 
