@@ -16,7 +16,7 @@ If you have [signed up](https://www.fullstory.com/plans/) for FullStory, add to 
 ```
 org = <your org id>
 enabledVariants = all
-server=https://fullstory.com
+server = https://fullstory.com
 ```
 Your orgId can be found on the Settings page.  It'll be next to the `window['_fs_org']` variable in the snippet.  For more information, see [Install your recording snippet](https://help.fullstory.com/hc/en-us/articles/360020828233#Install).
 
