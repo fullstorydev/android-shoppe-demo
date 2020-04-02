@@ -8,25 +8,25 @@ import androidx.lifecycle.MutableLiveData;
 
 import com.fullstorydev.shoppedemo.data.CustomerInfo;
 import com.fullstorydev.shoppedemo.data.CustomerInfoRepository;
-import com.fullstorydev.shoppedemo.data.ProductRepository;
+import com.fullstorydev.shoppedemo.data.ItemRepository;
 
 public class CheckoutViewModel extends AndroidViewModel {
     private CustomerInfoRepository mCustomerInfoRepo;
-    private ProductRepository mProductRepo;
+    private ItemRepository mItemProductRepo;
     private LiveData<Boolean> isLoading;
     private CustomerInfo customerInfo;
 
     public CheckoutViewModel(Application application) {
         super(application);
         mCustomerInfoRepo = new CustomerInfoRepository(application);
-        mProductRepo = new ProductRepository(application);
+        mItemProductRepo = new ItemRepository(application);
         isLoading = mCustomerInfoRepo.getIsLoading();
         fetchCustomerInfo();
     }
 
     public CustomerInfo getCustomerInfo(){ return customerInfo; }
     public LiveData<Double> getSubtotal() {
-        LiveData<Double> subtotal = mProductRepo.getSubtotal();
+        LiveData<Double> subtotal = mItemProductRepo.getSubtotal();
         if(subtotal == null) return new MutableLiveData<>(0.0);
         return subtotal;
     }

@@ -9,7 +9,7 @@ import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.fullstorydev.shoppedemo.R;
-import com.fullstorydev.shoppedemo.data.Product;
+import com.fullstorydev.shoppedemo.data.Item;
 import com.fullstorydev.shoppedemo.databinding.ListItemCartBinding;
 import com.fullstorydev.shoppedemo.ui.cart.CartEventHandlers;
 
@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CartItemAdapter extends RecyclerView.Adapter<CartItemAdapter.CartItemViewHolder> {
-    private List<Product> mItemList;
+    private List<Item> mItemList;
     private LayoutInflater layoutInflater;
     private CartEventHandlers mCartHandlers;
 
@@ -44,11 +44,11 @@ public class CartItemAdapter extends RecyclerView.Adapter<CartItemAdapter.CartIt
 
     @Override
     public int getItemCount() {
-        if(mItemList==null) return 0;
+        if(mItemList == null) return 0;
         return mItemList.size();
     }
 
-    public void setItemList(List<Product> items){
+    public void setItemList(List<Item> items){
         //TODO: check diff and use callback & DiffUtil.DiffResult to avoid recreating every view
         mItemList = items;
         notifyDataSetChanged();
@@ -63,7 +63,7 @@ public class CartItemAdapter extends RecyclerView.Adapter<CartItemAdapter.CartIt
             this.binding.setHandlers(mCartHandlers);
         }
 
-        void bind(Product item) {
+        void bind(Item item) {
             binding.setItem(item);
             binding.executePendingBindings();
         }
@@ -71,7 +71,7 @@ public class CartItemAdapter extends RecyclerView.Adapter<CartItemAdapter.CartIt
         @Override
         public void onClick(View v) {
             // getting clicked item from adapter position
-            Product item = mItemList.get(getAdapterPosition());
+            Item item = mItemList.get(getAdapterPosition());
             try {
                 //TODO: When recyclerview is clicked, get the item and perform action here, i.e. show item details fragment
             } catch (Exception e) {

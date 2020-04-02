@@ -7,15 +7,12 @@ import android.view.ViewGroup;
 import androidx.annotation.Nullable;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.fullstorydev.shoppedemo.R;
 import com.fullstorydev.shoppedemo.adapters.MarketProductAdapter;
-import com.fullstorydev.shoppedemo.data.Product;
-
-import java.util.List;
+import com.fullstorydev.shoppedemo.data.Item;
 
 public class MarketFragment extends Fragment implements MarketEventHandlers {
 
@@ -39,15 +36,10 @@ public class MarketFragment extends Fragment implements MarketEventHandlers {
         super.onActivityCreated(savedInstanceState);
 
         marketViewModel = new ViewModelProvider(this).get(MarketViewModel.class);
-        marketViewModel.getProductList().observe(this.getViewLifecycleOwner(), new Observer<List<Product>>() {
-            @Override
-            public void onChanged(List<Product> products) {
-                mMarketProductAdapter.setProductList(products);
-            }
-        });
+        marketViewModel.getProductList().observe(this.getViewLifecycleOwner(), products -> mMarketProductAdapter.setProductList(products));
     }
 
-    public void onClickAddToCart(Product product){
+    public void onClickAddToCart(Item product){
         marketViewModel.increaseQuantityInCart(product);
     }
 }

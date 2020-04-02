@@ -5,26 +5,26 @@ import android.app.Application;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
-import com.fullstorydev.shoppedemo.data.Product;
-import com.fullstorydev.shoppedemo.data.ProductRepository;
+import com.fullstorydev.shoppedemo.data.Item;
+import com.fullstorydev.shoppedemo.data.ItemRepository;
 
 import java.util.List;
 
 public class CartViewModel extends AndroidViewModel {
-    private ProductRepository mRepository;
-    private LiveData<List<Product>> mItemList;
+    private ItemRepository mItemRepository;
+    private LiveData<List<Item>> mItemList;
 
     public CartViewModel(Application application) {
         super(application);
-        mRepository = new ProductRepository(application);
-        mItemList = mRepository.getAllItemsFromDB();
+        mItemRepository = new ItemRepository(application);
+        mItemList = mItemRepository.getAllItemsFromDB();
     }
 
-    public LiveData<List<Product>> getItemList() {
+    public LiveData<List<Item>> getItemList() {
         return mItemList;
     }
 
-    public void decreaseQuantityInCart(Product product){
-        mRepository.decreaseQuantityInCart(product);
+    public void decreaseQuantityInCart(Item item){
+        mItemRepository.decreaseQuantityInCart(item);
     }
 }
