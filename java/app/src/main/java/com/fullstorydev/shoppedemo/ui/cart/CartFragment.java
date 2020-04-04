@@ -7,16 +7,13 @@ import android.view.ViewGroup;
 import androidx.annotation.Nullable;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.fullstorydev.shoppedemo.R;
 import com.fullstorydev.shoppedemo.adapters.CartItemAdapter;
-import com.fullstorydev.shoppedemo.data.Product;
-
-import java.util.List;
+import com.fullstorydev.shoppedemo.data.Item;
 
 public class CartFragment extends Fragment implements CartEventHandlers{
     private CartViewModel cartViewModel;
@@ -43,16 +40,11 @@ public class CartFragment extends Fragment implements CartEventHandlers{
         super.onActivityCreated(savedInstanceState);
 
         cartViewModel = new ViewModelProvider(this).get(CartViewModel.class);
-        cartViewModel.getItemList().observe(this.getViewLifecycleOwner(), new Observer<List<Product>>() {
-            @Override
-            public void onChanged(List<Product> items) {
-                mCartItemAdapter.setItemList(items);
-            }
-        });
+        cartViewModel.getItemList().observe(this.getViewLifecycleOwner(), items -> mCartItemAdapter.setItemList(items));
     }
 
     @Override
-    public void onClickRemoveFromCart(Product item) {
+    public void onClickRemoveFromCart(Item item) {
         cartViewModel.decreaseQuantityInCart(item);
     }
 }

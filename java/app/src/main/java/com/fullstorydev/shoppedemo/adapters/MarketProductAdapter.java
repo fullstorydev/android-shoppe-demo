@@ -8,16 +8,16 @@ import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.fullstorydev.shoppedemo.data.Item;
 import com.fullstorydev.shoppedemo.ui.market.MarketEventHandlers;
 import com.fullstorydev.shoppedemo.R;
-import com.fullstorydev.shoppedemo.data.Product;
 import com.fullstorydev.shoppedemo.databinding.ListItemMarketBinding;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class MarketProductAdapter extends RecyclerView.Adapter<MarketProductAdapter.MarketProductViewHolder> {
-    private List<Product> mProductList;
+    private List<Item> mProductList;
     private LayoutInflater layoutInflater;
     private MarketEventHandlers mMarketHandlers;
 
@@ -44,11 +44,11 @@ public class MarketProductAdapter extends RecyclerView.Adapter<MarketProductAdap
 
     @Override
     public int getItemCount() {
-        if(mProductList==null) return 0;
+        if(mProductList == null) return 0;
         return mProductList.size();
     }
 
-    public void setProductList(List<Product> products){
+    public void setProductList(List<Item> products){
         //TODO: check diff and use callback & DiffUtil.DiffResult to avoid recreating every view
         mProductList = products;
         notifyDataSetChanged();
@@ -63,7 +63,7 @@ public class MarketProductAdapter extends RecyclerView.Adapter<MarketProductAdap
             this.binding.setHandlers(mMarketHandlers);
         }
 
-        void bind(Product product) {
+        void bind(Item product) {
             binding.setProduct(product);
             binding.executePendingBindings();
         }
@@ -71,7 +71,7 @@ public class MarketProductAdapter extends RecyclerView.Adapter<MarketProductAdap
         @Override
         public void onClick(View v) {
             // getting clicked product from adapter position
-            Product product = mProductList.get(getAdapterPosition());
+            Item product = mProductList.get(getAdapterPosition());
             try {
                 //TODO: When recyclerview is clicked, get the product and perform action here, i.e. show product details fragment
             } catch (Exception e) {

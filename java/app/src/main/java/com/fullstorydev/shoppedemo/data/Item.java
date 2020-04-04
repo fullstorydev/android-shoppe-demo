@@ -17,8 +17,8 @@ import androidx.room.PrimaryKey;
     }
  */
 
-@Entity
-public class Product {
+@Entity(tableName = "items")
+public class Item {
 
     @PrimaryKey@NonNull
     @ColumnInfo(name = "title")
@@ -39,7 +39,7 @@ public class Product {
     @ColumnInfo(name = "quantityInCart",defaultValue = "1")
     public int quantityInCart;
 
-    public Product(String title, String description, Double price, String image, String unit, int quantityInCart) {
+    public Item(String title, String description, Double price, String image, String unit, int quantityInCart) {
             this.title = title;
             this.description = description;
             this.price = price;
@@ -49,9 +49,9 @@ public class Product {
     }
 
     @Ignore
-    public Product(String title, String description, Double price, String image, String unit) {
+    public Item(String title, String description, Double price, String image, String unit) {
         this(title,description,price,image,unit,1);
     }
 
-    public Product getProduct(){return this;}
+    public Item getItem(){return this;}
 }

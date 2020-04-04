@@ -1,7 +1,7 @@
 package com.fullstorydev.shoppedemo.ui.cart;
 
-import com.fullstorydev.shoppedemo.data.Product;
+import com.fullstorydev.shoppedemo.data.Item;
 
 public interface CartEventHandlers {
-    void onClickRemoveFromCart(Product item);
+    void onClickRemoveFromCart(Item item);
 }

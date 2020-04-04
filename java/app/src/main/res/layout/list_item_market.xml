@@ -5,7 +5,7 @@
     <data>
         <variable
             name="product"
-            type="com.fullstorydev.shoppedemo.data.Product" />
+            type="com.fullstorydev.shoppedemo.data.Item" />
         <variable
             name="handlers"
             type="com.fullstorydev.shoppedemo.ui.market.MarketEventHandlers"/>
