@@ -39,7 +39,7 @@ public class MarketFragment extends Fragment implements MarketEventHandlers {
         marketViewModel.getProductList().observe(this.getViewLifecycleOwner(), products -> mMarketProductAdapter.setProductList(products));
     }
 
-    public void onClickAddToCart(Item product){
-        marketViewModel.increaseQuantityInCart(product);
+    public void onClickAddToCart(Item item){
+        marketViewModel.increaseQuantityInCart(item);
     }
 }

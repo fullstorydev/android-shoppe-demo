@@ -27,5 +27,5 @@ public class MarketViewModel extends AndroidViewModel {
         return mProductList;
     }
 
-    public void increaseQuantityInCart(Item product){ mItemRepository.increaseQuantityInCart(product); }
+    public void increaseQuantityInCart(Item item){ mItemRepository.increaseQuantityInCart(item); }
 }

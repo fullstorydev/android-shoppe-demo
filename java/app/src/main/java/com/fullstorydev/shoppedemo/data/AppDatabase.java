@@ -27,9 +27,8 @@ public abstract class AppDatabase extends RoomDatabase {
                 if (INSTANCE == null) {
                     INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
                             AppDatabase.class, "product_database")
-//                             v1, no need for migration yet, but if you update your schema then you would need to write migrations
                             .addMigrations(MIGRATION_1_2)
-//                            .fallbackToDestructiveMigration()
+//                            .fallbackToDestructiveMigration() // Use with caution: This allows Room to destructively recreate database tables if Migrations that would migrate old database schemas to the latest schema version are not found.
                             .build();
                 }
             }
