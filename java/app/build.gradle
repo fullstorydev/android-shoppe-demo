@@ -5,9 +5,9 @@ Properties properties = new Properties()
 properties.load(project.rootProject.file('local.properties').newDataInputStream())
 
 fullstory {
-    org properties.hasProperty('org') ? properties.getProperty('org') : '' // your ORG_ID
-    enabledVariants properties.hasProperty('org') ? properties.getProperty('enabledVariants') : ''// enable variants that you want FS to instrument (all)
-    server properties.hasProperty('org') ? properties.getProperty('server') : ''// optional
+    org properties.hasProperty('org') ? properties.getProperty('org') : 'YOUR_ORG' // your ORG_ID
+    enabledVariants properties.hasProperty('enabledVariants') ? properties.getProperty('enabledVariants') : 'all'// enable variants that you want FS to instrument (all)
+    server properties.hasProperty('server') ? properties.getProperty('server') : 'https://fullstory.com'// optional
 }
 
 android {
