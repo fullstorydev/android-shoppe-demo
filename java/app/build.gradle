@@ -5,14 +5,14 @@ Properties properties = new Properties()
 properties.load(project.rootProject.file('local.properties').newDataInputStream())
 
 fullstory {
-    // ORG INFO
-    if(properties.getProperty('org') == null) throw new Exception('ORG ID is null, please configure your orgnization information in local.properties')
     org properties.getProperty('org') // your ORG_ID in local.properties, or set it here directly
+    if(org == null) throw new GradleException("ORG ID can not be null")
 
     // enable variants that you want to be instrumented by FS ( default to release if not set )
-    enabledVariants properties.getProperty('enabledVariants') != null ?
-            properties.getProperty('enabledVariants') : 'release'
-
+    if(properties.getProperty('enabledVariants') != null) {
+        enabledVariants properties.getProperty('enabledVariants')
+    }
+    
     // optional, please leave as is
     if(properties.getProperty('server') != null){
         server properties.getProperty('server')
@@ -33,6 +33,7 @@ android {
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
+        signingConfig signingConfigs.debug
     }
     buildTypes {
         release {
