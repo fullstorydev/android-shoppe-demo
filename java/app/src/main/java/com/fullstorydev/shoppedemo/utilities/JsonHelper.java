@@ -1,7 +1,5 @@
 package com.fullstorydev.shoppedemo.utilities;
 
-import android.util.Log;
-
 import com.fullstorydev.shoppedemo.data.Item;
 import com.google.gson.Gson;
 import com.google.gson.JsonParseException;
