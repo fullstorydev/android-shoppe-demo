@@ -6,13 +6,14 @@ import com.fullstory.FS;
 import com.segment.analytics.Analytics;
 
 public class AnalyticsWithFS {
-    private Context context;
-    static volatile AnalyticsWithFS singleton = null;
+    private Analytics analytics;
+    private static volatile AnalyticsWithFS singleton = null;
 
-    AnalyticsWithFS(Context context){
-        this.context = context;
+    private AnalyticsWithFS(Context context){
+        this.analytics = Analytics.with(context);
     }
 
+    // mimicking the design pattern for Segment Analytics to preserve the syntax: Analytics.with(context)....
     public static AnalyticsWithFS with(Context context) {
         if (singleton == null) {
             if (context == null) {
@@ -28,7 +29,7 @@ public class AnalyticsWithFS {
     }
 
     public void identify(String id){
-        Analytics.with(this.context).identify(id);
+        this.analytics.identify(id);
         FS.identify(id);
     }
 }

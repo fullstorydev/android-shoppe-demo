@@ -2,6 +2,7 @@ package com.fullstorydev.shoppedemo;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -15,9 +16,14 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
+import com.fullstory.FS;
+import com.fullstory.FSOnReadyListener;
+import com.fullstory.FSSessionData;
+import com.fullstorydev.shoppedemo.fssegment.AnalyticsWithFS;
+
 import org.jetbrains.annotations.NotNull;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements FSOnReadyListener {
     AppBarConfiguration mAppBarConfiguration;
     NavController mNavController;
 
@@ -31,6 +37,8 @@ public class MainActivity extends AppCompatActivity {
                 mNavController.getGraph())
                 .build();
         NavigationUI.setupActionBarWithNavController(this, mNavController, mAppBarConfiguration);
+
+        FS.setReadyListener(this);
     }
 
     @Override
@@ -68,5 +76,11 @@ public class MainActivity extends AppCompatActivity {
         if(imm != null){
             imm.hideSoftInputFromWindow(view.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
         }
+    }
+
+    @Override
+    public void onReady(FSSessionData sessionData) {
+        Log.d("MainActivity", FS.getCurrentSessionURL());
+        AnalyticsWithFS.with(getApplicationContext()).identify("test_user_2");
     }
 }
