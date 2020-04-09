@@ -3,9 +3,6 @@ apply plugin: 'fullstory'
 
 
 
-Properties apiKeyProperties = new Properties()
-apiKeyProperties.load(new FileInputStream(project.rootProject.file("apikey.properties")))
-
 android {
     compileSdkVersion 29
     buildToolsVersion "29.0.3"

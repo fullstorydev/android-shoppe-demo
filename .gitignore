@@ -20,3 +20,6 @@ java/app/release
 .cproject
 .settings/
 **/google-services.json
+
+# dev only api keys
+# **/APIKey.java
