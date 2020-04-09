@@ -5,9 +5,18 @@ Properties properties = new Properties()
 properties.load(project.rootProject.file('local.properties').newDataInputStream())
 
 fullstory {
-    org properties.getProperty('org') // your ORG_ID
-    enabledVariants properties.getProperty('enabledVariants') // enable variants that you want FS to instrument (all)
-    server properties.getProperty('server') // optional
+    org properties.getProperty('org') // your ORG_ID in local.properties, or set it here directly
+    if(org == null) throw new GradleException("ORG ID can not be null")
+
+    // enable variants that you want to be instrumented by FS ( default to release if not set )
+    if(properties.getProperty('enabledVariants') != null) {
+        enabledVariants properties.getProperty('enabledVariants')
+    }
+    
+    // optional, please leave as is
+    if(properties.getProperty('server') != null){
+        server properties.getProperty('server')
+    }
 }
 
 android {
