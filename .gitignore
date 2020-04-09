@@ -22,4 +22,4 @@ java/app/release
 **/google-services.json
 
 # dev only api keys
-# **/APIKey.java
+**/APIKey.java
