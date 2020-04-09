@@ -22,6 +22,5 @@ java/app/release
 **/google-services.json
 
 # dev only api keys
-**/APIKey.java
-java/app/src/main/java/com/fullstorydev/shoppedemo/utilities/APIKey.java
+# **/APIKey.java
 
