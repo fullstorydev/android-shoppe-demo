@@ -2,6 +2,7 @@ package com.fullstorydev.shoppedemo;
 
 import androidx.multidex.MultiDexApplication;
 
+import com.fullstorydev.shoppedemo.fssegment.AnalyticsWithFS;
 import com.segment.analytics.Analytics;
 
 public class App extends MultiDexApplication {
@@ -20,5 +21,7 @@ public class App extends MultiDexApplication {
 
 // Set the initialized instance as a globally accessible instance.
         Analytics.setSingletonInstance(analytics);
+
+        AnalyticsWithFS.with(getApplicationContext()).identify("test_user_1");
     }
 }
