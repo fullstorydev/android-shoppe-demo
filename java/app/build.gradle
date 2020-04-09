@@ -26,6 +26,10 @@ android {
                 storePassword 'android'
             }
         }
+        // !! for dev purpose only
+        // Having your key in local.properties prevents it from being committed to git. However this does not secure it: if someone were to decompile your app they can get to your API key
+        // Please follow the best practices to properly store and obfuscate your API Key for production use
+        buildConfigField("String", "SEGMENT_WRITE_KEY", properties['SEGMENT_WRITE_KEY'])
     }
     buildTypes {
         release {

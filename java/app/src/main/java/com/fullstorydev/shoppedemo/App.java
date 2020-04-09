@@ -2,7 +2,6 @@ package com.fullstorydev.shoppedemo;
 
 import androidx.multidex.MultiDexApplication;
 
-import com.fullstorydev.shoppedemo.utilities.APIKey;
 import com.segment.analytics.Analytics;
 
 public class App extends MultiDexApplication {
@@ -12,7 +11,7 @@ public class App extends MultiDexApplication {
 
         // Segment integration
         // Create an analytics client with the given context and Segment write key.
-        Analytics analytics = new Analytics.Builder(getApplicationContext(), APIKey.SEGMENT_WRITE_KEY)
+        Analytics analytics = new Analytics.Builder(getApplicationContext(), BuildConfig.SEGMENT_WRITE_KEY)
                 // Enable this to record certain application events automatically!
                 .trackApplicationLifecycleEvents()
                 // Enable this to record screen views automatically!
