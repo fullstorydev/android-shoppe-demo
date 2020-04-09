@@ -7,4 +7,3 @@ public class APIKey {
     // Please follow the best practices to properly store and obfuscate your API Key
     public static String SEGMENT_WRITE_KEY = "TOP SECRET";
 }
-asdf
