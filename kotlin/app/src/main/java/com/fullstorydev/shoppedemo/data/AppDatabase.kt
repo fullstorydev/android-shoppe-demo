@@ -8,7 +8,7 @@ import androidx.room.RoomDatabase
 @Database(entities = [CartItem::class, Product::class], version = 1, exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun productDao(): ProductDao
-    abstract fun itemDao(): CartItemDao
+    abstract fun cartItemDao(): CartItemDao
 
     companion object {
         // Singleton prevents multiple instances of database opening at the same time.
