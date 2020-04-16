@@ -1,7 +1,6 @@
 package com.fullstorydev.shoppedemo;
 
 import android.util.Log;
-import android.view.Gravity;
 
 import androidx.multidex.MultiDexApplication;
 
@@ -75,6 +74,7 @@ public class App extends MultiDexApplication {
 
                         Map<String, Object> context = new LinkedHashMap<>(payload.context());
                         context.put("fullstory_url", FS.getCurrentSessionURL());
+                        context.put("fullstory_now_url", FS.getCurrentSessionURL() + ':' + System.currentTimeMillis());
 //                        Build our new payload.
                         BasePayload newPayload = payload.toBuilder()
                                 .context(context)
