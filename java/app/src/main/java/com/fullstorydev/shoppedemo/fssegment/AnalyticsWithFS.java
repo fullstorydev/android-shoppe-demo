@@ -8,7 +8,6 @@ import com.segment.analytics.Options;
 import com.segment.analytics.Properties;
 
 import java.util.HashMap;
-import java.util.Map;
 
 public class AnalyticsWithFS {
     private Analytics analytics;
@@ -33,10 +32,15 @@ public class AnalyticsWithFS {
         return singleton;
     }
 
+    //TODO: shimming into automatic events such as application open? if needed
+    // https://segment.com/docs/connections/sources/catalog/libraries/mobile/android/#automatic-screen-tracking
+
     public void identify(String id){
         this.analytics.identify(id);
         FS.identify(id);
     }
+
+    //TODO: identify with traits: traits are likely also extending from hashmap, should be able to use as userVars
 
     public void reset(){
         this.analytics.reset();
@@ -63,5 +67,23 @@ public class AnalyticsWithFS {
         eventFS.put("options",options);
         FS.event(name,eventFS);
     }
+
+
+    // TODO: screen
+    // https://segment.com/docs/connections/sources/catalog/libraries/mobile/android/#screen
+    // custom events
+
+    // TODO: group
+    // https://segment.com/docs/connections/sources/catalog/libraries/mobile/android/#group
+    // setUserVars
+
+    // TODO: ???? https://segment.com/docs/connections/sources/catalog/libraries/mobile/android/#alias
+    // TODO: allow? Selecting Destinations https://segment.com/docs/connections/sources/catalog/libraries/mobile/android/#selecting-destinations
+
+    // TODO: ???  https://segment.com/docs/connections/sources/catalog/libraries/mobile/android/#context
+
+
+    // https://segment.com/docs/connections/sources/catalog/libraries/mobile/android/#anonymousid
+
 
 }

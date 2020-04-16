@@ -18,6 +18,8 @@ import com.fullstory.FS;
 import com.fullstorydev.shoppedemo.R;
 import com.fullstorydev.shoppedemo.data.CustomerInfo;
 import com.fullstorydev.shoppedemo.databinding.FragmentCheckoutBinding;
+import com.fullstorydev.shoppedemo.fssegment.AnalyticsWithFS;
+import com.segment.analytics.Properties;
 
 public class CheckoutFragment extends Fragment implements CheckoutEventHandlers {
     private FragmentCheckoutBinding binding;
@@ -77,11 +79,20 @@ public class CheckoutFragment extends Fragment implements CheckoutEventHandlers 
     }
     
     public void onClickPurchase(CustomerInfo customerInfo, Double subtotal) {
-        boolean valid = customerInfo.validateOrder();
-        if(valid && subtotal != null && subtotal > 0) {
-            // placeholder for your logic here to complete purchase
-            Toast.makeText(getContext(), "Purchase success!", Toast.LENGTH_LONG).show();
-        } else {
+        //Analytics.with(getContext()).track("test AnalyticsWithFS event");
+        // AnalyticsWithFS.with(getContext()).track("AnalyticsWithFSEvent",new Properties().putValue("name", "Moto 360"));
+
+        try{
+            boolean valid = customerInfo.validateOrder();
+            if(valid && subtotal != null && subtotal > 0) {
+                // placeholder for your logic here to complete purchase
+                Toast.makeText(getContext(), "Purchase success!", Toast.LENGTH_LONG).show();
+            } else {
+                throw new IllegalArgumentException("Order not valid");
+            }
+        } catch (IllegalArgumentException | NullPointerException e) {
+            e.printStackTrace();
+            // placeholder for your logic here to handle failed purchase
             Toast.makeText(getContext(),"Purchase failed!",Toast.LENGTH_LONG).show();
         }
     }
