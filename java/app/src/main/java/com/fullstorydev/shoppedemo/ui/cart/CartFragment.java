@@ -43,8 +43,6 @@ public class CartFragment extends Fragment implements CartEventHandlers{
         cartViewModel.getItemList().observe(this.getViewLifecycleOwner(), items -> mCartItemAdapter.setItemList(items));
     }
 
-    public void onClickRemoveFromCart(Item item) {
-        cartViewModel.decreaseQuantityInCart(item);
-    }
+    public void onClickRemoveFromCart(Item item) { cartViewModel.decreaseQuantityInCart(item); }
     public void onClickAddToCart(Item item){ cartViewModel.increaseQuantityInCart(item); }
 }
