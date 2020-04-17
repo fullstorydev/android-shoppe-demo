@@ -1,7 +1,5 @@
 package com.fullstorydev.shoppedemo.ui.checkout;
 
-import android.view.View;
-
 import com.fullstorydev.shoppedemo.data.CustomerInfo;
 
 public interface CheckoutEventHandlers {

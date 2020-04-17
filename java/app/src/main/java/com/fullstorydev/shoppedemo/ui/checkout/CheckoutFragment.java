@@ -19,14 +19,11 @@ import com.fullstorydev.shoppedemo.data.CustomerInfo;
 import com.fullstorydev.shoppedemo.databinding.FragmentCheckoutBinding;
 
 public class CheckoutFragment extends Fragment implements CheckoutEventHandlers {
-    FragmentCheckoutBinding binding;
-    private Spinner stateSpinner;
-    private Spinner yearSpinner;
-    private Spinner monthSpinner;
+    private FragmentCheckoutBinding binding;
     private ArrayAdapter<String> stateAdapter;
     private ArrayAdapter<Integer> yearAdapter;
     private ArrayAdapter<Integer> monthAdapter;
-    CheckoutViewModel checkoutViewModel;
+    private CheckoutViewModel checkoutViewModel;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -34,9 +31,9 @@ public class CheckoutFragment extends Fragment implements CheckoutEventHandlers 
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_checkout, container, false);
         View root = binding.getRoot();
 
-        stateSpinner = root.findViewById(R.id.spinner_checkout_states);
-        yearSpinner = root.findViewById(R.id.spinner_checkout_year);
-        monthSpinner = root.findViewById(R.id.spinner_checkout_month);
+        Spinner stateSpinner = root.findViewById(R.id.spinner_checkout_states);
+        Spinner yearSpinner = root.findViewById(R.id.spinner_checkout_year);
+        Spinner monthSpinner = root.findViewById(R.id.spinner_checkout_month);
         stateAdapter = new ArrayAdapter<>(root.getContext(),R.layout.support_simple_spinner_dropdown_item);
         yearAdapter = new ArrayAdapter<>(root.getContext(),R.layout.support_simple_spinner_dropdown_item);
         monthAdapter = new ArrayAdapter<>(root.getContext(),R.layout.support_simple_spinner_dropdown_item);
@@ -66,8 +63,7 @@ public class CheckoutFragment extends Fragment implements CheckoutEventHandlers 
             }
         });
     }
-
-    @Override
+    
     public void onClickPurchase(CustomerInfo customerInfo, Double subtotal) {
         try{
             boolean valid = customerInfo.validateOrder();
