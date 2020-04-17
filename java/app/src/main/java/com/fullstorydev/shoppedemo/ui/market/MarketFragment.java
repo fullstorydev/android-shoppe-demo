@@ -1,13 +1,18 @@
 package com.fullstorydev.shoppedemo.ui.market;
 
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.GridLayout;
+import android.widget.RelativeLayout;
+
 import androidx.annotation.Nullable;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.fullstorydev.shoppedemo.R;
@@ -18,17 +23,24 @@ public class MarketFragment extends Fragment implements MarketEventHandlers {
 
     private MarketViewModel marketViewModel;
     private MarketProductAdapter mMarketProductAdapter;
-
+    private RecyclerView mRecyclerView;
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_market, container, false);
 
         mMarketProductAdapter = new MarketProductAdapter(this);
-        RecyclerView mRecyclerView = root.findViewById(R.id.rv_product);
+        mRecyclerView = root.findViewById(R.id.rv_product);
         mRecyclerView.setAdapter(mMarketProductAdapter);
+        setRecyclerViewLayoutManager(getResources().getConfiguration().orientation);
 
         return root;
+    }
+
+    @Override
+    public void onConfigurationChanged(@NonNull Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        setRecyclerViewLayoutManager(newConfig.orientation);
     }
 
     @Override
@@ -39,7 +51,13 @@ public class MarketFragment extends Fragment implements MarketEventHandlers {
         marketViewModel.getProductList().observe(this.getViewLifecycleOwner(), products -> mMarketProductAdapter.setProductList(products));
     }
 
-    public void onClickAddToCart(Item item){
-        marketViewModel.increaseQuantityInCart(item);
+    public void onClickAddToCart(Item item){ marketViewModel.increaseQuantityInCart(item); }
+
+    private void setRecyclerViewLayoutManager(int orientation){
+        int spanCnt = orientation == Configuration.ORIENTATION_LANDSCAPE ? 2 : 1;
+        GridLayoutManager manager = (GridLayoutManager) mRecyclerView.getLayoutManager();
+        if(manager == null) manager = new GridLayoutManager(getContext(),spanCnt);
+        manager.setSpanCount(spanCnt);
+        mRecyclerView.setLayoutManager(manager);
     }
 }
