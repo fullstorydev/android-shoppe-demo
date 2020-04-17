@@ -20,11 +20,8 @@ public class CartViewModel extends AndroidViewModel {
         mItemList = mItemRepository.getAllItemsFromDB();
     }
 
-    public LiveData<List<Item>> getItemList() {
-        return mItemList;
-    }
+    LiveData<List<Item>> getItemList() { return mItemList; }
 
-    public void decreaseQuantityInCart(Item item){
-        mItemRepository.decreaseQuantityInCart(item);
-    }
+    void decreaseQuantityInCart(Item item){ mItemRepository.decreaseQuantityInCart(item); }
+    void increaseQuantityInCart(Item item){ mItemRepository.increaseQuantityInCart(item); }
 }
