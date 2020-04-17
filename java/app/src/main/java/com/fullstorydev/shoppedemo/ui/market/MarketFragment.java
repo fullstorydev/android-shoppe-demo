@@ -5,8 +5,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.GridLayout;
-import android.widget.RelativeLayout;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.NonNull;
@@ -24,6 +22,7 @@ public class MarketFragment extends Fragment implements MarketEventHandlers {
     private MarketViewModel marketViewModel;
     private MarketProductAdapter mMarketProductAdapter;
     private RecyclerView mRecyclerView;
+
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -54,6 +53,7 @@ public class MarketFragment extends Fragment implements MarketEventHandlers {
     public void onClickAddToCart(Item item){ marketViewModel.increaseQuantityInCart(item); }
 
     private void setRecyclerViewLayoutManager(int orientation){
+        // if landscape then have 2 columns, otherwise 1: for simplicity we are not calculating this based on screen size
         int spanCnt = orientation == Configuration.ORIENTATION_LANDSCAPE ? 2 : 1;
         GridLayoutManager manager = (GridLayoutManager) mRecyclerView.getLayoutManager();
         if(manager == null) manager = new GridLayoutManager(getContext(),spanCnt);
