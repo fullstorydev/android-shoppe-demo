@@ -12,24 +12,22 @@ import com.fullstorydev.shoppedemo.data.ItemRepository;
 
 public class CheckoutViewModel extends AndroidViewModel {
     private CustomerInfoRepository mCustomerInfoRepo;
-    private ItemRepository mItemProductRepo;
+    private ItemRepository mItemRepo;
     private LiveData<Boolean> isLoading;
     private CustomerInfo customerInfo;
+    private LiveData<Double> mSubtotal;
 
     public CheckoutViewModel(Application application) {
         super(application);
         mCustomerInfoRepo = new CustomerInfoRepository(application);
-        mItemProductRepo = new ItemRepository(application);
+        mItemRepo = new ItemRepository(application);
         isLoading = mCustomerInfoRepo.getIsLoading();
+        mSubtotal = mItemRepo.getSubtotal();
         fetchCustomerInfo();
     }
 
     public CustomerInfo getCustomerInfo(){ return customerInfo; }
-    public LiveData<Double> getSubtotal() {
-        LiveData<Double> subtotal = mItemProductRepo.getSubtotal();
-        if(subtotal == null) return new MutableLiveData<>(0.0);
-        return subtotal;
-    }
+    public LiveData<Double> getSubtotal() { return mSubtotal; }
 
     LiveData<Boolean> getIsLoading() { return isLoading; }
     String[] getStates() { return mCustomerInfoRepo.getStates(); }
