@@ -13,18 +13,18 @@ import java.util.List;
 public class CartViewModel extends AndroidViewModel {
     private ItemRepository mItemRepository;
     private LiveData<List<Item>> mItemList;
+    private LiveData<Double> mSubtotal;
 
     public CartViewModel(Application application) {
         super(application);
         mItemRepository = new ItemRepository(application);
         mItemList = mItemRepository.getAllItemsFromDB();
+        mSubtotal = mItemRepository.getSubtotal();
     }
 
-    public LiveData<List<Item>> getItemList() {
-        return mItemList;
-    }
+    LiveData<List<Item>> getItemList() { return mItemList; }
+    public LiveData<Double> getSubtotal() { return mSubtotal; }
 
-    public void decreaseQuantityInCart(Item item){
-        mItemRepository.decreaseQuantityInCart(item);
-    }
+    void decreaseQuantityInCart(Item item){ mItemRepository.decreaseQuantityInCart(item); }
+    void increaseQuantityInCart(Item item){ mItemRepository.increaseQuantityInCart(item); }
 }

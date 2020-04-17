@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import androidx.annotation.Nullable;
 import androidx.annotation.NonNull;
+import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
@@ -14,14 +15,17 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.fullstorydev.shoppedemo.R;
 import com.fullstorydev.shoppedemo.adapters.CartItemAdapter;
 import com.fullstorydev.shoppedemo.data.Item;
+import com.fullstorydev.shoppedemo.databinding.FragmentCartBinding;
 
 public class CartFragment extends Fragment implements CartEventHandlers{
     private CartViewModel cartViewModel;
     private CartItemAdapter mCartItemAdapter;
+    private FragmentCartBinding binding;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
             ViewGroup container, Bundle savedInstanceState) {
-        View root = inflater.inflate(R.layout.fragment_cart, container, false);
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_cart, container, false);
+        View root = binding.getRoot();
 
         mCartItemAdapter = new CartItemAdapter(this);
         RecyclerView mRecyclerView = root.findViewById(R.id.rv_cart);
@@ -41,10 +45,11 @@ public class CartFragment extends Fragment implements CartEventHandlers{
 
         cartViewModel = new ViewModelProvider(this).get(CartViewModel.class);
         cartViewModel.getItemList().observe(this.getViewLifecycleOwner(), items -> mCartItemAdapter.setItemList(items));
+
+        binding.setLifecycleOwner(getViewLifecycleOwner());
+        binding.setViewmodel(cartViewModel);
     }
 
-    @Override
-    public void onClickRemoveFromCart(Item item) {
-        cartViewModel.decreaseQuantityInCart(item);
-    }
+    public void onClickRemoveFromCart(Item item) { cartViewModel.decreaseQuantityInCart(item); }
+    public void onClickAddToCart(Item item){ cartViewModel.increaseQuantityInCart(item); }
 }
