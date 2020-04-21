@@ -16,11 +16,8 @@ If you have [signed up](https://www.fullstory.com/plans/) for FullStory, add to 
 ```
 org = <your org id>
 enabledVariants = all
-server = https://fullstory.com
 ```
-Your orgId can be found on the _Settings_ page once you are logged in to FullStory.  It'll be next to the `window['_fs_org']` variable in the snippet.  For more information, see [Install your recording snippet](https://help.fullstory.com/hc/en-us/articles/360020828233#Install).
-
-For successful recording, please do not change the `server` value. It should always be `https://fullstory.com`.
+To find your FullStory Org Id, see [How do I find my FullStory Org Id?](https://help.fullstory.com/hc/en-us/articles/360047075853).
 
 Sync gradle after the changes and your app should be fully instrumented with your org information.
 
