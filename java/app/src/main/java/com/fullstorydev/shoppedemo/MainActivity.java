@@ -1,6 +1,7 @@
 package com.fullstorydev.shoppedemo;
 
 import android.content.Context;
+import android.icu.util.Freezable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -19,7 +20,8 @@ import androidx.navigation.ui.NavigationUI;
 import com.fullstory.FS;
 import com.fullstory.FSOnReadyListener;
 import com.fullstory.FSSessionData;
-import com.fullstorydev.shoppedemo.fssegment.AnalyticsWithFS;
+import com.segment.analytics.Analytics;
+import com.segment.analytics.Properties;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -50,6 +52,8 @@ public class MainActivity extends AppCompatActivity implements FSOnReadyListener
 
     @Override
     public boolean onOptionsItemSelected(@NotNull MenuItem item) {
+        Analytics.with(getApplicationContext()).track("navigationEvent");
+
         return NavigationUI.onNavDestinationSelected(item, mNavController)
                 || super.onOptionsItemSelected(item);
     }
@@ -81,6 +85,6 @@ public class MainActivity extends AppCompatActivity implements FSOnReadyListener
     @Override
     public void onReady(FSSessionData sessionData) {
         Log.d("MainActivity", FS.getCurrentSessionURL());
-        AnalyticsWithFS.with(getApplicationContext()).identify("test_user_2");
+        Analytics.with(getApplicationContext()).track("FS_ready",new Properties().putUrl(FS.getCurrentSessionURL()));
     }
 }

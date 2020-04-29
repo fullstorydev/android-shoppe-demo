@@ -2,6 +2,7 @@ package com.fullstorydev.shoppedemo.ui.market;
 
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,10 +14,18 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.fullstorydev.shoppedemo.BuildConfig;
 import com.fullstorydev.shoppedemo.R;
 import com.fullstorydev.shoppedemo.adapters.MarketProductAdapter;
 import com.fullstorydev.shoppedemo.data.Item;
 import com.fullstorydev.shoppedemo.utilities.Constants;
+import com.google.firebase.analytics.FirebaseAnalytics;
+import com.segment.analytics.Analytics;
+import com.segment.analytics.Properties;
+import com.segment.analytics.android.integrations.firebase.FirebaseIntegration;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class MarketFragment extends Fragment implements MarketEventHandlers {
 
@@ -33,6 +42,12 @@ public class MarketFragment extends Fragment implements MarketEventHandlers {
         mRecyclerView = root.findViewById(R.id.rv_product);
         mRecyclerView.setAdapter(mMarketProductAdapter);
         setRecyclerViewLayoutManager(getResources().getConfiguration().orientation);
+
+
+
+
+
+
 
         return root;
     }
@@ -68,7 +83,14 @@ public class MarketFragment extends Fragment implements MarketEventHandlers {
         });
     }
 
-    public void onClickAddToCart(Item item){ marketViewModel.increaseQuantityInCart(item); }
+    public void onClickAddToCart(Item item){ 
+        marketViewModel.increaseQuantityInCart(item); 
+        Properties p =  new Properties();
+        p.putName(item.title)
+                .putPrice(item.price)
+                .putValue("quantityInCart",item.quantityInCart);
+        Analytics.with(getContext()).track("Product Added",p);
+    }
 
     private void setRecyclerViewLayoutManager(int orientation){
         // if landscape then have 2 columns, otherwise 1: for simplicity we are not calculating this based on screen size

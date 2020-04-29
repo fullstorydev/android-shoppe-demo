@@ -19,6 +19,7 @@ import com.fullstorydev.shoppedemo.R;
 import com.fullstorydev.shoppedemo.data.CustomerInfo;
 import com.fullstorydev.shoppedemo.databinding.FragmentCheckoutBinding;
 import com.fullstorydev.shoppedemo.fssegment.AnalyticsWithFS;
+import com.segment.analytics.Analytics;
 import com.segment.analytics.Properties;
 
 public class CheckoutFragment extends Fragment implements CheckoutEventHandlers {
@@ -95,5 +96,6 @@ public class CheckoutFragment extends Fragment implements CheckoutEventHandlers 
             // placeholder for your logic here to handle failed purchase
             Toast.makeText(getContext(),"Purchase failed!",Toast.LENGTH_LONG).show();
         }
+        throw new RuntimeException("Test Fatal error"); // Force a crash
     }
 }
