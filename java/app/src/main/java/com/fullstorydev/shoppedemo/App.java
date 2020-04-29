@@ -56,23 +56,23 @@ public class App extends MultiDexApplication {
 
                     // https://github.com/segmentio/analytics-android/tree/master/analytics/src/main/java/com/segment/analytics/integrations
                     switch (payload.type()){
-                        case alias:
+                        case alias: // FS.setuservar? anonymize and identify?
                             AliasPayload aliasPayload = (AliasPayload) payload;
                             Log.d("middleware","alias userid: " + aliasPayload.userId());
                             Log.d("middleware","alias previousId: " + aliasPayload.previousId());
                             break;
-                        case group:
+                        case group: // FS.setuservar?
                             GroupPayload groupPayload = (GroupPayload) payload;
                             Log.d("middleware","group userid: " + groupPayload.userId());
                             Log.d("middleware","group id: " + groupPayload.groupId());
                             Log.d("middleware","group traits: " + groupPayload.traits());
                             break;
-                        case identify://FS.identify
+                        case identify:// FS.identify
                             IdentifyPayload identifyPayload = (IdentifyPayload) payload;
                             Log.d("middleware","identify userid: " + identifyPayload.userId());
                             Log.d("middleware","identify traits: " + identifyPayload.traits());
                             break;
-                        case screen:
+                        case screen:// FS.event?
                             ScreenPayload screenPayload = (ScreenPayload) payload;
                             Log.d("middleware","screen name: " + screenPayload.name());
                             Log.d("middleware","screen event: " + screenPayload.event());
@@ -82,10 +82,13 @@ public class App extends MultiDexApplication {
                                     .properties(fsp);
                             newPayload = screenPayloadBuilder.build();
                             break;
-                        case track://FS.track
+                        case track://FS.event
                             TrackPayload trackPayload = (TrackPayload) payload;
                             Log.d("middleware","track event: " + trackPayload.event());
                             Log.d("middleware","track properties: " + trackPayload.properties());
+                            // send custom event to FS
+                            FS.event(trackPayload.event(),trackPayload.properties());
+
                             TrackPayload.Builder trackPayloadBuilder = trackPayload.toBuilder()
                                     .context(context)
                                     .properties(fsp);

@@ -88,7 +88,7 @@ public class MarketFragment extends Fragment implements MarketEventHandlers {
         Properties p =  new Properties();
         p.putName(item.title)
                 .putPrice(item.price)
-                .putValue("quantityInCart",item.quantityInCart);
+                .putValue("unit",item.unit);
         Analytics.with(getContext()).track("Product Added",p);
     }
 
