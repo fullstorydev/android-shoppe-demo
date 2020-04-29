@@ -87,3 +87,4 @@ fullstory {
         server properties.getProperty('server')
     }
 }
+apply plugin: 'com.google.gms.google-services'
