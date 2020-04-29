@@ -32,114 +32,117 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal" >
-                <TextView
-                    android:id="@+id/tv_checkout_first_name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:labelFor="@+id/et_checkout_first_name"
-                    android:text="@string/first_name" />
-                <EditText
-                    android:id="@+id/et_checkout_first_name"
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/checkout_first_name"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:importantForAutofill="no"
-                    android:inputType="text"
-                    android:text="@{viewmodel.customerInfo.firstName}"
-                    android:onTextChanged="@{(s,start,before,count)->viewmodel.setFirstName(s)}" />
-                <TextView
-                    android:id="@+id/tv_checkout_last_name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:labelFor="@+id/et_checkout_last_name"
-                    android:text="@string/last_name" />
-                <EditText
-                    android:id="@+id/et_checkout_last_name"
+                    android:hint="@string/first_name"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@{viewmodel.customerInfo.firstName}"
+                        android:onTextChanged="@{(s,start,before,count)->viewmodel.setFirstName(s)}"
+                        />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/checkout_last_name"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:importantForAutofill="no"
-                    android:inputType="text"
-                    android:text="@{viewmodel.customerInfo.lastName}"
-                    android:onTextChanged="@{(s,start,before,count)->viewmodel.setLastName(s)}" />
+                    android:hint="@string/last_name"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@{viewmodel.customerInfo.lastName}"
+                        android:onTextChanged="@{(s,start,before,count)->viewmodel.setLastName(s)}" />
+
+                </com.google.android.material.textfield.TextInputLayout>
             </LinearLayout>
 
-            <TextView
-                android:id="@+id/tv_checkout_address_1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:labelFor="@+id/et_checkout_address_1"
-                android:text="@string/address_1" />
-            <EditText
-                android:id="@+id/et_checkout_address_1"
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/checkout_address_1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:importantForAutofill="no"
-                android:inputType="text"
-                android:text="@{viewmodel.customerInfo.address1}"
-                android:onTextChanged="@{(s,start,before,count)->viewmodel.setAddress1(s)}" />
-            <TextView
-                android:id="@+id/tv_checkout_address_2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:labelFor="@id/et_checkout_address_2"
-                android:text="@string/address_2" />
-            <EditText
-                android:id="@+id/et_checkout_address_2"
+                android:hint="@string/address_1"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@{viewmodel.customerInfo.address1}"
+                    android:onTextChanged="@{(s,start,before,count)->viewmodel.setAddress1(s)}" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/checkout_address_2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:importantForAutofill="no"
-                android:inputType="text"
-                android:text="@{viewmodel.customerInfo.address2}"
-                android:onTextChanged="@{(s,start,before,count)->viewmodel.setAddress2(s)}" />
+                android:hint="@string/address_2"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@{viewmodel.customerInfo.address2}"
+                    android:onTextChanged="@{(s,start,before,count)->viewmodel.setAddress2(s)}" />
+            </com.google.android.material.textfield.TextInputLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal" >
-                <TextView
-                    android:id="@+id/tv_checkout_city"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:labelFor="@id/et_checkout_city"
-                    android:text="@string/city" />
-                <EditText
-                    android:id="@+id/et_checkout_city"
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/checkout_city"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1.5"
-                    android:importantForAutofill="no"
-                    android:inputType="text"
-                    android:text="@{viewmodel.customerInfo.city}"
-                    android:onTextChanged="@{(s,start,before,count)->viewmodel.setCity(s)}" />
-                <TextView
-                    android:id="@+id/tv_checkout_state"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:labelFor="@id/spinner_checkout_states"
-                    android:text="@string/state" />
-                <Spinner
-                    android:id="@+id/spinner_checkout_states"
+                    android:hint="@string/city"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/et_checkout_city"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@{viewmodel.customerInfo.city}"
+                        android:onTextChanged="@{(s,start,before,count)->viewmodel.setCity(s)}" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/checkout_state"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    app:selectedValue="@{viewmodel.customerInfo.state}"
-                    android:onItemSelected="@{(parent,view,position,id)->viewmodel.setState(position)}" />
-                <TextView
+                    android:layout_weight="1.5"
+                    android:hint="@string/state"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
+
+                    <AutoCompleteTextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="none"
+                        app:selectedValue="@{viewmodel.customerInfo.state}"
+                        android:onItemSelected="@{(parent,view,position,id)->viewmodel.setState(position)}"/>
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/tv_checkout_zip"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:labelFor="@id/et_checkout_zip"
-                    android:text="@string/zip_code" />
-                <EditText
-                    android:id="@+id/et_checkout_zip"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:importantForAutofill="no"
-                    android:inputType="number"
-                    android:text="@{viewmodel.customerInfo.zip}"
-                    android:onTextChanged="@{(s,start,before,count)->viewmodel.setZip(s)}" />
+                    android:hint="@string/zip_code"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="number"
+                        android:text="@{viewmodel.customerInfo.zip}"
+                        android:onTextChanged="@{(s,start,before,count)->viewmodel.setZip(s)}" />
+                </com.google.android.material.textfield.TextInputLayout>
             </LinearLayout>
 
             <TextView

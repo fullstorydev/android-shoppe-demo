@@ -31,13 +31,13 @@ public class CheckoutFragment extends Fragment implements CheckoutEventHandlers 
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_checkout, container, false);
         View root = binding.getRoot();
 
-        Spinner stateSpinner = root.findViewById(R.id.spinner_checkout_states);
+//        Spinner stateSpinner = root.findViewById(R.id.spinner_checkout_states);
         Spinner yearSpinner = root.findViewById(R.id.spinner_checkout_year);
         Spinner monthSpinner = root.findViewById(R.id.spinner_checkout_month);
-        stateAdapter = new ArrayAdapter<>(root.getContext(),R.layout.support_simple_spinner_dropdown_item);
+//        stateAdapter = new ArrayAdapter<>(root.getContext(),R.layout.support_simple_spinner_dropdown_item);
         yearAdapter = new ArrayAdapter<>(root.getContext(),R.layout.support_simple_spinner_dropdown_item);
         monthAdapter = new ArrayAdapter<>(root.getContext(),R.layout.support_simple_spinner_dropdown_item);
-        stateSpinner.setAdapter(stateAdapter);
+//        stateSpinner.setAdapter(stateAdapter);
         yearSpinner.setAdapter(yearAdapter);
         monthSpinner.setAdapter(monthAdapter);
 
@@ -51,7 +51,7 @@ public class CheckoutFragment extends Fragment implements CheckoutEventHandlers 
         checkoutViewModel = new ViewModelProvider(this).get(CheckoutViewModel.class);
         binding.setLifecycleOwner(getViewLifecycleOwner());
 
-        stateAdapter.addAll(checkoutViewModel.getStates());
+//        stateAdapter.addAll(checkoutViewModel.getStates());
         yearAdapter.addAll(checkoutViewModel.getYears());
         monthAdapter.addAll(checkoutViewModel.getMonths());
 
