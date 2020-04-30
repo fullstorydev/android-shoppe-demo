@@ -1,7 +1,6 @@
 package com.fullstorydev.shoppedemo.ui.checkout;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -70,7 +69,6 @@ public class CheckoutFragment extends Fragment implements CheckoutEventHandlers 
     public void onClickPurchase(CustomerInfo customerInfo, Double subtotal) {
         try{
             boolean valid = customerInfo.validateOrder();
-            Log.d("here", String.valueOf(customerInfo.getState()));
             if(valid && subtotal != null && subtotal > 0) {
                 // placeholder for your logic here to complete purchase
                 Toast.makeText(getContext(), "Purchase success!", Toast.LENGTH_LONG).show();
