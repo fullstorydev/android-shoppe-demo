@@ -1,11 +1,12 @@
 package com.fullstorydev.shoppedemo.ui.checkout;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.Spinner;
+import android.widget.AutoCompleteTextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -31,15 +32,17 @@ public class CheckoutFragment extends Fragment implements CheckoutEventHandlers 
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_checkout, container, false);
         View root = binding.getRoot();
 
-//        Spinner stateSpinner = root.findViewById(R.id.spinner_checkout_states);
-        Spinner yearSpinner = root.findViewById(R.id.spinner_checkout_year);
-        Spinner monthSpinner = root.findViewById(R.id.spinner_checkout_month);
-//        stateAdapter = new ArrayAdapter<>(root.getContext(),R.layout.support_simple_spinner_dropdown_item);
-        yearAdapter = new ArrayAdapter<>(root.getContext(),R.layout.support_simple_spinner_dropdown_item);
+        stateAdapter = new ArrayAdapter<>(root.getContext(),R.layout.support_simple_spinner_dropdown_item);
         monthAdapter = new ArrayAdapter<>(root.getContext(),R.layout.support_simple_spinner_dropdown_item);
-//        stateSpinner.setAdapter(stateAdapter);
-        yearSpinner.setAdapter(yearAdapter);
-        monthSpinner.setAdapter(monthAdapter);
+        yearAdapter = new ArrayAdapter<>(root.getContext(),R.layout.support_simple_spinner_dropdown_item);
+
+        AutoCompleteTextView stateEditTextFilledExposedDropdown = root.findViewById(R.id.dropdown_checkout_state);
+        AutoCompleteTextView monthEditTextFilledExposedDropdown = root.findViewById(R.id.dropdown_checkout_expiration_month);
+        AutoCompleteTextView yearEditTextFilledExposedDropdown = root.findViewById(R.id.dropdown_checkout_expiration_year);
+
+        stateEditTextFilledExposedDropdown.setAdapter(stateAdapter);
+        monthEditTextFilledExposedDropdown.setAdapter(monthAdapter);
+        yearEditTextFilledExposedDropdown.setAdapter(yearAdapter);
 
         return root;
     }
@@ -51,9 +54,9 @@ public class CheckoutFragment extends Fragment implements CheckoutEventHandlers 
         checkoutViewModel = new ViewModelProvider(this).get(CheckoutViewModel.class);
         binding.setLifecycleOwner(getViewLifecycleOwner());
 
-//        stateAdapter.addAll(checkoutViewModel.getStates());
-        yearAdapter.addAll(checkoutViewModel.getYears());
+        stateAdapter.addAll(checkoutViewModel.getStates());
         monthAdapter.addAll(checkoutViewModel.getMonths());
+        yearAdapter.addAll(checkoutViewModel.getYears());
 
         checkoutViewModel.getIsLoading().observe(getViewLifecycleOwner(),isLoading->{
             if(!isLoading){
@@ -67,6 +70,7 @@ public class CheckoutFragment extends Fragment implements CheckoutEventHandlers 
     public void onClickPurchase(CustomerInfo customerInfo, Double subtotal) {
         try{
             boolean valid = customerInfo.validateOrder();
+            Log.d("here", String.valueOf(customerInfo.getState()));
             if(valid && subtotal != null && subtotal > 0) {
                 // placeholder for your logic here to complete purchase
                 Toast.makeText(getContext(), "Purchase success!", Toast.LENGTH_LONG).show();

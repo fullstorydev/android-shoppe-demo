@@ -4,7 +4,6 @@ import android.app.Application;
 
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
 
 import com.fullstorydev.shoppedemo.data.CustomerInfo;
 import com.fullstorydev.shoppedemo.data.CustomerInfoRepository;
@@ -94,6 +93,7 @@ public class CheckoutViewModel extends AndroidViewModel {
             customerInfo.setExpirationYear(position);
         }
     }
+
     public void setSecurityCode(CharSequence s) { // handler for EditText onTextChanged
         String str = String.valueOf(s);
         if(!str.equals(customerInfo.getSecurityCode())){
@@ -109,6 +109,5 @@ public class CheckoutViewModel extends AndroidViewModel {
         }catch (IllegalArgumentException e){
             e.printStackTrace();
         }
-
     }
 }
