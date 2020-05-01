@@ -5,15 +5,18 @@ Properties properties = new Properties()
 properties.load(project.rootProject.file('local.properties').newDataInputStream())
 
 fullstory {
-    org properties.getProperty('org') // your ORG_ID in local.properties, or set it here directly
-    if(org == null) throw new GradleException("ORG ID can not be null")
+    // add your "org" in local.properties, or set it here directly
+    org properties.getProperty('org')
+    if(org == null) throw new GradleException('ORG ID is empty, will not record! Please set org in build.gradle(app) or local.properties!')
 
-    // enable variants that you want to be instrumented by FS ( default to release if not set )
+    // enable variants that you want to be instrumented by FS ( default to 'release' if not set )
     if(properties.getProperty('enabledVariants') != null) {
         enabledVariants properties.getProperty('enabledVariants')
     }
-    
-    // optional, please leave as is
+    // remove below line if you intend to instrument FS to only release builds
+    if(enabledVariants == null) throw GradleException('enabledVariants is empty, will only record for release builds! If this is intentional, please remove this GradleException in build.gradle(app), otherwise please enabled debug!')
+
+    // please do not set server value here or in local.properties
     if(properties.getProperty('server') != null){
         server properties.getProperty('server')
     }
@@ -46,38 +49,23 @@ android {
     }
 }
 
-ext {
-    room_version = "2.2.4"
-    nav_version = "2.2.1"
-    lifecycle_version = "2.2.0"
-    constraintlayout_version = "1.1.3"
-    appcompat_version = "1.1.0"
-    junit_version = "1.1.1"
-    espresso_version = "3.2.0"
-    okhttp_version = "4.4.0"
-    gson_version ="2.8.6"
-    glide_version = "4.11.0"
-    multidex_version = "2.0.1"
-    material_version = "1.1.0"
-}
-
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation "androidx.appcompat:appcompat:$appcompat_version"
-    implementation "androidx.constraintlayout:constraintlayout:$constraintlayout_version"
-    implementation "androidx.navigation:navigation-fragment:$nav_version"
-    implementation "androidx.navigation:navigation-ui:$nav_version"
-    implementation "androidx.lifecycle:lifecycle-extensions:$lifecycle_version"
-    implementation "androidx.room:room-runtime:$room_version"
-    annotationProcessor "androidx.room:room-compiler:$room_version"
-    implementation "androidx.multidex:multidex:$multidex_version"
-    implementation "com.squareup.okhttp3:okhttp:$okhttp_version"
-    implementation "com.google.code.gson:gson:$gson_version"
-    implementation "com.google.android.material:material:$material_version"
-    implementation "com.github.bumptech.glide:glide:$glide_version"
+    implementation "androidx.appcompat:appcompat:$rootProject.appcompat_version"
+    implementation "androidx.constraintlayout:constraintlayout:$rootProject.constraintlayout_version"
+    implementation "androidx.navigation:navigation-fragment:$rootProject.nav_version"
+    implementation "androidx.navigation:navigation-ui:$rootProject.nav_version"
+    implementation "androidx.lifecycle:lifecycle-extensions:$rootProject.lifecycle_version"
+    implementation "androidx.room:room-runtime:$rootProject.room_version"
+    annotationProcessor "androidx.room:room-compiler:$rootProject.room_version"
+    implementation "androidx.multidex:multidex:$rootProject.multidex_version"
+    implementation "com.squareup.okhttp3:okhttp:$rootProject.okhttp_version"
+    implementation "com.google.code.gson:gson:$rootProject.gson_version"
+    implementation "com.google.android.material:material:$rootProject.material_version"
+    implementation "com.github.bumptech.glide:glide:$rootProject.glide_version"
 
-    testImplementation 'junit:junit:4.12'
-    testImplementation "androidx.room:room-testing:$room_version"
-    androidTestImplementation "androidx.test.ext:junit:$junit_version"
-    androidTestImplementation "androidx.test.espresso:espresso-core:$espresso_version"
+    testImplementation "junit:junit:$rootProject.junit_version"
+    testImplementation "androidx.room:room-testing:$rootProject.room_version"
+    androidTestImplementation "androidx.test.ext:junit:$rootProject.ext_junit_version"
+    androidTestImplementation "androidx.test.espresso:espresso-core:$rootProject.espresso_version"
 }
