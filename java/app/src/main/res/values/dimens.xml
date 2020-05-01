@@ -7,5 +7,6 @@
     <dimen name="product_image_size">194dp</dimen>
     <dimen name="item_image_size">97dp</dimen>
     <dimen name="padding_space">16dp</dimen>
+    <dimen name="inner_padding_space">8dp</dimen>
     <dimen name="min_height">36dp</dimen>
 </resources>

@@ -13,7 +13,7 @@
     <string name="first_name">First Name</string>
     <string name="last_name">Last Name</string>
     <string name="address_1">Address 1</string>
-    <string name="address_2">Address 2</string>
+    <string name="address_2">Address 2 (optional)</string>
     <string name="city">City</string>
     <string name="state">State</string>
     <string name="zip_code">Zip Code</string>

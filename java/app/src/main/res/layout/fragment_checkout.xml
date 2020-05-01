@@ -17,12 +17,14 @@
         android:fillViewport="true" >
     <LinearLayout
         android:orientation="vertical"
+        android:padding="@dimen/padding_space"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" >
+        android:layout_height="wrap_content" >
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:padding="@dimen/padding_space"
             android:layout_gravity="center"
             android:orientation="horizontal" >
             <TextView
@@ -41,49 +43,42 @@
                 android:id="@+id/tv_checkout_billing"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:paddingTop="@dimen/inner_padding_space"
                 android:text="@string/billing_address"
                 android:textAppearance="?attr/textAppearanceHeadline6" />
 
-            <LinearLayout
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/checkout_first_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal" >
+                android:hint="@string/first_name"
+                style="@style/Widget.App.TextInputLayout.OutlinedBox" >
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="@{viewmodel.customerInfo.firstName}"
+                    android:onTextChanged="@{(s,start,before,count)->viewmodel.setFirstName(s)}" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/checkout_first_name"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:hint="@string/first_name"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox" >
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:text="@{viewmodel.customerInfo.firstName}"
-                        android:onTextChanged="@{(s,start,before,count)->viewmodel.setFirstName(s)}" />
-                </com.google.android.material.textfield.TextInputLayout>
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/checkout_last_name"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:hint="@string/last_name"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox" >
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:text="@{viewmodel.customerInfo.lastName}"
-                        android:onTextChanged="@{(s,start,before,count)->viewmodel.setLastName(s)}" />
-                </com.google.android.material.textfield.TextInputLayout>
-            </LinearLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/checkout_last_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/last_name"
+                style="@style/Widget.App.TextInputLayout.OutlinedBox" >
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="@{viewmodel.customerInfo.lastName}"
+                    android:onTextChanged="@{(s,start,before,count)->viewmodel.setLastName(s)}" />
+            </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/checkout_address_1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/address_1"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox" >
+                style="@style/Widget.App.TextInputLayout.OutlinedBox" >
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -96,12 +91,25 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/address_2"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox" >
+                style="@style/Widget.App.TextInputLayout.OutlinedBox" >
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:text="@{viewmodel.customerInfo.address2}"
                     android:onTextChanged="@{(s,start,before,count)->viewmodel.setAddress2(s)}" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/checkout_city"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/city"
+                style="@style/Widget.App.TextInputLayout.OutlinedBox" >
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="@{viewmodel.customerInfo.city}"
+                    android:onTextChanged="@{(s,start,before,count)->viewmodel.setCity(s)}" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <LinearLayout
@@ -110,25 +118,11 @@
                 android:orientation="horizontal" >
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/checkout_city"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1.5"
-                    android:hint="@string/city"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox" >
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:text="@{viewmodel.customerInfo.city}"
-                        android:onTextChanged="@{(s,start,before,count)->viewmodel.setCity(s)}" />
-                </com.google.android.material.textfield.TextInputLayout>
-
-                <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/checkout_state"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1.5"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu" >
+                    android:layout_weight="1"
+                    style="@style/Widget.App.TextInputLayout.OutlinedBox.ExposedDropdownMenu" >
                     <AutoCompleteTextView
                         android:id="@+id/dropdown_checkout_state"
                         android:layout_width="match_parent"
@@ -145,7 +139,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:hint="@string/zip_code"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox" >
+                    style="@style/Widget.App.TextInputLayout.OutlinedBox" >
                     <com.google.android.material.textfield.TextInputEditText
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
@@ -158,14 +152,16 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:paddingVertical="@dimen/inner_padding_space"
                 android:text="@string/payment_details"
                 android:textAppearance="?attr/textAppearanceHeadline6" />
+
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/checkout_credit_cart_number"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/credit_card_number"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox" >
+                style="@style/Widget.App.TextInputLayout.OutlinedBox" >
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -184,7 +180,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"  >
+                    style="@style/Widget.App.TextInputLayout.OutlinedBox.ExposedDropdownMenu"  >
 
                     <AutoCompleteTextView
                         android:id="@+id/dropdown_checkout_expiration_month"
@@ -201,7 +197,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"  >
+                    style="@style/Widget.App.TextInputLayout.OutlinedBox.ExposedDropdownMenu"  >
                     <AutoCompleteTextView
                         android:id="@+id/dropdown_checkout_expiration_year"
                         android:layout_width="match_parent"
@@ -214,27 +210,28 @@
 
                 </com.google.android.material.textfield.TextInputLayout>
 
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/tv_checkout_security_code"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:hint="@string/security_code"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox" >
+            </LinearLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tv_checkout_security_code"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/security_code"
+                style="@style/Widget.App.TextInputLayout.OutlinedBox" >
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:inputType="number"
                     android:text="@{viewmodel.customerInfo.securityCode}"
                     android:onTextChanged="@{(s,start,before,count)->viewmodel.setSecurityCode(s)}" />
-                </com.google.android.material.textfield.TextInputLayout>
-
-            </LinearLayout>
+            </com.google.android.material.textfield.TextInputLayout>
 
             <Button
                 android:id="@+id/btn_checkout_purchase"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_margin="@dimen/padding_space"
+                android:layout_gravity="center"
                 android:text="@string/purchase"
                 android:onClick="@{()->handlers.onClickPurchase(viewmodel.customerInfo,viewmodel.subtotal)}" />
         </LinearLayout>
