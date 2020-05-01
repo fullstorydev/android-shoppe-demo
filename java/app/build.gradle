@@ -14,7 +14,7 @@ fullstory {
         enabledVariants properties.getProperty('enabledVariants')
     }
 
-    // please do not set server value in local.properties
+    // please do not set server value here or in local.properties
     if(properties.getProperty('server') != null){
         server properties.getProperty('server')
     }
