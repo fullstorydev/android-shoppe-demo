@@ -12,9 +12,9 @@ fullstory {
     // enable variants that you want to be instrumented by FS ( default to 'release' if not set )
     if(properties.getProperty('enabledVariants') != null) {
         enabledVariants properties.getProperty('enabledVariants')
-    } else {
-        throw new GradleException('enabledVariants is empty, will only record for release builds! If this is intentional, please remove this GradleException in build.gradle(app), otherwise please enabled debug!')
     }
+    // remove below line if you intend to instrument FS to only release builds
+    if(enabledVariants == null) throw GradleException('enabledVariants is empty, will only record for release builds! If this is intentional, please remove this GradleException in build.gradle(app), otherwise please enabled debug!')
 
     // please do not set server value here or in local.properties
     if(properties.getProperty('server') != null){
