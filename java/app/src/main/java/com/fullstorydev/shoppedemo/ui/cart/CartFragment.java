@@ -16,6 +16,8 @@ import com.fullstorydev.shoppedemo.R;
 import com.fullstorydev.shoppedemo.adapters.CartItemAdapter;
 import com.fullstorydev.shoppedemo.data.Item;
 import com.fullstorydev.shoppedemo.databinding.FragmentCartBinding;
+import com.segment.analytics.Analytics;
+import com.segment.analytics.Properties;
 
 public class CartFragment extends Fragment implements CartEventHandlers{
     private CartViewModel cartViewModel;
@@ -34,6 +36,8 @@ public class CartFragment extends Fragment implements CartEventHandlers{
         root.findViewById(R.id.btn_checkout).setOnClickListener(v -> {
             Navigation.findNavController(v).navigate(R.id.action_navigation_cart_to_checkoutFragment);
         });
+
+        Analytics.with(getContext()).screen("CartFragment",new Properties().putValue("itemsInCart",5));
         
         return root;
     }

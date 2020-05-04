@@ -7,6 +7,7 @@ import androidx.multidex.MultiDexApplication;
 import com.fullstory.FS;
 import com.segment.analytics.Analytics;
 import com.segment.analytics.Properties;
+import com.segment.analytics.ValueMap;
 import com.segment.analytics.android.integrations.firebase.FirebaseIntegration;
 import com.segment.analytics.integrations.AliasPayload;
 import com.segment.analytics.integrations.BasePayload;
@@ -30,73 +31,77 @@ public class App extends MultiDexApplication {
         Analytics analytics = new Analytics.Builder(getApplicationContext(), BuildConfig.SEGMENT_WRITE_KEY)
                 // Enable this to record certain application events automatically!
                 .use(FirebaseIntegration.FACTORY)
-                .trackApplicationLifecycleEvents()
+//                .trackApplicationLifecycleEvents()
                 // Enable this to record screen views automatically!
-                .recordScreenViews()
+//                .recordScreenViews()
                 .logLevel(Analytics.LogLevel.VERBOSE)
                 .middleware(chain -> {
                     // Get the original payload from chain
                     BasePayload payload = chain.payload();
 
                     // Add FullStory URL to event properties
-                    Map<String, Object> p = payload.getValueMap("properties",Properties.class);
-                    Map<String, Object> fsp = new HashMap<>(p);
-                    String fsURL = FS.getCurrentSessionURL();
-                    if(fsURL != null){ // only add when FS is initialized
-                        fsp.put("fullstoryUrl", fsURL);
-                        fsp.put("fullstoryNowUrl", FS.getCurrentSessionURL() + ':' + System.currentTimeMillis());
-                    }
+                    ValueMap properties = payload.getValueMap("properties");
+                    Map<String, Object> fullStoryProperties = new HashMap<>();
+                    if(properties != null) fullStoryProperties.putAll(properties);
+                    fullStoryProperties.put("fullstoryUrl", FS.getCurrentSessionURL());
+                    // now URL API available post 1.3.0
+                    fullStoryProperties.put("fullstoryNowUrl", FS.getCurrentSessionURL(true));
+
+                    Log.d("middleware", String.valueOf(fullStoryProperties));
+                    Log.d("middleware", String.valueOf(payload.type()));
 
                     // Add any other information to context
                     // Example: Set the device year class on the context object.
                     Map<String, Object> context = new LinkedHashMap<>(payload.context());
                     context.put("device_year_class", 2019);
 
+                    Log.d("middleware","here" + context.get("userID"));
+
                     BasePayload newPayload = null;
 
                     // https://github.com/segmentio/analytics-android/tree/master/analytics/src/main/java/com/segment/analytics/integrations
                     switch (payload.type()){
-                        case alias: // FS.setuservar? anonymize and identify?
-                            AliasPayload aliasPayload = (AliasPayload) payload;
-                            Log.d("middleware","alias userid: " + aliasPayload.userId());
-                            Log.d("middleware","alias previousId: " + aliasPayload.previousId());
-                            break;
                         case group: // FS.setuservar?
                             GroupPayload groupPayload = (GroupPayload) payload;
                             Log.d("middleware","group userid: " + groupPayload.userId());
                             Log.d("middleware","group id: " + groupPayload.groupId());
                             Log.d("middleware","group traits: " + groupPayload.traits());
                             break;
-                        case identify:// FS.identify
+                        case identify:
                             IdentifyPayload identifyPayload = (IdentifyPayload) payload;
-                            Log.d("middleware","identify userid: " + identifyPayload.userId());
-                            Log.d("middleware","identify traits: " + identifyPayload.traits());
+
+                            //identify user in FullStory
+                            FS.identify(identifyPayload.userId(), identifyPayload.traits());
+
                             break;
-                        case screen:// FS.event?
+                        case screen:
                             ScreenPayload screenPayload = (ScreenPayload) payload;
-                            Log.d("middleware","screen name: " + screenPayload.name());
-                            Log.d("middleware","screen event: " + screenPayload.event());
-                            Log.d("middleware","screen properties: " + screenPayload.properties());
+
+                            // send custom event to FS
+                            FS.event("visited screen: " + screenPayload.name(), screenPayload.properties());
+
+                            //add FS URL to screen payload properties and build new payload
                             ScreenPayload.Builder screenPayloadBuilder = screenPayload.toBuilder()
                                     .context(context)
-                                    .properties(fsp);
+                                    .properties(fullStoryProperties);
                             newPayload = screenPayloadBuilder.build();
+
                             break;
-                        case track://FS.event
+                        case track:
                             TrackPayload trackPayload = (TrackPayload) payload;
-                            Log.d("middleware","track event: " + trackPayload.event());
-                            Log.d("middleware","track properties: " + trackPayload.properties());
+
                             // send custom event to FS
                             FS.event(trackPayload.event(),trackPayload.properties());
 
+                            //add FS URL to track payload properties and build new payload
                             TrackPayload.Builder trackPayloadBuilder = trackPayload.toBuilder()
                                     .context(context)
-                                    .properties(fsp);
+                                    .properties(fullStoryProperties);
                             newPayload = trackPayloadBuilder.build();
+
                             break;
                         default:
-                            Log.d("middleware","default: no known payload identified");
-                            Log.d("middleware","default to logger?" + payload.type());
+                            Log.d("middleware","No matching API found, not adding FS...");
                             break;
                     }
 
