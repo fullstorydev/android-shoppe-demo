@@ -110,6 +110,11 @@ public class App extends MultiDexApplication {
                 })
                 .build();
 
+        //TODO: check for userid, if user id is null then anonymmize the user?
+        // https://segment.com/docs/connections/sources/catalog/libraries/mobile/android/#reset
+        // Events queued on disk are not cleared and are uploaded the next time the app starts, or listen to shared pref
+
+
         // Set the initialized instance as a globally accessible instance.
         Analytics.setSingletonInstance(analytics);
 
