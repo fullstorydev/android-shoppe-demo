@@ -53,7 +53,7 @@ public class MainActivity extends AppCompatActivity implements FSOnReadyListener
 
     @Override
     public boolean onOptionsItemSelected(@NotNull MenuItem item) {
-        Analytics.with(getApplicationContext()).track("navigationEvent");
+        Analytics.with(getApplicationContext()).track("navigationEvent", new Properties().putName(item.toString()));
 
         return NavigationUI.onNavDestinationSelected(item, mNavController)
                 || super.onOptionsItemSelected(item);
@@ -87,8 +87,9 @@ public class MainActivity extends AppCompatActivity implements FSOnReadyListener
     public void onReady(FSSessionData sessionData) {
         Log.d("MainActivity", "FS is ready with URL: " + FS.getCurrentSessionURL());
 //        Analytics.with(getApplicationContext()).track("FS_ready",new Properties().putUrl(FS.getCurrentSessionURL()));
-//        Analytics.with(getApplicationContext()).identify("user_test_id_2", new Traits().putName("a user's name2"), null);
+        Analytics.with(getApplicationContext()).identify("test_user_id", new Traits().putName("Test User"), null);
 //        Analytics.with(getApplicationContext()).reset();
+//        FS.anonymize();
 //        Analytics.with(getApplicationContext()).identify("new_user_id");
 
     }
