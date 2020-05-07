@@ -13,7 +13,9 @@ public class JsonHelper {
             Gson gson = new Gson();
             // for now item and product shares the same model, will separate them in the future refactor
             TypeToken<List<Item>> list = new TypeToken<List<Item>>() {};
-            return gson.fromJson(jsonStr, list.getType());
+            // for now item and product shares the same model, may separate them in the future refactor
+            List<Item> availableProducts = gson.fromJson(jsonStr, list.getType());
+            return availableProducts;
         }catch (JsonParseException e){
             throw e;
         }
