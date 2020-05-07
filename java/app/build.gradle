@@ -58,6 +58,10 @@ dependencies {
     implementation "com.google.code.gson:gson:$rootProject.gson_version"
     implementation "com.google.android.material:material:$rootProject.material_version"
     implementation "com.github.bumptech.glide:glide:$rootProject.glide_version"
+    implementation "com.segment.analytics.android:analytics:$rootProject.segment_version"
+    implementation ('com.segment.analytics.android.integrations:firebase:+@aar') {
+        transitive = true
+    }
 
     testImplementation "junit:junit:$rootProject.junit_version"
     testImplementation "androidx.room:room-testing:$rootProject.room_version"

@@ -8,6 +8,7 @@ import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.fullstory.FS;
 import com.fullstorydev.shoppedemo.data.Item;
 import com.fullstorydev.shoppedemo.ui.market.MarketEventHandlers;
 import com.fullstorydev.shoppedemo.R;
@@ -61,6 +62,8 @@ public class MarketProductAdapter extends RecyclerView.Adapter<MarketProductAdap
             this.binding = binding;
             // bind the on click handler for add to cart buttons
             this.binding.setHandlers(mMarketHandlers);
+
+            FS.addClass(binding.getRoot().findViewById(R.id.tv_market_product_price_unit), FS.UNMASK_CLASS);
         }
 
         void bind(Item product) {

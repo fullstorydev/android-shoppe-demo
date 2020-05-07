@@ -30,11 +30,11 @@ public class App extends MultiDexApplication {
 //                .logLevel(Analytics.LogLevel.VERBOSE)
 //                .use(FirebaseIntegration.FACTORY)
 //                .use(FullStoryIntegration.FACTORY)
-                .trackApplicationLifecycleEvents()
+//                .trackApplicationLifecycleEvents()
 //                .recordScreenViews()
 
                 // add middleware for FullStory
-                .middleware(new FullStoryMiddleware())
+                .middleware(new FullStoryMiddleware().enableGroupTraitsToUserVars(true))
                 .build();
 
         // Analytics reset does not use middleware, so we need to listen to when the userID becomes null in shared preference and call anonymize to logout the user properly

@@ -92,7 +92,7 @@ public class MainActivity extends AppCompatActivity implements FSOnReadyListener
 //        Analytics.with(getApplicationContext()).track("FS_ready",new Properties().putUrl(FS.getCurrentSessionURL()));
         Analytics.with(getApplicationContext()).identify("test_user_id_3", new Traits().putName("Test User").putEmail("test_user_3@test.com"), null);
 
-        Analytics.with(getApplicationContext()).group("new_group_2");
+        Analytics.with(getApplicationContext()).group("fruitShoppe_group", new Traits().putIndustry("Retail"));
 
 //        try {
 //            Thread.sleep(2000);

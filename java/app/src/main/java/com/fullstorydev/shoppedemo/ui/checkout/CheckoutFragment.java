@@ -19,7 +19,6 @@ import com.fullstorydev.shoppedemo.R;
 import com.fullstorydev.shoppedemo.data.CustomerInfo;
 import com.fullstorydev.shoppedemo.databinding.FragmentCheckoutBinding;
 import com.segment.analytics.Analytics;
-import com.segment.analytics.Properties;
 
 public class CheckoutFragment extends Fragment implements CheckoutEventHandlers {
     private FragmentCheckoutBinding binding;

@@ -17,6 +17,13 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class FullStoryMiddleware implements Middleware {
+    private boolean enableGroupTraitsToUserVars;
+
+    public FullStoryMiddleware enableGroupTraitsToUserVars(boolean enabled){
+        enableGroupTraitsToUserVars = enabled;
+        return this;
+    }
+
     @Override
     public void intercept(Chain chain) {
         // Get the original payload from chain
@@ -50,6 +57,7 @@ public class FullStoryMiddleware implements Middleware {
                 // this is because if the user changes it's group which no longer has certain traits, we will not detect when to clear them in FS and user will be tied to old group data
                 HashMap<String, Object> userVars = new HashMap<>();
                 userVars.put("groupID",groupPayload.groupId());
+                if(enableGroupTraitsToUserVars && !isNullOrEmpty(groupPayload.traits())) userVars.putAll(((GroupPayload) payload).traits());
                 FS.setUserVars(userVars);
                 break;
             case identify:
