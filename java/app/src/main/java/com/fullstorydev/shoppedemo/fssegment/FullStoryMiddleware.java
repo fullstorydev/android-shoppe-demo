@@ -17,10 +17,15 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class FullStoryMiddleware implements Middleware {
-    private boolean enableGroupTraitsToUserVars;
+    private boolean enableGroupTraitsToUserVars = false;
+    private boolean enableFSSessionURLInEvent = true;
 
     public FullStoryMiddleware enableGroupTraitsToUserVars(boolean enabled){
         enableGroupTraitsToUserVars = enabled;
+        return this;
+    }
+    public FullStoryMiddleware enableFSSessionURLInEvent(boolean enabled){
+        enableFSSessionURLInEvent = enabled;
         return this;
     }
 
@@ -39,9 +44,9 @@ public class FullStoryMiddleware implements Middleware {
         fullStoryProperties.put("fullstoryNowUrl", FS.getCurrentSessionURL(true));
 
         // Add any other information you would like to context
-        // For example: add the device year class and FS URL to the context object.
+        // For example: add FS URL to the context object.
         Map<String, Object> context = new LinkedHashMap<>(payload.context());
-        context.put("device_year_class", 2019);
+//        context.put("device_year_class", 2019);
         context.put("fullstoryUrl", FS.getCurrentSessionURL());
 
         // create a place holder payload to be created
@@ -73,11 +78,13 @@ public class FullStoryMiddleware implements Middleware {
                 // send custom event to FS
                 FS.event("visited screen: " + screenPayload.name(), screenPayload.properties());
 
-                //add FS URL to screen payload properties and build new payload
-                ScreenPayload.Builder screenPayloadBuilder = screenPayload.toBuilder()
-                        .context(context)
-                        .properties(fullStoryProperties);
-                newPayload = screenPayloadBuilder.build();
+                if(enableFSSessionURLInEvent){
+                    //add FS URL to screen payload properties and build new payload
+                    ScreenPayload.Builder screenPayloadBuilder = screenPayload.toBuilder()
+                            .context(context)
+                            .properties(fullStoryProperties);
+                    newPayload = screenPayloadBuilder.build();
+                }
                 break;
             case track:
                 TrackPayload trackPayload = (TrackPayload) payload;
@@ -85,11 +92,14 @@ public class FullStoryMiddleware implements Middleware {
                 // send custom event to FS
                 FS.event(trackPayload.event(),trackPayload.properties());
 
-                //add FS URL to track payload properties and build new payload
-                TrackPayload.Builder trackPayloadBuilder = trackPayload.toBuilder()
-                        .context(context)
-                        .properties(fullStoryProperties);
-                newPayload = trackPayloadBuilder.build();
+                if(enableFSSessionURLInEvent) {
+                    //add FS URL to track payload properties and build new payload
+                    TrackPayload.Builder trackPayloadBuilder = trackPayload.toBuilder()
+                            .context(context)
+                            .properties(fullStoryProperties);
+                    newPayload = trackPayloadBuilder.build();
+                }
+
                 break;
             default:
                 Log.d("FullStoryMiddleware","No matching API found, not falling FS APIs...");
