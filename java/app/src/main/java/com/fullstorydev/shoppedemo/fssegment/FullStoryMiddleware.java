@@ -53,10 +53,11 @@ public class FullStoryMiddleware implements Middleware {
             case group:
                 GroupPayload groupPayload = (GroupPayload) payload;
 
-                // User will always be tied to the newest groupID that you set, group traits will not be included
+                // User will always be tied to the newest groupID that you set, group traits will not be included by default!
                 // this is because if the user changes it's group which no longer has certain traits, we will not detect when to clear them in FS and user will be tied to old group data
                 HashMap<String, Object> userVars = new HashMap<>();
                 userVars.put("groupID",groupPayload.groupId());
+                // optionally enable group traits to be passed into user vars
                 if(enableGroupTraitsToUserVars && !isNullOrEmpty(groupPayload.traits())) userVars.putAll(((GroupPayload) payload).traits());
                 FS.setUserVars(userVars);
                 break;
