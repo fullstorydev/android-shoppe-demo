@@ -30,7 +30,7 @@ public class App extends MultiDexApplication {
 //                .logLevel(Analytics.LogLevel.VERBOSE)
 //                .use(FirebaseIntegration.FACTORY)
 //                .use(FullStoryIntegration.FACTORY)
-//                .trackApplicationLifecycleEvents()
+                .trackApplicationLifecycleEvents()
 //                .recordScreenViews()
 
                 // add middleware for FullStory

@@ -90,7 +90,7 @@ public class MainActivity extends AppCompatActivity implements FSOnReadyListener
     public void onReady(FSSessionData sessionData) {
         Log.d("MainActivity", "FS is ready with URL: " + FS.getCurrentSessionURL());
 //        Analytics.with(getApplicationContext()).track("FS_ready",new Properties().putUrl(FS.getCurrentSessionURL()));
-        Analytics.with(getApplicationContext()).identify("test_user_id_1", new Traits().putName("Test User"), null);
+        Analytics.with(getApplicationContext()).identify("test_user_id_3", new Traits().putName("Test User").putEmail("test_user_3@test.com"), null);
 
         Analytics.with(getApplicationContext()).group("new_group_2");
 
