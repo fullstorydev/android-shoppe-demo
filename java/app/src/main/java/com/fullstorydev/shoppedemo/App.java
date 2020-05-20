@@ -24,7 +24,9 @@ public class App extends MultiDexApplication {
         final String writeKey = BuildConfig.SEGMENT_WRITE_KEY;
 
         ArrayList<String> whitelistedEvents = new ArrayList<>();
-        whitelistedEvents.add("navigationEvent");
+        whitelistedEvents.add("Cart Viewed");
+        whitelistedEvents.add("Order Completed");
+
         FullStoryMiddleware fsm = new FullStoryMiddleware(getApplicationContext(), writeKey, whitelistedEvents);
         fsm.enableFSSessionURLInEvents = true;
         fsm.enableGroupTraitsAsUserVars = true;

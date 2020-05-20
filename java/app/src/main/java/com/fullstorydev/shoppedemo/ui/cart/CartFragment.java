@@ -1,6 +1,7 @@
 package com.fullstorydev.shoppedemo.ui.cart;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,6 +9,7 @@ import androidx.annotation.Nullable;
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
@@ -38,7 +40,6 @@ public class CartFragment extends Fragment implements CartEventHandlers{
             Navigation.findNavController(v).navigate(R.id.action_navigation_cart_to_checkoutFragment);
         });
         FS.addClass(root.findViewById(R.id.tv_checkout_subtotal),FS.UNMASK_CLASS);
-        Analytics.with(getContext()).screen("CartFragment",new Properties().putValue("itemsInCart",5));
         
         return root;
     }
@@ -53,6 +54,19 @@ public class CartFragment extends Fragment implements CartEventHandlers{
 
         binding.setLifecycleOwner(getViewLifecycleOwner());
         binding.setViewmodel(cartViewModel);
+
+
+        Observer<Double> observer = new Observer<Double>() {
+            @Override
+            public void onChanged(@Nullable Double subtotal) {
+                if(subtotal != null){
+                    Analytics.with(getContext()).track("Cart Viewed", new Properties().putSubtotal(subtotal));
+                    cartViewModel.getSubtotal().removeObserver(this);
+                }
+            }
+        };
+
+        cartViewModel.getSubtotal().observe(getViewLifecycleOwner(),observer);
     }
 
     public void onClickRemoveFromCart(Item item) { cartViewModel.decreaseQuantityInCart(item); }

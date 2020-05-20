@@ -1,6 +1,7 @@
 package com.fullstorydev.shoppedemo.ui.checkout;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +20,9 @@ import com.fullstorydev.shoppedemo.R;
 import com.fullstorydev.shoppedemo.data.CustomerInfo;
 import com.fullstorydev.shoppedemo.databinding.FragmentCheckoutBinding;
 import com.segment.analytics.Analytics;
+import com.segment.analytics.Properties;
+
+import java.util.HashMap;
 
 public class CheckoutFragment extends Fragment implements CheckoutEventHandlers {
     private FragmentCheckoutBinding binding;
@@ -75,6 +79,8 @@ public class CheckoutFragment extends Fragment implements CheckoutEventHandlers 
                 binding.setHandlers(this);
             }
         });
+
+
     }
     
     public void onClickPurchase(CustomerInfo customerInfo, Double subtotal) {
@@ -86,6 +92,7 @@ public class CheckoutFragment extends Fragment implements CheckoutEventHandlers 
             if(valid && subtotal != null && subtotal > 0) {
                 // placeholder for your logic here to complete purchase
                 Toast.makeText(getContext(), "Purchase success!", Toast.LENGTH_LONG).show();
+                Analytics.with(getActivity()).track("Order Completed",new Properties().putSubtotal(subtotal));
             } else {
                 throw new IllegalArgumentException("Order not valid");
             }
