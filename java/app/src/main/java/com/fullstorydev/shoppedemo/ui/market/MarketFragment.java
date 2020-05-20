@@ -44,12 +44,6 @@ public class MarketFragment extends Fragment implements MarketEventHandlers {
         mRecyclerView.setAdapter(mMarketProductAdapter);
         setRecyclerViewLayoutManager(getResources().getConfiguration().orientation);
 
-
-
-
-
-
-
         return root;
     }
 
