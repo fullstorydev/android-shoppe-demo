@@ -107,11 +107,12 @@ public class FullStoryMiddleware implements Middleware {
                 break;
         }
 
+        Map<String, Object> context = new LinkedHashMap<>(payload.context());
         if(this.enableFSSessionURLInEvents){
-            newPayload = getNewPayloadWithFSURL(payload,payload.context());
+            newPayload = getNewPayloadWithFSURL(payload,context);
         }
 
-        if(newPayload == null) newPayload = payload.toBuilder().context(payload.context()).build();
+        if(newPayload == null) newPayload = payload.toBuilder().context(context).build();
         chain.proceed(newPayload);
     }
 
