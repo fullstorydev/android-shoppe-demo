@@ -123,8 +123,8 @@ public class FullStoryMiddleware implements Middleware {
         if(!isNullOrEmpty(properties)) fullStoryProperties.putAll(properties);
 
         fullStoryProperties.put("fullstoryUrl", FS.getCurrentSessionURL());
-            // now URL API available post FullStory plugin v1.3.0
-        fullStoryProperties.put("fullstoryNowUrl", FS.getCurrentSessionURL(true));
+//            // now URL API available post FullStory plugin v1.3.0
+//        fullStoryProperties.put("fullstoryNowUrl", FS.getCurrentSessionURL(true));
         context.put("fullstoryUrl", FS.getCurrentSessionURL());
 
         if(payload.type() == BasePayload.Type.screen){
