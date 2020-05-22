@@ -80,7 +80,7 @@ public class CustomerInfo {
         }
         if (zip == null || zip.length()!= 5) {
             // only allow US zip codes
-            this.zipError.postValue("zip code is valid: should be 5 digits");
+            this.zipError.postValue("invalid zip code: should be 5 digits");
             this.isValid = false;
         } else {
             this.zipError.postValue(null);
@@ -92,19 +92,19 @@ public class CustomerInfo {
             this.creditCardNumberError.postValue(null);
         }
         if (expirationMonth < 0 || expirationMonth >= 12) {
-            this.expirationMonthError.postValue("expiration month invalid");
+            this.expirationMonthError.postValue("invalid expiration month");
             this.isValid = false;
         } else {
             this.expirationMonthError.postValue(null);
         }
         if (expirationYear < 0) {
-            this.expirationYearError.postValue("expiration year invalid");
+            this.expirationYearError.postValue("invalid expiration year");
             this.isValid = false;
         } else {
             this.expirationYearError.postValue(null);
         }
         if (securityCode.length() != 3) {
-            this.securityCodeError.postValue("security code not valid: should be 3 digits");
+            this.securityCodeError.postValue("invalid security code: should be 3 digits");
             this.isValid = false;
         } else {
             this.securityCodeError.postValue(null);
