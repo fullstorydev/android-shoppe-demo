@@ -67,17 +67,11 @@ public class CheckoutFragment extends Fragment implements CheckoutEventHandlers 
     }
     
     public void onClickPurchase(CustomerInfo customerInfo, Double subtotal) {
-        try{
-            boolean valid = customerInfo.validateOrder();
-            if(valid && subtotal != null && subtotal > 0) {
-                // placeholder for your logic here to complete purchase
-                Toast.makeText(getContext(), "Purchase success!", Toast.LENGTH_LONG).show();
-            } else {
-                throw new IllegalArgumentException("Order not valid");
-            }
-        } catch (IllegalArgumentException | NullPointerException e) {
-            e.printStackTrace();
-            // placeholder for your logic here to handle failed purchase
+        boolean valid = customerInfo.validateOrder();
+        if(valid && subtotal != null && subtotal > 0) {
+            // placeholder for your logic here to complete purchase
+            Toast.makeText(getContext(), "Purchase success!", Toast.LENGTH_LONG).show();
+        } else {
             Toast.makeText(getContext(),"Purchase failed!",Toast.LENGTH_LONG).show();
         }
     }
