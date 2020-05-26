@@ -1,10 +1,7 @@
 apply plugin: 'com.android.application'
 apply plugin: 'fullstory'
 
-Properties properties = new Properties()
-if (project.rootProject.file('local.properties').canRead()) {
-    properties.load(project.rootProject.file("local.properties").newDataInputStream())
-}
+
 
 android {
     compileSdkVersion 29
@@ -62,6 +59,11 @@ dependencies {
     testImplementation "androidx.room:room-testing:$rootProject.room_version"
     androidTestImplementation "androidx.test.ext:junit:$rootProject.ext_junit_version"
     androidTestImplementation "androidx.test.espresso:espresso-core:$rootProject.espresso_version"
+}
+
+Properties properties = new Properties()
+if (project.rootProject.file('local.properties').canRead()) {
+    properties.load(project.rootProject.file("local.properties").newDataInputStream())
 }
 
 fullstory {
