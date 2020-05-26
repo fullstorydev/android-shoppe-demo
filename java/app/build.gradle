@@ -2,7 +2,9 @@ apply plugin: 'com.android.application'
 apply plugin: 'fullstory'
 
 Properties properties = new Properties()
-properties.load(project.rootProject.file('local.properties').newDataInputStream())
+if (project.rootProject.file('local.properties').canRead()) {
+    properties.load(project.rootProject.file("local.properties").newDataInputStream())
+}
 
 fullstory {
     // add your "org" in local.properties, or set it here directly
@@ -30,16 +32,26 @@ android {
     }
     defaultConfig {
         applicationId "com.fullstorydev.shoppedemo"
-        minSdkVersion 19
+        minSdkVersion 21
         targetSdkVersion 29
-        versionCode 1
-        versionName "1.0"
+        versionCode 3
+        versionName "1.0.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
+
+        signingConfigs {
+            release {
+                keyAlias 'androiddebugkey'
+                keyPassword 'android'
+                storeFile file(System.getenv('HOME') + '/.android/debug.keystore')
+                storePassword 'android'
+            }
+        }
     }
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
+            signingConfig signingConfigs.release
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
