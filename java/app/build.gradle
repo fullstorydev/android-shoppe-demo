@@ -6,24 +6,6 @@ if (project.rootProject.file('local.properties').canRead()) {
     properties.load(project.rootProject.file("local.properties").newDataInputStream())
 }
 
-fullstory {
-    // add your "org" in local.properties, or set it here directly
-    org properties.getProperty('org')
-    if(org == null) throw new GradleException('ORG ID is empty, will not record! Please set org in build.gradle(app) or local.properties!')
-
-    // enable variants that you want to be instrumented by FS ( default to 'release' if not set )
-    if(properties.getProperty('enabledVariants') != null) {
-        enabledVariants properties.getProperty('enabledVariants')
-    }
-    // remove below line if you intend to instrument FS to only release builds
-    if(enabledVariants == null) throw GradleException('enabledVariants is empty, will only record for release builds! If this is intentional, please remove this GradleException in build.gradle(app), otherwise please enabled debug!')
-
-    // please do not set server value here or in local.properties
-    if(properties.getProperty('server') != null){
-        server properties.getProperty('server')
-    }
-}
-
 android {
     compileSdkVersion 29
     buildToolsVersion "29.0.3"
@@ -80,4 +62,22 @@ dependencies {
     testImplementation "androidx.room:room-testing:$rootProject.room_version"
     androidTestImplementation "androidx.test.ext:junit:$rootProject.ext_junit_version"
     androidTestImplementation "androidx.test.espresso:espresso-core:$rootProject.espresso_version"
+}
+
+fullstory {
+    // add your "org" in local.properties, or set it here directly
+    org properties.getProperty('org')
+    if(org == null) throw new GradleException('ORG ID is empty, will not record! Please set org in build.gradle(app) or local.properties!')
+
+    // enable variants that you want to be instrumented by FS ( default to 'release' if not set )
+    if(properties.getProperty('enabledVariants') != null) {
+        enabledVariants properties.getProperty('enabledVariants')
+    }
+    // remove below line if you intend to instrument FS to only release builds
+    if(enabledVariants == null) throw new GradleException('enabledVariants is empty, will only record for release builds! If this is intentional, please remove this GradleException in build.gradle(app), otherwise please enabled debug!')
+
+    // please do not set server value here or in local.properties
+    if(properties.getProperty('server') != null){
+        server properties.getProperty('server')
+    }
 }
