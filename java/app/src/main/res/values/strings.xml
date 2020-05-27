@@ -23,4 +23,6 @@
     <string name="security_code">Security Code</string>
     <string name="subtotal">Subtotal:</string>
     <string name="purchase">Purchase</string>
+
+    <string name="load_error">Error, please retry later!</string>
 </resources>

@@ -2,9 +2,11 @@ package com.fullstorydev.shoppedemo.ui.market;
 
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.NonNull;
@@ -16,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.fullstorydev.shoppedemo.R;
 import com.fullstorydev.shoppedemo.adapters.MarketProductAdapter;
 import com.fullstorydev.shoppedemo.data.Item;
+import com.fullstorydev.shoppedemo.utilities.Constants;
 
 public class MarketFragment extends Fragment implements MarketEventHandlers {
 
@@ -48,6 +51,23 @@ public class MarketFragment extends Fragment implements MarketEventHandlers {
 
         marketViewModel = new ViewModelProvider(this).get(MarketViewModel.class);
         marketViewModel.getProductList().observe(this.getViewLifecycleOwner(), products -> mMarketProductAdapter.setProductList(products));
+
+        marketViewModel.getStatus().observe(this.getViewLifecycleOwner(), status ->{
+            View v = getView();
+            if(v != null){
+                if (status == Constants.Status.LOADING) {
+                    v.findViewById(R.id.progressbar).setVisibility(View.VISIBLE);
+                } else {
+                    v.findViewById(R.id.progressbar).setVisibility(View.GONE);
+                }
+                //TODO: add network listener to detect network change and auto reload
+                if (status == Constants.Status.ERROR) {
+                    v.findViewById(R.id.tv_error).setVisibility(View.VISIBLE);
+                } else {
+                    v.findViewById(R.id.tv_error).setVisibility(View.GONE);
+                }
+            }
+        });
     }
 
     public void onClickAddToCart(Item item){ marketViewModel.increaseQuantityInCart(item); }
