@@ -12,6 +12,7 @@
 /captures
 .externalNativeBuild
 .cxx
+java/app/release
 
 # Legacy Eclipse project files
 .classpath
