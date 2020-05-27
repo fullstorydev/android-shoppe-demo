@@ -59,7 +59,7 @@
                                 android:layout_height="@dimen/min_height"
                                 android:layout_alignParentEnd="true"
                                 android:onClick="@{()->handlers.onClickRemoveFromCart(item)}"
-                                app:icon="@drawable/ic_remove_black_24dp"
+                                app:icon="@drawable/ic_remove_24dp"
                                 style="@style/Widget.App.Button.TextButton.IconOnly">
                             </Button>
                             <TextView
@@ -76,7 +76,7 @@
                                 android:layout_height="@dimen/min_height"
                                 android:onClick="@{()->handlers.onClickAddToCart(item)}"
                                 android:layout_alignParentStart="true"
-                                app:icon="@drawable/ic_add_black_24dp"
+                                app:icon="@drawable/ic_add_24dp"
                                 style="@style/Widget.App.Button.TextButton.IconOnly">
                             </Button>
                         </RelativeLayout>
