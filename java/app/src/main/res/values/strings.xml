@@ -24,5 +24,5 @@
     <string name="subtotal">Subtotal:</string>
     <string name="purchase">Purchase</string>
 
-    <string name="load_error">Error, please retry later!</string>
+    <string name="load_error">Error, please close the app and retry later!</string>
 </resources>
