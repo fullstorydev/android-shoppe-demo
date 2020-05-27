@@ -1,7 +1,6 @@
 package com.fullstorydev.shoppedemo.ui.checkout;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -55,7 +54,6 @@ public class CheckoutFragment extends Fragment implements CheckoutEventHandlers 
         FS.addClass(view.findViewById(R.id.checkout_expiration_month),FS.EXCLUDE_CLASS);
         FS.addClass(view.findViewById(R.id.checkout_expiration_year),FS.EXCLUDE_CLASS);
         FS.addClass(view.findViewById(R.id.checkout_security_code),FS.EXCLUDE_CLASS);
-        Log.d("test",FS.getCurrentSessionURL());
     }
 
     @Override
