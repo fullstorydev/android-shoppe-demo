@@ -52,9 +52,9 @@ public class CheckoutFragment extends Fragment implements CheckoutEventHandlers 
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         FS.addClass(view.findViewById(R.id.checkout_credit_cart_number),FS.EXCLUDE_CLASS);
-        FS.addClass(view.findViewById(R.id.dropdown_checkout_expiration_year),FS.EXCLUDE_CLASS);
-        FS.addClass(view.findViewById(R.id.dropdown_checkout_expiration_month),FS.EXCLUDE_CLASS);
-        FS.addClass(view.findViewById(R.id.tv_checkout_security_code),FS.EXCLUDE_CLASS);
+        FS.addClass(view.findViewById(R.id.checkout_expiration_month),FS.EXCLUDE_CLASS);
+        FS.addClass(view.findViewById(R.id.checkout_expiration_year),FS.EXCLUDE_CLASS);
+        FS.addClass(view.findViewById(R.id.checkout_security_code),FS.EXCLUDE_CLASS);
         Log.d("test",FS.getCurrentSessionURL());
     }
 
