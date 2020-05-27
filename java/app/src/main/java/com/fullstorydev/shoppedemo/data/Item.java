@@ -6,6 +6,8 @@ import androidx.room.Entity;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
+import androidx.annotation.Keep;
+
 /*    sample data:
 {
         "title": "Bananas",
@@ -17,6 +19,7 @@ import androidx.room.PrimaryKey;
     }
  */
 
+@Keep
 @Entity(tableName = "items")
 public class Item {
 
