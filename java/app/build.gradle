@@ -63,6 +63,9 @@ dependencies {
         transitive = true
     }
 
+    implementation 'com.fullstorydev:FullStorySegmentMiddleware:1.0'
+
+
     testImplementation "junit:junit:$rootProject.junit_version"
     testImplementation "androidx.room:room-testing:$rootProject.room_version"
     androidTestImplementation "androidx.test.ext:junit:$rootProject.ext_junit_version"

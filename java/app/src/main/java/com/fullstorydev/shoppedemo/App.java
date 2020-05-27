@@ -7,7 +7,9 @@ import androidx.multidex.MultiDexApplication;
 
 import com.fullstory.FS;
 import com.fullstorydev.shoppedemo.fssegment.FullStoryIntegration;
-import com.fullstorydev.shoppedemo.fssegment.FullStoryMiddleware;
+//import com.fullstorydev.shoppedemo.fssegment.FullStoryMiddleware;
+import com.fullstorydev.fullstorysegmentmiddleware.*;
+
 import com.segment.analytics.Analytics;
 
 import java.util.ArrayList;
