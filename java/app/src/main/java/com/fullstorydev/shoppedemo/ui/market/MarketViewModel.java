@@ -5,7 +5,6 @@ import android.app.Application;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
-import com.fullstorydev.shoppedemo.App;
 import com.fullstorydev.shoppedemo.data.Item;
 import com.fullstorydev.shoppedemo.data.ItemRepository;
 import com.fullstorydev.shoppedemo.data.ProductRepository;

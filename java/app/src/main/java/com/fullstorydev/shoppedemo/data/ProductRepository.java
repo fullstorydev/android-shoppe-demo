@@ -5,7 +5,6 @@ import android.app.Application;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
-import com.fullstorydev.shoppedemo.App;
 import com.fullstorydev.shoppedemo.R;
 import com.fullstorydev.shoppedemo.utilities.Constants;
 import com.fullstorydev.shoppedemo.utilities.JsonHelper;
