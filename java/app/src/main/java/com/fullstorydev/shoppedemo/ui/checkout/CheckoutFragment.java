@@ -14,6 +14,7 @@ import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.fullstory.FS;
 import com.fullstorydev.shoppedemo.R;
 import com.fullstorydev.shoppedemo.data.CustomerInfo;
 import com.fullstorydev.shoppedemo.databinding.FragmentCheckoutBinding;
@@ -44,6 +45,15 @@ public class CheckoutFragment extends Fragment implements CheckoutEventHandlers 
         yearEditTextFilledExposedDropdown.setAdapter(yearAdapter);
 
         return root;
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        FS.addClass(view.findViewById(R.id.checkout_credit_cart_number),FS.EXCLUDE_CLASS);
+        FS.addClass(view.findViewById(R.id.checkout_expiration_month),FS.EXCLUDE_CLASS);
+        FS.addClass(view.findViewById(R.id.checkout_expiration_year),FS.EXCLUDE_CLASS);
+        FS.addClass(view.findViewById(R.id.checkout_security_code),FS.EXCLUDE_CLASS);
     }
 
     @Override
