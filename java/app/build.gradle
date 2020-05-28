@@ -1,7 +1,10 @@
 apply plugin: 'com.android.application'
 apply plugin: 'fullstory'
 
-
+Properties properties = new Properties()
+if (project.rootProject.file('local.properties').canRead()) {
+    properties.load(project.rootProject.file("local.properties").newDataInputStream())
+}
 
 android {
     compileSdkVersion 29
@@ -63,8 +66,14 @@ dependencies {
         transitive = true
     }
 
-    implementation 'com.fullstorydev:FullStorySegmentMiddleware:1.0'
+    repositories {
+        maven {
+            url  "https://dl.bintray.com/fullstorysolengteam/maven"
+        }
+//        mavenLocal()
+    }
 
+    implementation 'com.fullstorydev:fullstory-segment-middleware:0.0.4'
 
     testImplementation "junit:junit:$rootProject.junit_version"
     testImplementation "androidx.room:room-testing:$rootProject.room_version"
@@ -72,10 +81,7 @@ dependencies {
     androidTestImplementation "androidx.test.espresso:espresso-core:$rootProject.espresso_version"
 }
 
-Properties properties = new Properties()
-if (project.rootProject.file('local.properties').canRead()) {
-    properties.load(project.rootProject.file("local.properties").newDataInputStream())
-}
+
 
 fullstory {
     // add your "org" in local.properties, or set it here directly

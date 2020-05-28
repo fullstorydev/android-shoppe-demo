@@ -8,7 +8,7 @@ import androidx.multidex.MultiDexApplication;
 import com.fullstory.FS;
 import com.fullstorydev.shoppedemo.fssegment.FullStoryIntegration;
 //import com.fullstorydev.shoppedemo.fssegment.FullStoryMiddleware;
-import com.fullstorydev.fullstorysegmentmiddleware.*;
+import com.fullstorydev.fullstorysegmentmiddleware.FullStoryMiddleware;
 
 import com.segment.analytics.Analytics;
 
@@ -25,14 +25,18 @@ public class App extends MultiDexApplication {
 
         final String writeKey = BuildConfig.SEGMENT_WRITE_KEY;
 
-        ArrayList<String> whitelistedEvents = new ArrayList<>();
-        whitelistedEvents.add("Cart Viewed");
-        whitelistedEvents.add("Order Completed");
+//        ArrayList<String> whitelistedEvents = new ArrayList<>();
+//        whitelistedEvents.add("Cart Viewed");
+//        whitelistedEvents.add("Order Completed");
+//        whitelistedEvents.add("Application Opened");
+//        whitelistedEvents.add("Application Backgrounded");
 
-        FullStoryMiddleware fsm = new FullStoryMiddleware(getApplicationContext(), writeKey, whitelistedEvents);
+//        FullStoryMiddleware fsm = new FullStoryMiddleware(getApplicationContext(), writeKey, whitelistedEvents);
+        FullStoryMiddleware fsm = new FullStoryMiddleware(getApplicationContext(), writeKey);
         fsm.enableFSSessionURLInEvents = true;
         fsm.enableGroupTraitsAsUserVars = true;
         fsm.enableSendScreenAsEvents = true;
+        fsm.whitelistAllTrackEvents = true;
 
         // Segment integration
         // Create an analytics client with the given context, segmentTag and Segment write key.
@@ -43,7 +47,7 @@ public class App extends MultiDexApplication {
 //                .logLevel(Analytics.LogLevel.VERBOSE)
 //                .use(FirebaseIntegration.FACTORY)
 //                .use(FullStoryIntegration.FACTORY)
-//                .trackApplicationLifecycleEvents()
+                .trackApplicationLifecycleEvents()
 //                .recordScreenViews()
 
                 // add middleware for FullStory
