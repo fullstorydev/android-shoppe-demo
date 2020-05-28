@@ -1,7 +1,10 @@
 apply plugin: 'com.android.application'
 apply plugin: 'fullstory'
 
-
+Properties properties = new Properties()
+if (project.rootProject.file('local.properties').canRead()) {
+    properties.load(project.rootProject.file("local.properties").newDataInputStream())
+}
 
 android {
     compileSdkVersion 29
@@ -26,6 +29,10 @@ android {
                 storePassword 'android'
             }
         }
+        // !! for dev purpose only
+        // Having your key in local.properties prevents it from being committed to git. However this does not secure it: if someone were to decompile your app they can get to your API key
+        // Please follow the best practices to properly store and obfuscate your API Key for production use
+        buildConfigField("String", "SEGMENT_WRITE_KEY", properties['SEGMENT_WRITE_KEY'])
     }
     buildTypes {
         release {
@@ -54,16 +61,12 @@ dependencies {
     implementation "com.google.code.gson:gson:$rootProject.gson_version"
     implementation "com.google.android.material:material:$rootProject.material_version"
     implementation "com.github.bumptech.glide:glide:$rootProject.glide_version"
+    implementation "com.segment.analytics.android:analytics:$rootProject.segment_version"
 
     testImplementation "junit:junit:$rootProject.junit_version"
     testImplementation "androidx.room:room-testing:$rootProject.room_version"
     androidTestImplementation "androidx.test.ext:junit:$rootProject.ext_junit_version"
     androidTestImplementation "androidx.test.espresso:espresso-core:$rootProject.espresso_version"
-}
-
-Properties properties = new Properties()
-if (project.rootProject.file('local.properties').canRead()) {
-    properties.load(project.rootProject.file("local.properties").newDataInputStream())
 }
 
 fullstory {
