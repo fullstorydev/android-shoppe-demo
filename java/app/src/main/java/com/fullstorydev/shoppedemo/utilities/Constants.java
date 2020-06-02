@@ -100,4 +100,6 @@ public class Constants {
     public static final String PREFERENCE_FILE_KEY = "com.fullstorydev.shoppedemo.PREFERENCE_FILE_KEY";
 
     public enum Status { SUCCESS, LOADING, ERROR };
+
+    public static final String PRODUCT_DATA_FILENE = "products.json";
 }
