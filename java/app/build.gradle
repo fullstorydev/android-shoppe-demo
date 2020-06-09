@@ -1,7 +1,6 @@
 apply plugin: 'com.android.application'
 apply plugin: 'fullstory'
-
-
+apply plugin: 'newrelic'
 
 android {
     compileSdkVersion 29
@@ -54,6 +53,7 @@ dependencies {
     implementation "com.google.code.gson:gson:$rootProject.gson_version"
     implementation "com.google.android.material:material:$rootProject.material_version"
     implementation "com.github.bumptech.glide:glide:$rootProject.glide_version"
+    implementation "com.newrelic.agent.android:android-agent:5.25.2"
 
     testImplementation "junit:junit:$rootProject.junit_version"
     testImplementation "androidx.room:room-testing:$rootProject.room_version"

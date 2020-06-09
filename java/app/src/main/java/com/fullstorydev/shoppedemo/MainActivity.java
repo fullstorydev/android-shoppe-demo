@@ -17,6 +17,11 @@ import androidx.navigation.ui.NavigationUI;
 
 import org.jetbrains.annotations.NotNull;
 
+import com.fullstory.FS;
+import com.newrelic.agent.android.NewRelic;
+
+import java.util.HashMap;
+
 public class MainActivity extends AppCompatActivity {
     AppBarConfiguration mAppBarConfiguration;
     NavController mNavController;
@@ -31,6 +36,10 @@ public class MainActivity extends AppCompatActivity {
                 mNavController.getGraph())
                 .build();
         NavigationUI.setupActionBarWithNavController(this, mNavController, mAppBarConfiguration);
+
+        NewRelic.withApplicationToken(
+                "AA4ec43f9af08e992ccf6c62b8cd91c15f6f5acd3e-NRMA"
+        ).start(this.getApplication());
     }
 
     @Override
