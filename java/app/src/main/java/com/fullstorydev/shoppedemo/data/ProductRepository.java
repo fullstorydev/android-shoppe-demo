@@ -50,9 +50,11 @@ public class ProductRepository {
                 }
             }
 
+
             List<Item> list = JsonHelper.getProductListFromJsonString(resStr);
             mAllProducts.postValue(list);
             mStatus.postValue(Constants.Status.SUCCESS);
+
         }).start();
     }
 
