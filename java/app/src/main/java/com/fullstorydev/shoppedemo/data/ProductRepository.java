@@ -50,10 +50,14 @@ public class ProductRepository {
                 }
             }
 
-
-            List<Item> list = JsonHelper.getProductListFromJsonString(resStr);
-            mAllProducts.postValue(list);
-            mStatus.postValue(Constants.Status.SUCCESS);
+            try{
+                List<Item> list = JsonHelper.getProductListFromJsonString(resStr);
+                mAllProducts.postValue(list);
+                mStatus.postValue(Constants.Status.SUCCESS);
+            }catch(JsonParseException e){
+                mStatus.postValue(Constants.Status.ERROR);
+                e.printStackTrace();
+            }
 
         }).start();
     }
