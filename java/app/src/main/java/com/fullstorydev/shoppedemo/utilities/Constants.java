@@ -101,5 +101,5 @@ public class Constants {
 
     public enum Status { SUCCESS, LOADING, ERROR };
 
-    public static final String PRODUCT_DATA_FILENE = "products.json";
+    public static final String PRODUCT_DATA_FILENAME = "products.json";
 }

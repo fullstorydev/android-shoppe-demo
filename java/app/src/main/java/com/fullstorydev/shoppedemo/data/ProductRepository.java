@@ -43,13 +43,13 @@ public class ProductRepository {
 
             if(loadFromFile){
                 try {
-                    productListJsonString = LoadAssetsUtils.getProductListFromFile(application,Constants.PRODUCT_DATA_FILENE);
+                    productListJsonString = LoadAssetsUtils.getProductListFromFile(application,Constants.PRODUCT_DATA_FILENAME);
                 } catch (IOException e) {
                     mStatus.postValue(Constants.Status.ERROR);
                     e.printStackTrace();
                 }
             }
-
+            6af6f135aefd01201369e8dae91338262450d81a
             try{
                 List<Item> productList = JsonHelper.getProductListFromJsonString(productListJsonString);
                 mAllProducts.postValue(productList);
