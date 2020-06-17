@@ -49,7 +49,7 @@ public class ProductRepository {
                     e.printStackTrace();
                 }
             }
-            6af6f135aefd01201369e8dae91338262450d81a
+
             try{
                 List<Item> productList = JsonHelper.getProductListFromJsonString(productListJsonString);
                 mAllProducts.postValue(productList);
