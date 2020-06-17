@@ -32,10 +32,10 @@ public class ProductRepository {
         //TODO: save the product locally and call API in the backend, only update DB when it changes and notify and handle change
         new Thread(() -> {
             String hostURLStr = application.getString(R.string.products_endpoint);
-            String resStr = "";
+            String productListJsonString = "";
             boolean loadFromFile = false;
             try {
-                resStr = NetworkUtils.getProductListFromURL(hostURLStr);
+                productListJsonString = NetworkUtils.getProductListFromURL(hostURLStr);
             } catch (IOException e) {
                 loadFromFile = true;
                 e.printStackTrace();
@@ -43,7 +43,7 @@ public class ProductRepository {
 
             if(loadFromFile){
                 try {
-                    resStr = LoadAssetsUtils.getProductListFromFile(application,Constants.PRODUCT_DATA_FILENE);
+                    productListJsonString = LoadAssetsUtils.getProductListFromFile(application,Constants.PRODUCT_DATA_FILENE);
                 } catch (IOException e) {
                     mStatus.postValue(Constants.Status.ERROR);
                     e.printStackTrace();
@@ -51,8 +51,8 @@ public class ProductRepository {
             }
 
             try{
-                List<Item> list = JsonHelper.getProductListFromJsonString(resStr);
-                mAllProducts.postValue(list);
+                List<Item> productList = JsonHelper.getProductListFromJsonString(productListJsonString);
+                mAllProducts.postValue(productList);
                 mStatus.postValue(Constants.Status.SUCCESS);
             }catch(JsonParseException e){
                 mStatus.postValue(Constants.Status.ERROR);
