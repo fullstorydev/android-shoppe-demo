@@ -15,7 +15,7 @@ android {
     defaultConfig {
         applicationId "com.fullstorydev.shoppedemo"
         minSdkVersion 21
-        targetSdkVersion 29
+        targetSdkVersion 27
         versionCode 3
         versionName "1.0.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -62,18 +62,9 @@ dependencies {
     implementation "com.google.android.material:material:$rootProject.material_version"
     implementation "com.github.bumptech.glide:glide:$rootProject.glide_version"
     implementation "com.segment.analytics.android:analytics:$rootProject.segment_version"
-    implementation ('com.segment.analytics.android.integrations:firebase:+@aar') {
-        transitive = true
-    }
 
-    repositories {
-        maven {
-            url  "https://dl.bintray.com/fullstorysolengteam/maven"
-        }
-//        mavenLocal()
-    }
-
-    implementation 'com.fullstorydev:fullstory-segment-middleware:0.0.4'
+    // pull down dev-preview-1 branch via jitpack
+    implementation 'com.github.fullstorydev:fullstory-segment-middleware-android:dev-preview-1-SNAPSHOT'
 
     testImplementation "junit:junit:$rootProject.junit_version"
     testImplementation "androidx.room:room-testing:$rootProject.room_version"
@@ -100,4 +91,3 @@ fullstory {
         server properties.getProperty('server')
     }
 }
-apply plugin: 'com.google.gms.google-services'

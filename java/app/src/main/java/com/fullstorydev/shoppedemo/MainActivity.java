@@ -1,8 +1,6 @@
 package com.fullstorydev.shoppedemo;
 
 import android.content.Context;
-import android.content.SharedPreferences;
-import android.icu.util.Freezable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -26,8 +24,6 @@ import com.segment.analytics.Properties;
 import com.segment.analytics.Traits;
 
 import org.jetbrains.annotations.NotNull;
-
-import static com.segment.analytics.internal.Utils.getSegmentSharedPreferences;
 
 public class MainActivity extends AppCompatActivity implements FSOnReadyListener {
     AppBarConfiguration mAppBarConfiguration;
@@ -56,7 +52,7 @@ public class MainActivity extends AppCompatActivity implements FSOnReadyListener
 
     @Override
     public boolean onOptionsItemSelected(@NotNull MenuItem item) {
-        Analytics.with(getApplicationContext()).track("navigationEvent", new Properties().putName(item.toString()));
+        Analytics.with(getApplicationContext()).screen(item.toString());
 
         return NavigationUI.onNavDestinationSelected(item, mNavController)
                 || super.onOptionsItemSelected(item);
@@ -88,25 +84,7 @@ public class MainActivity extends AppCompatActivity implements FSOnReadyListener
 
     @Override
     public void onReady(FSSessionData sessionData) {
-        Log.d("MainActivity", "FS is ready with URL: " + FS.getCurrentSessionURL());
-//        Analytics.with(getApplicationContext()).track("FS_ready",new Properties().putUrl(FS.getCurrentSessionURL()));
-        Analytics.with(getApplicationContext()).identify("test_user_id_3", new Traits().putName("Test User").putEmail("test_user_3@test.com"), null);
-
-        Analytics.with(getApplicationContext()).group("fruitShoppe_group", new Traits().putIndustry("Retail"));
-
-//        try {
-//            Thread.sleep(2000);
-//            Analytics.with(getApplicationContext()).reset();
-//            Log.d("here-resetting","reset segment called");
-//            SharedPreferences sharedPreferences = getSegmentSharedPreferences(getApplicationContext(), BuildConfig.SEGMENT_WRITE_KEY);
-//            Log.d("here-resetting", String.valueOf(sharedPreferences.getAll()));
-//
-//        } catch (InterruptedException e) {
-//            e.printStackTrace();
-//        }
-
-//        FS.anonymize();
-//        Analytics.with(getApplicationContext()).identify("new_user_id");
-
+        Analytics.with(getApplicationContext()).track("FS_ready",new Properties().putUrl(FS.getCurrentSessionURL()));
+        Log.i("MainActivity", "FS URL: " + FS.getCurrentSessionURL());
     }
 }

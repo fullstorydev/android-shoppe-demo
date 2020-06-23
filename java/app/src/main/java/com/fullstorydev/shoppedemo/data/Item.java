@@ -8,6 +8,9 @@ import androidx.room.PrimaryKey;
 
 import androidx.annotation.Keep;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /*    sample data:
 {
         "title": "Bananas",
@@ -57,4 +60,14 @@ public class Item {
     }
 
     public Item getItem(){return this;}
+    public Map<String, Object> getItemMap(){
+        Map<String,Object> itemMap = new HashMap<>();
+        itemMap.put("title",title);
+        itemMap.put("description",description);
+        itemMap.put("price",price);
+        itemMap.put("image",image);
+        itemMap.put("unit",unit);
+        itemMap.put("quantityInCart",quantityInCart);
+        return itemMap;
+    }
 }

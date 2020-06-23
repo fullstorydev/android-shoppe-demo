@@ -18,11 +18,13 @@ import androidx.lifecycle.ViewModelProvider;
 import com.fullstory.FS;
 import com.fullstorydev.shoppedemo.R;
 import com.fullstorydev.shoppedemo.data.CustomerInfo;
+import com.fullstorydev.shoppedemo.data.Item;
 import com.fullstorydev.shoppedemo.databinding.FragmentCheckoutBinding;
 import com.segment.analytics.Analytics;
 import com.segment.analytics.Properties;
 
-import java.util.HashMap;
+import java.util.ArrayList;
+import java.util.Map;
 
 public class CheckoutFragment extends Fragment implements CheckoutEventHandlers {
     private FragmentCheckoutBinding binding;
@@ -30,6 +32,7 @@ public class CheckoutFragment extends Fragment implements CheckoutEventHandlers 
     private ArrayAdapter<Integer> yearAdapter;
     private ArrayAdapter<Integer> monthAdapter;
     private CheckoutViewModel checkoutViewModel;
+    private ArrayList<Map<String, Object>> itmes = new ArrayList<>();
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -80,19 +83,21 @@ public class CheckoutFragment extends Fragment implements CheckoutEventHandlers 
             }
         });
 
-
+        checkoutViewModel.getItems().observe(getViewLifecycleOwner(), items->{
+            for (Item i: items){
+                this.itmes.add(i.getItemMap());
+            }
+        });
     }
     
     public void onClickPurchase(CustomerInfo customerInfo, Double subtotal) {
-        //Analytics.with(getContext()).track("test AnalyticsWithFS event");
-        // AnalyticsWithFS.with(getContext()).track("AnalyticsWithFSEvent",new Properties().putValue("name", "Moto 360"));
-
         try{
             boolean valid = customerInfo.validateOrder();
             if(valid && subtotal != null && subtotal > 0) {
                 // placeholder for your logic here to complete purchase
                 Toast.makeText(getContext(), "Purchase success!", Toast.LENGTH_LONG).show();
-                Analytics.with(getActivity()).track("Order Completed",new Properties().putSubtotal(subtotal));
+
+                Analytics.with(getActivity()).track("Order Completed",new Properties().putSubtotal(subtotal).putOrderId("50314b8e9bcf000000000000").putValue("products",this.itmes));
             } else {
                 throw new IllegalArgumentException("Order not valid");
             }

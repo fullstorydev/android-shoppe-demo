@@ -11,22 +11,19 @@ import android.view.ViewGroup;
 import androidx.annotation.Nullable;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.fullstorydev.shoppedemo.BuildConfig;
 import com.fullstorydev.shoppedemo.R;
 import com.fullstorydev.shoppedemo.adapters.MarketProductAdapter;
 import com.fullstorydev.shoppedemo.data.Item;
 import com.fullstorydev.shoppedemo.utilities.Constants;
-import com.google.firebase.analytics.FirebaseAnalytics;
 import com.segment.analytics.Analytics;
 import com.segment.analytics.Properties;
-import com.segment.analytics.android.integrations.firebase.FirebaseIntegration;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.List;
 
 public class MarketFragment extends Fragment implements MarketEventHandlers {
 
@@ -58,7 +55,12 @@ public class MarketFragment extends Fragment implements MarketEventHandlers {
         super.onActivityCreated(savedInstanceState);
 
         marketViewModel = new ViewModelProvider(this).get(MarketViewModel.class);
-        marketViewModel.getProductList().observe(this.getViewLifecycleOwner(), products -> mMarketProductAdapter.setProductList(products));
+        marketViewModel.getProductList().observe(this.getViewLifecycleOwner(), new Observer<List<Item>>() {
+            @Override
+            public void onChanged(List<Item> products) {
+                mMarketProductAdapter.setProductList(products);
+            }
+        });
 
         marketViewModel.getStatus().observe(this.getViewLifecycleOwner(), status ->{
             View v = getView();

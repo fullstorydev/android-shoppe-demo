@@ -7,7 +7,10 @@ import androidx.lifecycle.LiveData;
 
 import com.fullstorydev.shoppedemo.data.CustomerInfo;
 import com.fullstorydev.shoppedemo.data.CustomerInfoRepository;
+import com.fullstorydev.shoppedemo.data.Item;
 import com.fullstorydev.shoppedemo.data.ItemRepository;
+
+import java.util.List;
 
 public class CheckoutViewModel extends AndroidViewModel {
     private CustomerInfoRepository mCustomerInfoRepo;
@@ -15,6 +18,7 @@ public class CheckoutViewModel extends AndroidViewModel {
     private LiveData<Boolean> isLoading;
     private CustomerInfo customerInfo;
     private LiveData<Double> mSubtotal;
+    private LiveData<List<Item>> items;
 
     public CheckoutViewModel(Application application) {
         super(application);
@@ -22,6 +26,7 @@ public class CheckoutViewModel extends AndroidViewModel {
         mItemRepo = new ItemRepository(application);
         isLoading = mCustomerInfoRepo.getIsLoading();
         mSubtotal = mItemRepo.getSubtotal();
+        items = mItemRepo.getAllItemsFromDB();
         fetchCustomerInfo();
     }
 
@@ -33,6 +38,7 @@ public class CheckoutViewModel extends AndroidViewModel {
     Integer[] getYears() { return mCustomerInfoRepo.getYears(); }
     Integer[] getMonths() { return mCustomerInfoRepo.getMonths(); }
     void fetchCustomerInfo() { customerInfo = mCustomerInfoRepo.getCustomerInfo(); } //fetch the current customer info from repo
+    LiveData<List<Item>> getItems() { return items; } //fetch the current customer info from repo
 
 
     // handler for EditText onTextChanged or Spinner
