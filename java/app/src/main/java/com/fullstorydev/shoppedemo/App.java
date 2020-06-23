@@ -18,16 +18,17 @@ public class App extends MultiDexApplication {
 //        ArrayList<String> allowlistedEvents = new ArrayList<>();
 //        allowlistedEvents.add("Cart Viewed");
 //        allowlistedEvents.add("Order Completed");
-//        allowlistedEvents.add("Application Opened");
-//        allowlistedEvents.add("Application Backgrounded");
 
         FullStorySegmentMiddleware fsm = new FullStorySegmentMiddleware(getApplicationContext(), writeKey);
+        // enable to insert FS session URL to Segment event properties and contexts, default to true
         fsm.enableFSSessionURLInEvents = true;
+        // when calling Segment group, send group traits as userVars, default to false
         fsm.enableGroupTraitsAsUserVars = true;
+        // when calling Segment screen, sent the screen event as custom events to FS, default to false
         fsm.enableSendScreenAsEvents = true;
+        // allow all track events as FS custom events, alternatively allow list that you would like to track, default to false
         fsm.allowlistAllTrackEvents = true;
 
-        // Segment integration
         // Create an analytics client with the given context, segmentTag and Segment write key.
         Analytics analytics = new Analytics.Builder(getApplicationContext(), writeKey)
                 // If you explicitly set the tag like below, use the same tag for FS, else by default use write key
