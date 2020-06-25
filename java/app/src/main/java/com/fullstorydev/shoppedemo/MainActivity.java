@@ -20,8 +20,6 @@ import com.fullstory.FS;
 import com.fullstory.FSOnReadyListener;
 import com.fullstory.FSSessionData;
 import com.segment.analytics.Analytics;
-import com.segment.analytics.Properties;
-import com.segment.analytics.Traits;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -84,7 +82,6 @@ public class MainActivity extends AppCompatActivity implements FSOnReadyListener
 
     @Override
     public void onReady(FSSessionData sessionData) {
-        Analytics.with(getApplicationContext()).track("FS_ready",new Properties().putUrl(FS.getCurrentSessionURL()));
         Log.i("MainActivity", "FS URL: " + FS.getCurrentSessionURL());
     }
 }

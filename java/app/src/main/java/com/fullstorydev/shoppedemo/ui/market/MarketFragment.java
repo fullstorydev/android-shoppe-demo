@@ -1,9 +1,7 @@
 package com.fullstorydev.shoppedemo.ui.market;
 
 import android.content.res.Configuration;
-import android.icu.util.Freezable;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;

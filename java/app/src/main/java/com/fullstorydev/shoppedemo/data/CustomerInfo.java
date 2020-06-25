@@ -5,7 +5,6 @@ import android.util.Log;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
-import com.fullstory.FS;
 import com.fullstorydev.shoppedemo.utilities.Constants;
 
 public class CustomerInfo {
@@ -49,9 +48,6 @@ public class CustomerInfo {
 
     public boolean validateOrder() throws NullPointerException, IllegalArgumentException{
         this.isValid = true;
-
-        //backdoor for printing out the fullstory URL for internal debugging
-        if(this.firstName.equals("give me fullstory")) Log.i("CustomerInfo", "FullStory URL is: " + FS.getCurrentSessionURL());
 
         if (firstName == null || firstName.length()<1) {
             this.firstNameError.postValue("first name can not be null");

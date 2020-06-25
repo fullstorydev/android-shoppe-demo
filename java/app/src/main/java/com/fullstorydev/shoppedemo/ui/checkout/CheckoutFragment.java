@@ -22,6 +22,7 @@ import com.fullstorydev.shoppedemo.data.Item;
 import com.fullstorydev.shoppedemo.databinding.FragmentCheckoutBinding;
 import com.segment.analytics.Analytics;
 import com.segment.analytics.Properties;
+import com.segment.analytics.Traits;
 
 import java.util.ArrayList;
 import java.util.Map;
@@ -97,7 +98,18 @@ public class CheckoutFragment extends Fragment implements CheckoutEventHandlers 
                 // placeholder for your logic here to complete purchase
                 Toast.makeText(getContext(), "Purchase success!", Toast.LENGTH_LONG).show();
 
-                Analytics.with(getActivity()).track("Order Completed",new Properties().putSubtotal(subtotal).putOrderId("50314b8e9bcf000000000000").putValue("products",this.itmes));
+                Analytics.with(getActivity()).track("Order Completed",
+                        new Properties()
+                            .putSubtotal(subtotal)
+                            .putOrderId("50314b8e9bcf000000000000")
+                            .putValue("products",this.itmes));
+
+                Analytics.with(getContext()).identify(customerInfo.getFirstName()+customerInfo.getLastName(),
+                        new Traits()
+                                .putFirstName(customerInfo.getFirstName())
+                                .putLastName(customerInfo.getLastName()),
+                        null);
+
             } else {
                 throw new IllegalArgumentException("Order not valid");
             }
