@@ -4,12 +4,12 @@ buildscript {
     repositories {
         google()
         jcenter()
-//        maven { url "https://maven.fullstory.com" }
-        mavenLocal()
+        maven { url "https://maven.fullstory.com" }
+//        mavenLocal()
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:3.6.0'
-        classpath 'com.fullstory:gradle-plugin-local:1.5.0'
+        classpath 'com.fullstory:gradle-plugin-local:1.4.0'
         classpath "com.newrelic.agent.android:agent-gradle-plugin:5.25.2"
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
