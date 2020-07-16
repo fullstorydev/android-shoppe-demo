@@ -15,9 +15,13 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.fullstory.FS;
+import com.fullstorydev.shoppedemo.BuildConfig;
 import com.fullstorydev.shoppedemo.R;
 import com.fullstorydev.shoppedemo.data.CustomerInfo;
 import com.fullstorydev.shoppedemo.databinding.FragmentCheckoutBinding;
+import com.fullstorydev.shoppedemo.utilities.NetworkUtils;
+
+import java.io.IOException;
 
 public class CheckoutFragment extends Fragment implements CheckoutEventHandlers {
     private FragmentCheckoutBinding binding;
@@ -77,12 +81,20 @@ public class CheckoutFragment extends Fragment implements CheckoutEventHandlers 
     }
     
     public void onClickPurchase(CustomerInfo customerInfo, Double subtotal) {
-        boolean valid = customerInfo.validateOrder();
-        if(valid && subtotal != null && subtotal > 0) {
-            // placeholder for your logic here to complete purchase
-            Toast.makeText(getContext(), "Purchase success!", Toast.LENGTH_LONG).show();
-        } else {
-            Toast.makeText(getContext(),"Purchase failed!",Toast.LENGTH_LONG).show();
-        }
+        new Thread(() -> {
+            boolean valid = customerInfo.validateOrder();
+            if(valid && subtotal != null && subtotal > 0) {
+                // placeholder for your logic here to complete purchase
+                try {
+                    NetworkUtils.postToCheckout(BuildConfig.CHECKOUT_URL);
+                    Toast.makeText(getContext(), "Purchase success!", Toast.LENGTH_LONG).show();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    Toast.makeText(getContext(),"Purchase failed!",Toast.LENGTH_LONG).show();
+                }
+            } else {
+                Toast.makeText(getContext(),"Purchase failed!",Toast.LENGTH_LONG).show();
+            }
+        }).start();
     }
 }

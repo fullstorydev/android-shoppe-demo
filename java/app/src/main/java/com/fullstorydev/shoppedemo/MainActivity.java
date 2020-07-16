@@ -2,6 +2,7 @@ package com.fullstorydev.shoppedemo;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -18,11 +19,13 @@ import androidx.navigation.ui.NavigationUI;
 import org.jetbrains.annotations.NotNull;
 
 import com.fullstory.FS;
+import com.fullstory.FSOnReadyListener;
+import com.fullstory.FSSessionData;
 import com.newrelic.agent.android.NewRelic;
 
 import java.util.HashMap;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements FSOnReadyListener {
     AppBarConfiguration mAppBarConfiguration;
     NavController mNavController;
 
@@ -40,6 +43,8 @@ public class MainActivity extends AppCompatActivity {
         NewRelic.withApplicationToken(
                 "AA4ec43f9af08e992ccf6c62b8cd91c15f6f5acd3e-NRMA"
         ).start(this.getApplication());
+
+        FS.setReadyListener(this);
     }
 
     @Override
@@ -77,5 +82,11 @@ public class MainActivity extends AppCompatActivity {
         if(imm != null){
             imm.hideSoftInputFromWindow(view.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
         }
+    }
+
+    @Override
+    public void onReady(FSSessionData sessionData) {
+        boolean success = NewRelic.setAttribute("FSURL",FS.getCurrentSessionURL());
+        if(!success) Log.w("MainActivity", "Error adding FullStory session URL as New Relic attribute");
     }
 }
