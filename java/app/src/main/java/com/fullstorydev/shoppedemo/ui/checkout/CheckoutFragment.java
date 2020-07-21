@@ -99,9 +99,10 @@ public class CheckoutFragment extends Fragment implements CheckoutEventHandlers 
 
                 Analytics.with(getActivity()).track("Order Completed",
                         new Properties()
-                            .putSubtotal(subtotal)
-                            .putOrderId("50314b8e9bcf000000000000")
-                            .putValue("products",this.itmes));
+                                .putSubtotal(subtotal)
+                                .putOrderId("50314b8e9bcf000000000000")
+                                .putRevenue(subtotal)
+                                .putValue("products",this.itmes));
 
                 Analytics.with(getContext()).identify(customerInfo.getFirstName()+customerInfo.getLastName(),
                         new Traits()
