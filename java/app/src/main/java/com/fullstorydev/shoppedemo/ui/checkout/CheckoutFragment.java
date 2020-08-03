@@ -86,7 +86,7 @@ public class CheckoutFragment extends Fragment implements CheckoutEventHandlers 
     
     public void onClickPurchase(CustomerInfo customerInfo, Double subtotal) {
         // trigger crash when subtotal exceeds 20 for Crashlytics demo purpose
-        if(subtotal > 20) throw new RuntimeException("A crash that's hard to trouble shoot'");
+        if(subtotal > 20) throw new RuntimeException("A crash that's hard to troubleshoot");
 
         boolean valid = customerInfo.validateOrder();
         if(valid && subtotal != null && subtotal > 0) {
