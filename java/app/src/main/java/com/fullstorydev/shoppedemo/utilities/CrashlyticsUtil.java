@@ -11,7 +11,7 @@ public class CrashlyticsUtil {
     public static void identifyAndAddUserURLs(String userID) {
         Map<String, String> userVars = new HashMap<>();
         userVars.put("displayName", userID);
-        userVars.put("crashlyticsURLAndroidDemoapp","https://console.firebase.google.com/u/0/project/fs-crashlytics/crashlytics/app/android:com.fullstorydev.shoppedemo>/search?time=last-seven-days&type=crash&q="+userID);
+        userVars.put("crashlyticsURLAndroidDemoapp","https://console.firebase.google.com/u/0/project/fs-crashlytics/crashlytics/app/android:com.fullstorydev.shoppedemo/search?time=last-seven-days&type=crash&q="+userID);
 
         FS.identify(userID, userVars);
 
