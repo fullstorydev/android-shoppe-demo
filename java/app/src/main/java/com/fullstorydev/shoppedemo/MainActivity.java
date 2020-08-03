@@ -2,6 +2,7 @@ package com.fullstorydev.shoppedemo;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -39,6 +40,8 @@ public class MainActivity extends AppCompatActivity implements FSOnReadyListener
                 mNavController.getGraph())
                 .build();
         NavigationUI.setupActionBarWithNavController(this, mNavController, mAppBarConfiguration);
+
+        FS.setReadyListener(this);
     }
 
     @Override
@@ -72,6 +75,7 @@ public class MainActivity extends AppCompatActivity implements FSOnReadyListener
 
     @Override
     public void onReady(FSSessionData sessionData) {
+        Log.d("MainActivity", "FS URL: " + FS.getCurrentSessionURL());
         // Add a FullStory session replay link to a crash report as custom key
         FirebaseCrashlytics instance = FirebaseCrashlytics.getInstance();
         instance.setCustomKey("FSsessionURL", FS.getCurrentSessionURL());

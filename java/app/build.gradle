@@ -3,6 +3,11 @@ apply plugin: 'fullstory'
 apply plugin: 'com.google.gms.google-services'
 apply plugin: 'com.google.firebase.crashlytics'
 
+Properties properties = new Properties()
+if (project.rootProject.file('local.properties').canRead()) {
+    properties.load(project.rootProject.file("local.properties").newDataInputStream())
+}
+
 android {
     compileSdkVersion 29
     buildToolsVersion "29.0.3"
@@ -26,6 +31,8 @@ android {
                 storePassword 'android'
             }
         }
+
+        buildConfigField "String", "ORG_ID", '"' + properties.get("org") + '"'
     }
     buildTypes {
         release {
@@ -61,11 +68,6 @@ dependencies {
     testImplementation "androidx.room:room-testing:$rootProject.room_version"
     androidTestImplementation "androidx.test.ext:junit:$rootProject.ext_junit_version"
     androidTestImplementation "androidx.test.espresso:espresso-core:$rootProject.espresso_version"
-}
-
-Properties properties = new Properties()
-if (project.rootProject.file('local.properties').canRead()) {
-    properties.load(project.rootProject.file("local.properties").newDataInputStream())
 }
 
 fullstory {

@@ -12,10 +12,12 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.fullstory.FS;
 import com.fullstorydev.shoppedemo.R;
 import com.fullstorydev.shoppedemo.adapters.CartItemAdapter;
 import com.fullstorydev.shoppedemo.data.Item;
 import com.fullstorydev.shoppedemo.databinding.FragmentCartBinding;
+import com.fullstorydev.shoppedemo.utilities.CrashlyticsUtil;
 
 public class CartFragment extends Fragment implements CartEventHandlers{
     private CartViewModel cartViewModel;
@@ -34,7 +36,9 @@ public class CartFragment extends Fragment implements CartEventHandlers{
         root.findViewById(R.id.btn_checkout).setOnClickListener(v -> {
             Navigation.findNavController(v).navigate(R.id.action_navigation_cart_to_checkoutFragment);
         });
-        
+
+        CrashlyticsUtil.log("Cart Viewed");
+
         return root;
     }
 

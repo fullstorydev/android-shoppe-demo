@@ -16,10 +16,16 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.fullstory.FS;
+import com.fullstorydev.shoppedemo.BuildConfig;
 import com.fullstorydev.shoppedemo.R;
 import com.fullstorydev.shoppedemo.data.CustomerInfo;
 import com.fullstorydev.shoppedemo.databinding.FragmentCheckoutBinding;
+import com.fullstorydev.shoppedemo.utilities.CrashlyticsUtil;
+import com.google.firebase.crashlytics.CrashlyticsRegistrar;
 import com.google.firebase.crashlytics.FirebaseCrashlytics;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class CheckoutFragment extends Fragment implements CheckoutEventHandlers {
     private FragmentCheckoutBinding binding;
@@ -84,10 +90,18 @@ public class CheckoutFragment extends Fragment implements CheckoutEventHandlers 
 
         boolean valid = customerInfo.validateOrder();
         if(valid && subtotal != null && subtotal > 0) {
-            // placeholder for your logic here to complete purchase
+            // identify user to Crashlytics and to FullStory, using fake uid: first+last name
+            String userID = customerInfo.getFirstName()+' '+customerInfo.getLastName();
+            CrashlyticsUtil.identifyAndAddUserURLs(userID);
+
+            // your logic here to complete purchase
             Toast.makeText(getContext(), "Purchase success!", Toast.LENGTH_LONG).show();
         } else {
             Toast.makeText(getContext(),"Purchase failed!",Toast.LENGTH_LONG).show();
+            // non-fatal exception handling example:
+            // record the Exception to Crashlytics
+            Exception e = new Exception("Purchase failed! Valid customer info: " + valid);
+            CrashlyticsUtil.handleNonFatalException(e);
         }
     }
 }
