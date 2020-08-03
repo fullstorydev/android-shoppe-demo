@@ -1,8 +1,12 @@
 package com.fullstorydev.shoppedemo.data;
 
 import android.app.Application;
+import android.util.Log;
 
 import androidx.lifecycle.LiveData;
+
+import com.fullstory.FS;
+import com.google.firebase.crashlytics.FirebaseCrashlytics;
 
 import java.util.List;
 
@@ -39,6 +43,11 @@ public class ItemRepository {
     public void increaseQuantityInCart(Item item){
         AppDatabase.databaseWriteExecutor.execute(() -> {
             mItemDao.increaseQuantityOrInsert(item);
+
+            String logMsg = "Product added. Title: " + item.title + ", price: " + item.price ;
+            // Crashlytics:
+            FirebaseCrashlytics.getInstance().log(logMsg);
+            FS.log(FS.LogLevel.INFO,logMsg);
         });
     }
 

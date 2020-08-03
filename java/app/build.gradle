@@ -1,7 +1,7 @@
 apply plugin: 'com.android.application'
 apply plugin: 'fullstory'
-
-
+apply plugin: 'com.google.gms.google-services'
+apply plugin: 'com.google.firebase.crashlytics'
 
 android {
     compileSdkVersion 29
@@ -54,6 +54,8 @@ dependencies {
     implementation "com.google.code.gson:gson:$rootProject.gson_version"
     implementation "com.google.android.material:material:$rootProject.material_version"
     implementation "com.github.bumptech.glide:glide:$rootProject.glide_version"
+    implementation "com.google.firebase:firebase-analytics:$rootProject.google_analytics_version"
+    implementation "com.google.firebase:firebase-crashlytics:$rootProject.crashlytics_version"
 
     testImplementation "junit:junit:$rootProject.junit_version"
     testImplementation "androidx.room:room-testing:$rootProject.room_version"

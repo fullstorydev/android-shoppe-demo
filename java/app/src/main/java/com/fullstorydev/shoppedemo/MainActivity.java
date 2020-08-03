@@ -15,9 +15,17 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
+import com.fullstory.FS;
+import com.fullstory.FSOnReadyListener;
+import com.fullstory.FSSessionData;
+import com.google.firebase.crashlytics.FirebaseCrashlytics;
+
 import org.jetbrains.annotations.NotNull;
 
-public class MainActivity extends AppCompatActivity {
+import java.util.HashMap;
+import java.util.Map;
+
+public class MainActivity extends AppCompatActivity implements FSOnReadyListener {
     AppBarConfiguration mAppBarConfiguration;
     NavController mNavController;
 
@@ -60,6 +68,14 @@ public class MainActivity extends AppCompatActivity {
             hideKeyboard(view);
         }
         return super.dispatchTouchEvent(ev);
+    }
+
+    @Override
+    public void onReady(FSSessionData sessionData) {
+        // Add a FullStory session replay link to a crash report as custom key
+        FirebaseCrashlytics instance = FirebaseCrashlytics.getInstance();
+        instance.setCustomKey("FSsessionURL", FS.getCurrentSessionURL());
+        instance.log("Current FSSessionURL "+ FS.getCurrentSessionURL());
     }
 
     private void hideKeyboard(View view) {

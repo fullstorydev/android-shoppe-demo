@@ -1,6 +1,7 @@
 package com.fullstorydev.shoppedemo.ui.checkout;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +19,7 @@ import com.fullstory.FS;
 import com.fullstorydev.shoppedemo.R;
 import com.fullstorydev.shoppedemo.data.CustomerInfo;
 import com.fullstorydev.shoppedemo.databinding.FragmentCheckoutBinding;
+import com.google.firebase.crashlytics.FirebaseCrashlytics;
 
 public class CheckoutFragment extends Fragment implements CheckoutEventHandlers {
     private FragmentCheckoutBinding binding;
@@ -77,6 +79,9 @@ public class CheckoutFragment extends Fragment implements CheckoutEventHandlers 
     }
     
     public void onClickPurchase(CustomerInfo customerInfo, Double subtotal) {
+        // trigger crash when subtotal exceeds 20 for Crashlytics demo purpose
+        if(subtotal > 20) throw new RuntimeException("A crash that's hard to trouble shoot'");
+
         boolean valid = customerInfo.validateOrder();
         if(valid && subtotal != null && subtotal > 0) {
             // placeholder for your logic here to complete purchase
