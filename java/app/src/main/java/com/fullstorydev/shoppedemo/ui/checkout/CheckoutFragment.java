@@ -17,7 +17,12 @@ import androidx.lifecycle.ViewModelProvider;
 import com.fullstory.FS;
 import com.fullstorydev.shoppedemo.R;
 import com.fullstorydev.shoppedemo.data.CustomerInfo;
+import com.fullstorydev.shoppedemo.data.Item;
+import com.fullstorydev.shoppedemo.data.Order;
 import com.fullstorydev.shoppedemo.databinding.FragmentCheckoutBinding;
+import com.fullstorydev.shoppedemo.utilities.FSUtils;
+
+import java.util.List;
 
 public class CheckoutFragment extends Fragment implements CheckoutEventHandlers {
     private FragmentCheckoutBinding binding;
@@ -25,6 +30,8 @@ public class CheckoutFragment extends Fragment implements CheckoutEventHandlers 
     private ArrayAdapter<Integer> yearAdapter;
     private ArrayAdapter<Integer> monthAdapter;
     private CheckoutViewModel checkoutViewModel;
+    private Order order;
+    private List<Item> items;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -67,6 +74,10 @@ public class CheckoutFragment extends Fragment implements CheckoutEventHandlers 
         monthAdapter.addAll(checkoutViewModel.getMonths());
         yearAdapter.addAll(checkoutViewModel.getYears());
 
+        subscribeEvents();
+    }
+
+    private void subscribeEvents() {
         checkoutViewModel.getIsLoading().observe(getViewLifecycleOwner(),isLoading->{
             if(!isLoading){
                 checkoutViewModel.fetchCustomerInfo();
@@ -74,14 +85,32 @@ public class CheckoutFragment extends Fragment implements CheckoutEventHandlers 
                 binding.setHandlers(this);
             }
         });
+
+        checkoutViewModel.getCurrentOrder().observe(getViewLifecycleOwner(), order -> {
+            if(order == null) {
+                checkoutViewModel.createOrder();
+            }
+            this.order = order;
+        });
+
+        checkoutViewModel.getItems().observe(getViewLifecycleOwner(), itmes -> {
+            this.items = itmes;
+        });
     }
     
     public void onClickPurchase(CustomerInfo customerInfo, Double subtotal) {
         boolean valid = customerInfo.validateOrder();
         if(valid && subtotal != null && subtotal > 0) {
-            // placeholder for your logic here to complete purchase
+            // place your logic here to complete purchase
+
+            checkoutViewModel.completeOrder(order);
+
+            // for Demo-ing events
+            FSUtils.checkoutSuccess(subtotal, order);
             Toast.makeText(getContext(), "Purchase success!", Toast.LENGTH_LONG).show();
         } else {
+            // for Demo-ing events
+            FSUtils.checkoutFailure("invalid. Uh. Something went wrong.", items, order, subtotal);
             Toast.makeText(getContext(),"Purchase failed!",Toast.LENGTH_LONG).show();
         }
     }

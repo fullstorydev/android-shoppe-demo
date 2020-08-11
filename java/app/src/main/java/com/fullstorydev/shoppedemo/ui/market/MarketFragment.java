@@ -17,6 +17,7 @@ import com.fullstorydev.shoppedemo.R;
 import com.fullstorydev.shoppedemo.adapters.MarketProductAdapter;
 import com.fullstorydev.shoppedemo.data.Item;
 import com.fullstorydev.shoppedemo.utilities.Constants;
+import com.fullstorydev.shoppedemo.utilities.FSUtils;
 
 public class MarketFragment extends Fragment implements MarketEventHandlers {
 
@@ -68,7 +69,10 @@ public class MarketFragment extends Fragment implements MarketEventHandlers {
         });
     }
 
-    public void onClickAddToCart(Item item){ marketViewModel.increaseQuantityInCart(item); }
+    public void onClickAddToCart(Item item){
+        FSUtils.productAdded(item);
+        marketViewModel.increaseQuantityInCart(item);
+    }
 
     private void setRecyclerViewLayoutManager(int orientation){
         // if landscape then have 2 columns, otherwise 1: for simplicity we are not calculating this based on screen size

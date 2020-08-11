@@ -102,4 +102,13 @@ public class Constants {
     public enum Status { SUCCESS, LOADING, ERROR };
 
     public static final String PRODUCT_DATA_FILENAME = "products.json";
+
+
+    public static final class EVENT_NAMES{
+        public static final String PRODUCT_ADDED = "Product Added";
+        public static final String PRODUCT_REMOVED = "Product Removed";
+        public static final String ORDER_COMPLETED = "Order Completed";
+        public static final String CHECKOUT_ERROR = "Checkout Error";
+    }
 }
+
