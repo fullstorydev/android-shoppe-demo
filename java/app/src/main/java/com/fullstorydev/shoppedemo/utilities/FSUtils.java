@@ -1,16 +1,12 @@
 package com.fullstorydev.shoppedemo.utilities;
 
-import android.util.Log;
-
 import com.fullstory.FS;
 import com.fullstorydev.shoppedemo.data.Item;
 import com.fullstorydev.shoppedemo.data.Order;
 
-import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Random;
 
 public class FSUtils{
     public static void checkoutSuccess(Double subtotal, Order order) {
@@ -39,7 +35,7 @@ public class FSUtils{
         FS.event(Constants.EVENT_NAMES.CHECKOUT_ERROR, properties);
     }
 
-    public static void productAdded(Item item){
+    public static void productUpdated(String event, Item item){
         Map<String, Object> properties = new HashMap<>();
         properties.put("description_str", item.description);
         properties.put("displayName_str", item.title);
@@ -50,21 +46,7 @@ public class FSUtils{
         properties.put("product_id_str", FSUtils.makeId(9));
         properties.put("unit_str", item.unit);
 
-        FS.event(Constants.EVENT_NAMES.PRODUCT_ADDED, properties);
-    }
-
-    public static void productRemoved(Item item){
-        Map<String, Object> properties = new HashMap<>();
-        properties.put("description_str", item.description);
-        properties.put("displayName_str", item.title);
-        properties.put("id_str", item.title);
-        properties.put("imgName_str", item.image);
-        properties.put("price_raw_real", item.price);
-        properties.put("price_real", item.price);
-        properties.put("product_id_str", FSUtils.makeId(9));
-        properties.put("unit_str", item.unit);
-
-        FS.event(Constants.EVENT_NAMES.PRODUCT_REMOVED, properties);
+        FS.event(event, properties);
     }
 
     public static String makeId(int n) {
