@@ -2,7 +2,6 @@ package com.fullstorydev.shoppedemo;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -78,6 +77,7 @@ public class MainActivity extends AppCompatActivity implements FSOnReadyListener
 
     @Override
     public void onReady(FSSessionData sessionData) {
-        Log.d("MainActivity", "FS session URL: " + FS.getCurrentSessionURL());
+        String fsUrl = sessionData.getCurrentSessionURL();
+        // do stuff with session URL (for example send to desired integrations, etc)
     }
 }
