@@ -15,9 +15,13 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
+import com.fullstory.FS;
+import com.fullstory.FSOnReadyListener;
+import com.fullstory.FSSessionData;
+
 import org.jetbrains.annotations.NotNull;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements FSOnReadyListener {
     AppBarConfiguration mAppBarConfiguration;
     NavController mNavController;
 
@@ -31,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
                 mNavController.getGraph())
                 .build();
         NavigationUI.setupActionBarWithNavController(this, mNavController, mAppBarConfiguration);
+        FS.setReadyListener(this);
     }
 
     @Override
@@ -68,5 +73,11 @@ public class MainActivity extends AppCompatActivity {
         if(imm != null){
             imm.hideSoftInputFromWindow(view.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
         }
+    }
+
+    @Override
+    public void onReady(FSSessionData sessionData) {
+        String fsUrl = sessionData.getCurrentSessionURL();
+        // do stuff with session URL (for example send to desired integrations, etc)
     }
 }

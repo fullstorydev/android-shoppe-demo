@@ -7,26 +7,40 @@ import androidx.lifecycle.LiveData;
 
 import com.fullstorydev.shoppedemo.data.CustomerInfo;
 import com.fullstorydev.shoppedemo.data.CustomerInfoRepository;
+import com.fullstorydev.shoppedemo.data.Item;
 import com.fullstorydev.shoppedemo.data.ItemRepository;
+import com.fullstorydev.shoppedemo.data.Order;
+import com.fullstorydev.shoppedemo.data.OrderRepository;
+
+import java.util.List;
 
 public class CheckoutViewModel extends AndroidViewModel {
     private CustomerInfoRepository mCustomerInfoRepo;
     private ItemRepository mItemRepo;
+    private OrderRepository mOrderRepo;
     private LiveData<Boolean> isLoading;
     private CustomerInfo customerInfo;
     private LiveData<Double> mSubtotal;
+    private LiveData<Order> mCurrentOrder;
+    private LiveData<List<Item>> mItems;
 
     public CheckoutViewModel(Application application) {
         super(application);
         mCustomerInfoRepo = new CustomerInfoRepository(application);
         mItemRepo = new ItemRepository(application);
+        mOrderRepo = new OrderRepository(application);
+
         isLoading = mCustomerInfoRepo.getIsLoading();
         mSubtotal = mItemRepo.getSubtotal();
+        mCurrentOrder = mOrderRepo.getCurrentOrder();
+        mItems = mItemRepo.getAllItemsFromDB();
         fetchCustomerInfo();
     }
 
     public CustomerInfo getCustomerInfo(){ return customerInfo; }
     public LiveData<Double> getSubtotal() { return mSubtotal; }
+    public LiveData<Order> getCurrentOrder() { return mCurrentOrder; }
+    public LiveData<List<Item>>  getItems() { return mItems; }
 
     LiveData<Boolean> getIsLoading() { return isLoading; }
     String[] getStates() { return mCustomerInfoRepo.getStates(); }
@@ -34,6 +48,8 @@ public class CheckoutViewModel extends AndroidViewModel {
     Integer[] getMonths() { return mCustomerInfoRepo.getMonths(); }
     void fetchCustomerInfo() { customerInfo = mCustomerInfoRepo.getCustomerInfo(); } //fetch the current customer info from repo
 
+    public void createOrder(){ mOrderRepo.createOrder(); }
+    public void completeOrder(Order order) { mOrderRepo.completeOrder(order); }
 
     // handler for EditText onTextChanged or Spinner
     public void setFirstName(CharSequence s) {

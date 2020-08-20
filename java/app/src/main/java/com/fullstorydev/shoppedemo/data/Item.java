@@ -39,7 +39,7 @@ public class Item {
     @ColumnInfo(name = "unit")
     public String unit="lb";
 
-    @ColumnInfo(name = "quantityInCart",defaultValue = "1")
+    @ColumnInfo(name = "quantityInCart", defaultValue = "1")
     public int quantityInCart;
 
     public Item(String title, String description, Double price, String image, String unit, int quantityInCart) {

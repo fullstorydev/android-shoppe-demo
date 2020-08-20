@@ -16,6 +16,8 @@ import com.fullstorydev.shoppedemo.R;
 import com.fullstorydev.shoppedemo.adapters.CartItemAdapter;
 import com.fullstorydev.shoppedemo.data.Item;
 import com.fullstorydev.shoppedemo.databinding.FragmentCartBinding;
+import com.fullstorydev.shoppedemo.utilities.Constants;
+import com.fullstorydev.shoppedemo.utilities.FSUtils;
 
 public class CartFragment extends Fragment implements CartEventHandlers{
     private CartViewModel cartViewModel;
@@ -50,6 +52,12 @@ public class CartFragment extends Fragment implements CartEventHandlers{
         binding.setViewmodel(cartViewModel);
     }
 
-    public void onClickRemoveFromCart(Item item) { cartViewModel.decreaseQuantityInCart(item); }
-    public void onClickAddToCart(Item item){ cartViewModel.increaseQuantityInCart(item); }
+    public void onClickRemoveFromCart(Item item) {
+        cartViewModel.decreaseQuantityInCart(item);
+        FSUtils.productUpdated(FSUtils.EVENT_NAMES.PRODUCT_REMOVED, item);
+    }
+    public void onClickAddToCart(Item item){
+        cartViewModel.increaseQuantityInCart(item);
+        FSUtils.productUpdated(FSUtils.EVENT_NAMES.PRODUCT_ADDED, item);
+    }
 }
