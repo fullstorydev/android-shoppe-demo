@@ -70,7 +70,7 @@ public class MarketFragment extends Fragment implements MarketEventHandlers {
     }
 
     public void onClickAddToCart(Item item){
-        FSUtils.productUpdated(Constants.EVENT_NAMES.PRODUCT_ADDED, item);
+        FSUtils.productUpdated(FSUtils.EVENT_NAMES.PRODUCT_ADDED, item);
         marketViewModel.increaseQuantityInCart(item);
     }
 

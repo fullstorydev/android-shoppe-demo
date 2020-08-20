@@ -54,10 +54,10 @@ public class CartFragment extends Fragment implements CartEventHandlers{
 
     public void onClickRemoveFromCart(Item item) {
         cartViewModel.decreaseQuantityInCart(item);
-        FSUtils.productUpdated(Constants.EVENT_NAMES.PRODUCT_REMOVED, item);
+        FSUtils.productUpdated(FSUtils.EVENT_NAMES.PRODUCT_REMOVED, item);
     }
     public void onClickAddToCart(Item item){
         cartViewModel.increaseQuantityInCart(item);
-        FSUtils.productUpdated(Constants.EVENT_NAMES.PRODUCT_ADDED, item);
+        FSUtils.productUpdated(FSUtils.EVENT_NAMES.PRODUCT_ADDED, item);
     }
 }

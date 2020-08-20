@@ -18,7 +18,7 @@ public class FSUtils{
         properties.put("revenue_real", subtotal);
         properties.put("shipping", 5.99);
         properties.put("tax_real", 2.75);
-        FS.event(Constants.EVENT_NAMES.ORDER_COMPLETED, properties);
+        FS.event(EVENT_NAMES.ORDER_COMPLETED, properties);
     }
 
     public static void checkoutFailure(String msg, List<Item> items, Order order, Double subtotal) {
@@ -32,7 +32,7 @@ public class FSUtils{
         properties.put("order.order_id", orderId);
         properties.put("order.total_real", subtotal);
 
-        FS.event(Constants.EVENT_NAMES.CHECKOUT_ERROR, properties);
+        FS.event(EVENT_NAMES.CHECKOUT_ERROR, properties);
     }
 
     public static void productUpdated(String event, Item item){
@@ -62,5 +62,12 @@ public class FSUtils{
         }
 
         return sb.toString();
+    }
+
+    public static final class EVENT_NAMES{
+        public static final String PRODUCT_ADDED = "Product Added";
+        public static final String PRODUCT_REMOVED = "Product Removed";
+        public static final String ORDER_COMPLETED = "Order Completed";
+        public static final String CHECKOUT_ERROR = "Checkout Error";
     }
 }
