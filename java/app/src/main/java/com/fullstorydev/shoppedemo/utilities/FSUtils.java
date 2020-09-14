@@ -4,6 +4,8 @@ import com.fullstory.FS;
 import com.fullstorydev.shoppedemo.data.Item;
 import com.fullstorydev.shoppedemo.data.Order;
 
+import android.util.Log;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -33,6 +35,9 @@ public class FSUtils{
         properties.put("order.total_real", subtotal);
 
         FS.event(EVENT_NAMES.CHECKOUT_ERROR, properties);
+
+        // log to logcat so we can generate error clicks
+        Log.e("FruitShoppe", msg);
     }
 
     public static void productUpdated(String event, Item item){
