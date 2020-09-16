@@ -33,8 +33,7 @@ public class ItemRepository {
     public LiveData<Double> getSubtotal(){ return mSubtotal; }
 
     public LiveData<Integer> getItemCount(){ return mItemCount; }
-
-
+    
     public void insert(Item item) {
         AppDatabase.databaseWriteExecutor.execute(() -> {
             mItemDao.insert(item);
