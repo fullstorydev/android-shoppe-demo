@@ -2,16 +2,9 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-<!--    <item-->
-<!--        android:id="@+id/navigation_home"-->
-<!--        android:icon="@drawable/ic_home_black_24dp"-->
-<!--        android:title="@string/title_home"-->
-<!--        app:showAsAction="never"/>-->
-
     <item
         android:id="@+id/navigation_cart"
-        android:icon="@drawable/ic_shopping_cart_24dp"
+        app:actionLayout="@layout/navbar_item_cart"
         android:title="@string/title_cart"
         app:showAsAction="always"/>
-
 </menu>
