@@ -54,12 +54,14 @@
                             android:layout_height="wrap_content"
                             android:orientation="horizontal">
                             <Button
-                                android:id="@+id/btn_remove_from_cart"
-                                android:layout_width="wrap_content"
+                                android:id="@+id/btn_add_to_cart"
+                                android:layout_width="@dimen/min_height"
                                 android:layout_height="@dimen/min_height"
-                                android:layout_alignParentEnd="true"
-                                android:onClick="@{()->handlers.onClickRemoveFromCart(item)}"
-                                app:icon="@drawable/ic_remove_24dp"
+                                android:padding="0dp"
+                                android:layout_alignParentStart="true"
+                                android:onClick="@{()->handlers.onClickAddToCart(item)}"
+                                app:icon="@drawable/ic_add_24dp"
+                                app:iconSize="@dimen/min_height"
                                 style="@style/Widget.App.Button.TextButton.IconOnly">
                             </Button>
                             <TextView
@@ -69,14 +71,16 @@
                                 android:gravity="center"
                                 android:textAlignment="center"
                                 android:textAppearance="?attr/textAppearanceBody1"
-                                android:text="@{String.valueOf(item.quantityInCart)}"/>
+                                android:text="@{String.valueOf(item.quantityInCart)}" />
                             <Button
-                                android:id="@+id/btn_add_to_cart"
-                                android:layout_width="wrap_content"
+                                android:id="@+id/btn_remove_from_cart"
+                                android:layout_width="@dimen/min_height"
                                 android:layout_height="@dimen/min_height"
-                                android:onClick="@{()->handlers.onClickAddToCart(item)}"
-                                android:layout_alignParentStart="true"
-                                app:icon="@drawable/ic_add_24dp"
+                                android:layout_alignParentEnd="true"
+                                android:padding="0dp"
+                                android:onClick="@{()->handlers.onClickRemoveFromCart(item)}"
+                                app:icon="@drawable/ic_remove_24dp"
+                                app:iconSize="@dimen/min_height"
                                 style="@style/Widget.App.Button.TextButton.IconOnly">
                             </Button>
                         </RelativeLayout>

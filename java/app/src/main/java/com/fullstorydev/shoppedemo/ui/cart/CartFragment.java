@@ -16,7 +16,6 @@ import com.fullstorydev.shoppedemo.R;
 import com.fullstorydev.shoppedemo.adapters.CartItemAdapter;
 import com.fullstorydev.shoppedemo.data.Item;
 import com.fullstorydev.shoppedemo.databinding.FragmentCartBinding;
-import com.fullstorydev.shoppedemo.utilities.Constants;
 import com.fullstorydev.shoppedemo.utilities.FSUtils;
 
 public class CartFragment extends Fragment implements CartEventHandlers{
