@@ -14,13 +14,12 @@ import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.fullstory.FS;
 import com.fullstorydev.shoppedemo.R;
 import com.fullstorydev.shoppedemo.data.CustomerInfo;
 import com.fullstorydev.shoppedemo.data.Item;
 import com.fullstorydev.shoppedemo.data.Order;
 import com.fullstorydev.shoppedemo.databinding.FragmentCheckoutBinding;
-import com.fullstorydev.shoppedemo.utilities.FSUtils;
+import com.fullstorydev.shoppedemo.utilities.OrderUtils;
 
 import java.util.List;
 
@@ -57,10 +56,6 @@ public class CheckoutFragment extends Fragment implements CheckoutEventHandlers 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        FS.addClass(view.findViewById(R.id.checkout_credit_cart_number),FS.EXCLUDE_CLASS);
-        FS.addClass(view.findViewById(R.id.checkout_expiration_month),FS.EXCLUDE_CLASS);
-        FS.addClass(view.findViewById(R.id.checkout_expiration_year),FS.EXCLUDE_CLASS);
-        FS.addClass(view.findViewById(R.id.checkout_security_code),FS.EXCLUDE_CLASS);
     }
 
     @Override
@@ -102,15 +97,10 @@ public class CheckoutFragment extends Fragment implements CheckoutEventHandlers 
         boolean valid = customerInfo.validateOrder();
         if(valid && subtotal != null && subtotal > 0) {
             // place your logic here to complete purchase
-
             checkoutViewModel.completeOrder(order);
 
-            // for Demo-ing events
-            FSUtils.checkoutSuccess(subtotal, order);
             Toast.makeText(getContext(), "Purchase success!", Toast.LENGTH_LONG).show();
         } else {
-            // for Demo-ing events
-            FSUtils.checkoutFailure("invalid. Uh. Something went wrong.", items, order, subtotal);
             Toast.makeText(getContext(),"Purchase failed!",Toast.LENGTH_LONG).show();
         }
     }

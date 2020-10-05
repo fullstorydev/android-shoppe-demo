@@ -17,7 +17,6 @@ import com.fullstorydev.shoppedemo.R;
 import com.fullstorydev.shoppedemo.adapters.MarketProductAdapter;
 import com.fullstorydev.shoppedemo.data.Item;
 import com.fullstorydev.shoppedemo.utilities.Constants;
-import com.fullstorydev.shoppedemo.utilities.FSUtils;
 
 public class MarketFragment extends Fragment implements MarketEventHandlers {
 
@@ -70,7 +69,6 @@ public class MarketFragment extends Fragment implements MarketEventHandlers {
     }
 
     public void onClickAddToCart(Item item){
-        FSUtils.productUpdated(FSUtils.EVENT_NAMES.PRODUCT_ADDED, item);
         marketViewModel.increaseQuantityInCart(item);
     }
 

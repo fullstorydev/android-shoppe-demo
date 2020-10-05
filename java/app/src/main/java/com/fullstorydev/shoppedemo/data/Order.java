@@ -6,7 +6,7 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
-import com.fullstorydev.shoppedemo.utilities.FSUtils;
+import com.fullstorydev.shoppedemo.utilities.OrderUtils;
 
 /*    sample data:
 {
@@ -27,7 +27,7 @@ public class Order {
     public boolean completed;
 
     public Order() {
-        this.id = FSUtils.makeId(9);
+        this.id = OrderUtils.makeId(9);
         this.completed = false;
     }
 
