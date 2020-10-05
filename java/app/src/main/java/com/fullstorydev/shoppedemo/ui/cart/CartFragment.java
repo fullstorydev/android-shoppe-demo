@@ -12,6 +12,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.fullstory.FS;
 import com.fullstorydev.shoppedemo.R;
 import com.fullstorydev.shoppedemo.adapters.CartItemAdapter;
 import com.fullstorydev.shoppedemo.data.Item;
@@ -48,6 +49,12 @@ public class CartFragment extends Fragment implements CartEventHandlers{
 
         binding.setLifecycleOwner(getViewLifecycleOwner());
         binding.setViewmodel(cartViewModel);
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        FS.addClass(view, FS.UNMASK_CLASS);
     }
 
     public void onClickRemoveFromCart(Item item) {
