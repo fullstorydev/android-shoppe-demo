@@ -1,6 +1,9 @@
 package com.fullstorydev.shoppedemo.ui.checkout;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +24,10 @@ import com.fullstorydev.shoppedemo.data.Item;
 import com.fullstorydev.shoppedemo.data.Order;
 import com.fullstorydev.shoppedemo.databinding.FragmentCheckoutBinding;
 import com.fullstorydev.shoppedemo.utilities.FSUtils;
+import com.google.android.play.core.review.ReviewInfo;
+import com.google.android.play.core.review.ReviewManager;
+import com.google.android.play.core.review.ReviewManagerFactory;
+import com.google.android.play.core.tasks.Task;
 
 import java.util.List;
 
@@ -32,6 +39,9 @@ public class CheckoutFragment extends Fragment implements CheckoutEventHandlers 
     private CheckoutViewModel checkoutViewModel;
     private Order order;
     private List<Item> items;
+
+    private ReviewInfo reviewInfo;
+    private ReviewManager manager;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -75,6 +85,20 @@ public class CheckoutFragment extends Fragment implements CheckoutEventHandlers 
         yearAdapter.addAll(checkoutViewModel.getYears());
 
         subscribeEvents();
+
+        manager = ReviewManagerFactory.create(this.getActivity());
+        Task<ReviewInfo> request = manager.requestReviewFlow();
+
+        request.addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                // We can get the ReviewInfo object
+                reviewInfo = task.getResult();
+                Log.d("MarketFragment", String.valueOf(reviewInfo));
+            } else {
+                // There was some problem, continue regardless of the result.
+                Log.e("MarketFragment", "failed to get ReviewInfo");
+            }
+        });
     }
 
     private void subscribeEvents() {
@@ -108,6 +132,47 @@ public class CheckoutFragment extends Fragment implements CheckoutEventHandlers 
             // for Demo-ing events
             FSUtils.checkoutSuccess(subtotal, order);
             Toast.makeText(getContext(), "Purchase success!", Toast.LENGTH_LONG).show();
+
+            // 1. Instantiate an <code><a href="/reference/android/app/AlertDialog.Builder.html">AlertDialog.Builder</a></code> with its constructor
+            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+
+            // 2. Chain together various setter methods to set the dialog characteristics
+            builder.setMessage("Please rate us in play store!")
+                    .setTitle("Enjoying FruitShoppe App?")
+                    .setPositiveButton("  \uD83D\uDE0D  ", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            // prompt for app review
+                            Task<Void> flow = manager.launchReviewFlow(getActivity(), reviewInfo);
+                            flow.addOnCompleteListener(reviewTask -> {
+                                // The flow has finished. The API does not indicate whether the user
+                                // reviewed or not, or even whether the review dialog was shown. Thus, no
+                                // matter the result, we continue our app flow.
+                                Log.d("MarketFragment", String.valueOf(reviewTask.isSuccessful()));
+                                Log.d("MarketFragment", "reviewTask " + String.valueOf(reviewTask.getResult()));
+                            });
+                        }
+                    })
+                    .setNegativeButton("  \uD83D\uDE1E  ", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            // User cancelled the dialog
+                            // prompt for app review
+                            Task<Void> flow = manager.launchReviewFlow(getActivity(), reviewInfo);
+                            flow.addOnCompleteListener(reviewTask -> {
+                                // The flow has finished. The API does not indicate whether the user
+                                // reviewed or not, or even whether the review dialog was shown. Thus, no
+                                // matter the result, we continue our app flow.
+                                Log.d("MarketFragment", String.valueOf(reviewTask.isSuccessful()));
+                                Log.d("MarketFragment", "reviewTask " + String.valueOf(reviewTask.getResult()));
+                            });
+                        }
+                    });
+
+            // 3. Get the <code><a href="/reference/android/app/AlertDialog.html">AlertDialog</a></code> from <code><a href="/reference/android/app/AlertDialog.Builder.html#create()">create()</a></code>
+            AlertDialog dialog = builder.create();
+            dialog.show();
+
+
+
         } else {
             // for Demo-ing events
             FSUtils.checkoutFailure("invalid. Uh. Something went wrong.", items, order, subtotal);

@@ -13,6 +13,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.fullstory.FS;
 import com.fullstorydev.shoppedemo.R;
 import com.fullstorydev.shoppedemo.adapters.MarketProductAdapter;
 import com.fullstorydev.shoppedemo.data.Item;
@@ -34,7 +35,6 @@ public class MarketFragment extends Fragment implements MarketEventHandlers {
         mRecyclerView = root.findViewById(R.id.rv_product);
         mRecyclerView.setAdapter(mMarketProductAdapter);
         setRecyclerViewLayoutManager(getResources().getConfiguration().orientation);
-
         return root;
     }
 
