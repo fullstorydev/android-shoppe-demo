@@ -8,6 +8,7 @@ import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.fullstory.FS;
 import com.fullstorydev.shoppedemo.data.Item;
 import com.fullstorydev.shoppedemo.ui.market.MarketEventHandlers;
 import com.fullstorydev.shoppedemo.R;
@@ -40,6 +41,12 @@ public class MarketProductAdapter extends RecyclerView.Adapter<MarketProductAdap
     @Override
     public void onBindViewHolder(@NonNull MarketProductViewHolder holder, int position) {
         holder.bind(mProductList.get(position));
+
+        if(position == 0) {
+            FS.setAttribute(holder.binding.getRoot(), "kebab-case", "kebab-attr");
+        }
+        else //FS.setAttribute(holder.binding.getRoot(), "kebab-case", "kebab-attr");
+            FS.setAttribute(holder.binding.getRoot(), "camelCase", "camelCaseAttr");
     }
 
     @Override
