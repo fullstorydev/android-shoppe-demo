@@ -22,7 +22,7 @@ abstract class ItemDao {
     @Query("SELECT ROUND(IFNULL(SUM(quantityInCart * price), 0.00), 2) FROM items")
     abstract LiveData<Double> getSubtotal();
 
-    @Query("SELECT SUM(quantityInCart, 0) FROM items")
+    @Query("SELECT IFNULL(SUM(quantityInCart), 0) FROM items")
     abstract LiveData<Integer> getItemCount();
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
