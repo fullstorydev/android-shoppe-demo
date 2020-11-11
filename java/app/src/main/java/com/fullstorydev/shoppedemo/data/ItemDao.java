@@ -19,10 +19,10 @@ abstract class ItemDao {
     @Query("SELECT quantityInCart FROM items WHERE title = :title LIMIT 1")
     protected abstract int getItemQuantityByTitle(String title);
 
-    @Query("SELECT ROUND(IFNULL(SUM(quantityInCart * price),0.00),2) FROM items")
+    @Query("SELECT ROUND(IFNULL(SUM(quantityInCart * price), 0.00), 2) FROM items")
     abstract LiveData<Double> getSubtotal();
 
-    @Query("SELECT SUM(quantityInCart) FROM items")
+    @Query("SELECT SUM(quantityInCart, 0) FROM items")
     abstract LiveData<Integer> getItemCount();
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
@@ -34,25 +34,25 @@ abstract class ItemDao {
     @Update
     abstract void updateItem(Item item);
 
-    @Query("UPDATE items SET quantityInCart = quantityInCart + 1 WHERE title=:title")
+    @Query("UPDATE items SET quantityInCart = quantityInCart + 1 WHERE title = :title")
     abstract int increaseQuantity(String title);
 
-    @Query("UPDATE items SET quantityInCart = quantityInCart - 1 WHERE title=:title")
+    @Query("UPDATE items SET quantityInCart = quantityInCart - 1 WHERE title = :title")
     abstract int decreaseQuantity(String title);
 
     @Transaction
     void increaseQuantityOrInsert(Item item) {
-        if(increaseQuantity(item.title) == 0){
-            item.quantityInCart =1;
+        if (increaseQuantity(item.title) == 0) {
+            item.quantityInCart = 1;
             insert(item);
         }
     }
     @Transaction
     void decreaseQuantityOrDelete(Item item) {
         int itemsInCart = getItemQuantityByTitle(item.title);
-        if(itemsInCart > 1 ){
+        if (itemsInCart > 1) {
             decreaseQuantity(item.title);
-        }else{
+        } else {
             delete(item);
         }
     }
