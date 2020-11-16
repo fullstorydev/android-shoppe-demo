@@ -11,6 +11,7 @@ buildscript {
         // in the individual module build.gradle files
         classpath 'com.android.tools.build:gradle:3.5.3'
         // always ue the latest FS version
+        // DO NOT USE in production, this is for demo app purposes and can lead to unpredictable and unrepeatable builds
         classpath 'com.fullstory:gradle-plugin-local:+'
     }
 }
