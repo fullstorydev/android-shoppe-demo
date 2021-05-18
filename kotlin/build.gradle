@@ -5,7 +5,7 @@ buildscript {
         // Sdk and tools
         build_tools_version = '29.0.3'
         compilesdk_version = 28
-        minsdk_version = 19
+        minsdk_version = 21
         targetsdk_version = 28
 
         // App dependencies
@@ -20,16 +20,18 @@ buildscript {
         kotlin_version = '1.3.61'
         test_ext_junit = '1.1.1'
         espresso_version = '3.2.0'
+        fs_version = '1.14.1'
     }
 
     repositories {
         google()
         jcenter()
-        
+        maven { url "https://maven.fullstory.com" }
     }
     dependencies {
         classpath "com.android.tools.build:gradle:$gradle_version"
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath "com.fullstory:gradle-plugin-local:$fs_version"
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files

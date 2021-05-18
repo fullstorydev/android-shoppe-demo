@@ -2,6 +2,13 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
+apply plugin: 'fullstory'
+
+
+fullstory {
+    org '<YOUR_ORG_HERE>'
+    enabledVariants 'all'
+}
 
 android {
     compileSdkVersion rootProject.compilesdk_version
