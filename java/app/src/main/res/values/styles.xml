@@ -1,15 +1,15 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+    <style name="AppTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimaryPink</item>
         <item name="colorOnPrimary">@color/colorIvoryPink</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDarkPink</item>
         <item name="colorAccent">@color/colorIvoryPink</item>
-
         <item name="colorPrimarySurface">@color/colorPrimaryPink</item>
         <item name="colorOnBackground">@color/colorIvoryPink</item>
+        <item name="windowActionBar">false</item>
     </style>
 
     <style name="Widget.App.Button.TextButton.IconOnly" parent="Widget.MaterialComponents.Button.TextButton">

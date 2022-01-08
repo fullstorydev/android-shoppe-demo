@@ -7,4 +7,5 @@
         app:actionLayout="@layout/navbar_item_cart"
         android:title="@string/title_cart"
         app:showAsAction="always"/>
+
 </menu>
