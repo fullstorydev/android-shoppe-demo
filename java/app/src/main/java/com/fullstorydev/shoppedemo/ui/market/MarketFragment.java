@@ -2,6 +2,7 @@ package com.fullstorydev.shoppedemo.ui.market;
 
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.fullstory.FS;
 import com.fullstorydev.shoppedemo.R;
 import com.fullstorydev.shoppedemo.adapters.MarketProductAdapter;
 import com.fullstorydev.shoppedemo.data.Item;
@@ -36,6 +38,14 @@ public class MarketFragment extends Fragment implements MarketEventHandlers {
         setRecyclerViewLayoutManager(getResources().getConfiguration().orientation);
 
         return root;
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        Log.i("MarketFragment", "market view is created");
+        Log.i("MarketFragment", "FS is ready?" + (FS.getCurrentSessionURL() != null));
+        FS.event("market-view-created", null);
     }
 
     @Override

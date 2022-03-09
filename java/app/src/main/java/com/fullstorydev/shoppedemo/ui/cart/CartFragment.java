@@ -1,6 +1,7 @@
 package com.fullstorydev.shoppedemo.ui.cart;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,11 +13,15 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.fullstory.FS;
 import com.fullstorydev.shoppedemo.R;
 import com.fullstorydev.shoppedemo.adapters.CartItemAdapter;
 import com.fullstorydev.shoppedemo.data.Item;
 import com.fullstorydev.shoppedemo.databinding.FragmentCartBinding;
 import com.fullstorydev.shoppedemo.utilities.FSUtils;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class CartFragment extends Fragment implements CartEventHandlers{
     private CartViewModel cartViewModel;
@@ -39,6 +44,12 @@ public class CartFragment extends Fragment implements CartEventHandlers{
         return root;
     }
 
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        Log.i("CartFragment", "cart view created");
+        FS.event("cart-view-created", null);
+    }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
