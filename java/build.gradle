@@ -9,9 +9,9 @@ buildscript {
     dependencies {
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
-        classpath 'com.android.tools.build:gradle:7.0.3'
+        classpath 'com.android.tools.build:gradle:8.0.1'
         // always ue the latest FS version
-        classpath 'com.fullstory:gradle-plugin-local:1.19.1'
+        classpath 'com.fullstory:gradle-plugin-local:1.37.0'
     }
 }
 
@@ -27,7 +27,7 @@ task clean(type: Delete) {
 }
 
 ext {
-    room_version = "2.3.0"
+    room_version = "2.5.1"
     nav_version = "2.3.5"
     lifecycle_version = "2.2.0"
     constraintlayout_version = "2.1.1"

@@ -39,9 +39,9 @@ public class CheckoutFragment extends Fragment implements CheckoutEventHandlers 
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_checkout, container, false);
         View root = binding.getRoot();
 
-        stateAdapter = new ArrayAdapter<>(root.getContext(),R.layout.support_simple_spinner_dropdown_item);
-        monthAdapter = new ArrayAdapter<>(root.getContext(),R.layout.support_simple_spinner_dropdown_item);
-        yearAdapter = new ArrayAdapter<>(root.getContext(),R.layout.support_simple_spinner_dropdown_item);
+        stateAdapter = new ArrayAdapter<>(root.getContext(), androidx.appcompat.R.layout.support_simple_spinner_dropdown_item);
+        monthAdapter = new ArrayAdapter<>(root.getContext(), androidx.appcompat.R.layout.support_simple_spinner_dropdown_item);
+        yearAdapter = new ArrayAdapter<>(root.getContext(), androidx.appcompat.R.layout.support_simple_spinner_dropdown_item);
 
         AutoCompleteTextView stateEditTextFilledExposedDropdown = root.findViewById(R.id.dropdown_checkout_state);
         AutoCompleteTextView monthEditTextFilledExposedDropdown = root.findViewById(R.id.dropdown_checkout_expiration_month);

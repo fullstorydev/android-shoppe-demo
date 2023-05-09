@@ -4,17 +4,18 @@ apply plugin: 'fullstory'
 
 
 android {
-    compileSdkVersion 30
-    buildToolsVersion "29.0.3"
+    namespace 'com.fullstorydev.shoppedemo'
+    compileSdkVersion 33
+    buildToolsVersion "33.0.2"
     dataBinding {
         enabled = true
     }
     defaultConfig {
         applicationId "com.fullstorydev.shoppedemo"
-        minSdkVersion 21
-        targetSdkVersion 30
-        versionCode 10
-        versionName "1.0.10"
+        minSdkVersion 24
+        targetSdkVersion 33
+        versionCode 11
+        versionName "1.0.11"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
 
@@ -80,6 +81,6 @@ fullstory {
 
     // please do not set server value here or in local.properties
     if(properties.getProperty('server') != null){
-        server properties.getProperty('server')
+        serverUrl properties.getProperty('server')
     }
 }
